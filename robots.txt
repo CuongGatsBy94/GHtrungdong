@@ -1,0 +1,12 @@
+# Hướng dẫn dành cho Googlebot và Bingbot
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+# Áp dụng quy tắc chung cho tất cả bot khác
+User-agent: *
+Allow: /
+
+# Đường dẫn tới sitemap
+Sitemap: https://giaohotrungdong.icu/sitemap.xml
