@@ -1,5 +1,5 @@
 <!-- 
-  @Author: Your name
+  @Author: Cường GatsBy
   @Date:   2025-04-03 23:10:28
   @Last Modified by:   Your name
   @Last Modified time: 2025-04-03 23:11:10
@@ -7,80 +7,161 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <!-- Meta tags giống trang chủ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chính sách bảo mật - Giáo Họ Trung Đồng</title>
-    <!-- Thêm các thẻ meta và CSS tương tự như trang index -->
+    <title>Chính Sách Bảo Mật - Giáo Họ Trung Đồng</title>
+    <meta name="description" content="Chính sách bảo mật thông tin cá nhân trên trang web Giáo Họ Trung Đồng">
+    
+    <!-- Kế thừa CSS từ trang chủ -->
     <style>
+        :root {
+            --primary-color: #ff7e5f;
+            --secondary-color: #2c3e50;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat fixed;
+            color: white;
+            animation: fadeIn 0.8s ease-out;
         }
-        h1, h2 {
-            color: #2c3e50;
+        
+        .privacy-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 80px auto;
+            max-width: 900px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
+        
         h1 {
+            color: var(--primary-color);
             text-align: center;
             margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
         }
+        
         h2 {
-            margin-top: 25px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
+            color: var(--primary-color);
+            margin-top: 30px;
+            font-size: 1.3rem;
         }
-        .last-updated {
-            text-align: right;
-            font-style: italic;
-            color: #666;
+        
+        .highlight-box {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
         }
     </style>
+    <!-- Liên kết CSS/JS từ trang chủ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Chính Sách Bảo Mật</h1>
-    <p class="last-updated">Cập nhật lần cuối: 01/04/2025</p>
+    <!-- Navigation giống trang chủ -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Giáo Họ Trung Đồng</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">Giới Thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#services">Hoạt Động</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Hình Ảnh</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <h2>1. Thu thập thông tin</h2>
-    <p>Trang web Giáo Họ Trung Đồng có thể thu thập thông tin cá nhân khi bạn:</p>
-    <ul>
-        <li>Truy cập trang web (địa chỉ IP, trình duyệt, thời gian truy cập)</li>
-        <li>Đăng ký nhận thông báo (nếu có)</li>
-        <li>Liên hệ qua email hoặc mạng xã hội</li>
-    </ul>
+    <!-- Nội dung chính -->
+    <div class="privacy-container">
+        <h1><i class="fas fa-shield-alt mr-2"></i>CHÍNH SÁCH BẢO MẬT</h1>
+        <p class="text-right font-italic">Cập nhật lần cuối: 01/04/2025</p>
+        
+        <div class="highlight-box">
+            <p><i class="fas fa-info-circle mr-2"></i>Giáo Họ Trung Đồng cam kết bảo vệ thông tin cá nhân của giáo dân và khách truy cập.</p>
+        </div>
+        
+        <h2><i class="fas fa-database mr-2"></i>1. Thông tin thu thập</h2>
+        <p>Chúng tôi có thể thu thập:</p>
+        <ul>
+            <li>Thông tin công khai khi tham gia hoạt động</li>
+            <li>Dữ liệu truy cập (địa chỉ IP, trình duyệt) qua Google Analytics</li>
+            <li>Thông tin bạn tự nguyện cung cấp qua liên hệ</li>
+        </ul>
+        
+        <h2><i class="fas fa-user-shield mr-2"></i>2. Bảo mật dữ liệu</h2>
+        <p>Áp dụng các biện pháp:</p>
+        <ul>
+            <li>Mã hóa SSL cho dữ liệu truyền tải</li>
+            <li>Giới hạn quyền truy cập thông tin nhạy cảm</li>
+            <li>Không lưu trữ thông tin tài chính</li>
+        </ul>
+        
+        <h2><i class="fas fa-cookie-bite mr-2"></i>3. Cookie</h2>
+        <p>Website sử dụng cookie để:</p>
+        <ul>
+            <li>Ghi nhớ tùy chọn người dùng</li>
+            <li>Phân tích truy cập (Google Analytics)</li>
+            <li>Bạn có thể tắt cookie trong trình duyệt</li>
+        </ul>
+        
+        <h2><i class="fas fa-question-circle mr-2"></i>4. Liên hệ</h2>
+        <p>Mọi thắc mắc về bảo mật:</p>
+        <p><i class="fas fa-envelope mr-2"></i> <strong>nhathogiaohotrungdong@gmail.com</strong></p>
+        
+        <div class="text-center mt-5">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-arrow-left mr-2"></i>Về Trang Chủ
+            </a>
+        </div>
+    </div>
 
-    <h2>2. Sử dụng thông tin</h2>
-    <p>Thông tin được sử dụng để:</p>
-    <ul>
-        <li>Cải thiện trải nghiệm người dùng</li>
-        <li>Gửi thông báo về các hoạt động (nếu bạn đăng ký)</li>
-        <li>Phản hồi yêu cầu liên hệ</li>
-        <li>Phân tích lưu lượng truy cập (qua Google Analytics)</li>
-    </ul>
+    <!-- Footer giống trang chủ -->
+    <footer class="text-center py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-left mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2024 Giáo Họ Trung Đồng</p>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <a href="privacy.html" class="text-white mr-3">Chính Sách Bảo Mật</a>
+                    <a href="terms.html" class="text-white">Điều Khoản Sử Dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <h2>3. Bảo mật thông tin</h2>
-    <p>Chúng tôi cam kết:</p>
-    <ul>
-        <li>Không bán, chia sẻ thông tin cá nhân cho bên thứ ba</li>
-        <li>Chỉ sử dụng thông tin cho mục đích chính đáng</li>
-        <li>Áp dụng các biện pháp bảo mật phù hợp</li>
-    </ul>
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary" title="Lên đầu trang">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    <h2>4. Cookie</h2>
-    <p>Trang web sử dụng cookie để:</p>
-    <ul>
-        <li>Ghi nhớ tùy chọn người dùng</li>
-        <li>Phân tích truy cập (qua Google Analytics)</li>
-        <li>Bạn có thể tắt cookie trong cài đặt trình duyệt</li>
-    </ul>
-
-    <h2>5. Liên hệ</h2>
-    <p>Mọi thắc mắc về bảo mật, vui lòng liên hệ:</p>
-    <p>Email: <strong>nhathogiaohotrungdong@gmail.com</strong></p>
-
-    <h2>6. Thay đổi chính sách</h2>
-    <p>Chúng tôi có thể cập nhật chính sách này. Phiên bản mới sẽ được đăng trên trang web.</p>
+    <!-- Scripts giống trang chủ -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Back to top button
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        };
+        
+        document.getElementById("backToTop").onclick = function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
+    </script>
 </body>
 </html>
