@@ -1,9 +1,3 @@
-<!-- 
-  @Author: Your name
-  @Date:   2025-04-07 12:15:07
-  @Last Modified by:   Your name
-  @Last Modified time: 2025-04-09 21:20:10
--->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -133,7 +127,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
         const CLIENT_ID = '1006727064828-qcl2buhghnrc6p7imjnj2ul11vegm7b3.apps.googleusercontent.com';
-        const API_KEY = 'AIzaSyDf8AVnVv_TbIYLE0BaWkpeNh_yxYaUrik'; // Thay YOUR_API_KEY bằng API Key hợp lệ của bạn
+        const API_KEY = 'AIzaSyDf8AVnVv_TbIYLE0BaWkpeNh_yxYaUrik'; // Sử dụng API Key bạn cung cấp
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
         const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 
@@ -153,7 +147,7 @@
         }
 
         function listFiles() {
-            const FOLDER_ID = '1-Vob-LaaE8BKHz894zPt-CWIXfdYIcCU';
+            const FOLDER_ID = '1-Vob-LaaE8BKHz894zPt-CWIXfdYIcCU'; // ID thư mục Google Drive
             gapi.client.drive.files.list({
                 q: `'${FOLDER_ID}' in parents`,
                 pageSize: 20,
