@@ -1,8 +1,8 @@
 <!-- 
   @Author: Your name
-  @Date:   2024-11-19 22:48:46
+  @Date:   2025-02-03 21:50:13
   @Last Modified by:   Your name
-  @Last Modified time: 2025-02-24 18:18:31
+  @Last Modified time: 2025-04-27 10:27:45
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="w1NH3M5PiBfskkvCzulARP0eFddvgKkWJs3E1GHuB2c" />
     <meta name="msvalidate.01" content="CACCA3CDB162ADDD475C6F85AEAFF2A6" />
-    <title>Kinh Nguyện</title>
-    <meta name="description" content="Danh sách các kinh nguyện Công Giáo">
+    <title>Kinh Nguyện - Giáo Họ Trung Đồng</title>
+    <meta name="description" content="Danh sách các kinh nguyện Công Giáo của Giáo Họ Trung Đồng">
     <link rel="icon" type="image/png" sizes="favicon-16x16" href="/favicon-16x16.png">
     
     <!-- Google Analytics -->
@@ -26,216 +26,398 @@
     <!-- End Google Analytics -->
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS */
+        :root {
+            --primary-color: #8e210b;
+            --secondary-color: #d4a76a;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            color: white;
+            font-family: 'Noto Serif', serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
-
-        .navbar-brand { font-weight: bold; }
         
-        .hero {
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            padding: 0.5rem 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+        
+        .social-icons .nav-link {
+            font-size: 1.2rem;
+            padding: 0.5rem 0.7rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://giaohotrungdong.icu/images/banner.jpg') no-repeat center center;
+            background-size: cover;
             padding: 100px 0;
+            color: white;
             text-align: center;
-            position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
+            margin-bottom: 30px;
         }
         
-        .hero h1 {
+        .hero-title {
             font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
-        .hero p {
+        
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--primary-color);
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .prayer-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+        
+        .prayer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .prayer-card .card-body {
+            padding: 25px;
+        }
+        
+        .prayer-card .card-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .prayer-card .card-text {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .btn-prayer {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-prayer:hover {
+            background-color: #6b1908;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-title {
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
             font-size: 1.2rem;
         }
-
-        .btn {
-            background-color: #ff7e5f;
-            border: none;
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s;
         }
-
-        .section {
-            padding: 50px 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding-left: 5px;
         }
-
-        .bg-light {
-            background-color: #f9f9f9 !important;
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
         }
-
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-        }
-
-        /* Thêm lớp này vào đoạn style hiện tại */
-        .service-box {
-            border: 2px solid #fff; /* Khung viền màu trắng */
-            border-radius: 10px; /* Bo tròn các góc */
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            background: rgba(255, 255, 255, 0.1); /* Làm mờ nền */
-        }
-
-        .service-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-box h4 {
-            margin-bottom: 15px;
-            color: #ff7e5f;
-        }
-
-        .service-box p {
-            color: #fff;
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="../index.html">Giáo Họ Trung Đồng</a> <!-- Liên kết về index.html -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="../index.html">Trang Chủ</a> <!-- Liên kết về index.html -->
-            </li>
-        </ul>
-        <!-- Mạng xã hội -->
-        <ul class="navbar-nav social-icons">
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.facebook.com/GHtrungdong" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" title="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">Giáo Họ Trung Đồng</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">Giới Thiệu</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="kinh-nguyen.html">Kinh Nguyện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../news.html">Tin Tức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact.html">Liên Hệ</a>
+                    </li>
+                </ul>
+                <!-- Mạng xã hội -->
+                <ul class="navbar-nav social-icons ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.facebook.com/GHtrungdong" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Kinh Nguyện Công Giáo</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center bg-transparent">
+                    <li class="breadcrumb-item"><a href="../index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Kinh Nguyện</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
 
     <!-- Kinh Nguyện Section -->
-    <section id="kinh-nguyen" class="section">
+    <section class="py-5">
         <div class="container">
-            <h2 class="text-center">Danh Sách Kinh Nguyện</h2>
+            <h2 class="text-center page-title">Danh Sách Kinh Nguyện</h2>
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Lạy Cha</h4>
-                        <p><em>Lạy Cha chúng con ở trên trời...</em></p>
-                        <a href="1kinh-lay-cha.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Lạy Cha</h4>
+                            <p class="card-text"><em>Lạy Cha chúng con ở trên trời, chúng con nguyện danh Cha cả sáng...</em></p>
+                            <a href="1kinh-lay-cha.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Kính Mừng</h4>
-                        <p><em>Kính mừng Maria đầy ơn phúc...</em></p>
-                        <a href="2kinh-kinh-mung.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Kính Mừng</h4>
+                            <p class="card-text"><em>Kính mừng Maria đầy ơn phúc, Đức Chúa Trời ở cùng Bà...</em></p>
+                            <a href="2kinh-kinh-mung.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Tin Kính</h4>
-                        <p><em>Tôi tin kính một Thiên Chúa...</em></p>
-                        <a href="3kinh-sang-danh.html" class="btn btn-hover">Đọc Kinh</a>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Lạy Chúa Thánh Thần</h4>
-                        <p><em>Lạy Chúa Thánh Thần, xin Ngài ngự đến...</em></p>
-                        <a href="4kinh-lay-chua-thanh-than.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Tin Kính</h4>
+                            <p class="card-text"><em>Tôi tin kính một Thiên Chúa là Cha toàn năng, Đấng tạo thành trời đất...</em></p>
+                            <a href="3kinh-sang-danh.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Tin Kính </h4>
-                        <p><em>Tôi tin kính Đức Chúa Trời là Cha ...</em></p>
-                        <a href="5kinh-tin-kinh.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Lạy Chúa Thánh Thần</h4>
+                            <p class="card-text"><em>Lạy Chúa Thánh Thần, xin Ngài ngự đến, và xin sai Thánh Thần Ngài từ trời...</em></p>
+                            <a href="4kinh-lay-chua-thanh-than.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Thiên Thần Bản Mệnh</h4>
-                        <p><em>Thiên Thần của Chúa là Thiên Thần...</em></p>
-                        <a href="6kinh-thien-than-ban-menh.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Tin Kính Các Tông Đồ</h4>
+                            <p class="card-text"><em>Tôi tin kính Đức Chúa Trời là Cha phép tắc vô cùng dựng nên trời đất...</em></p>
+                            <a href="5kinh-tin-kinh.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Nghỉ yên muôn đời</h4>
-                        <p><em>Lạy Chúa,xin cho các linh hồn...</em></p>
-                        <a href="7kinh-nghi-yen.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Thiên Thần Bản Mệnh</h4>
+                            <p class="card-text"><em>Thiên Thần của Chúa là Thiên Thần hộ thủ tôi, Người soi sáng, dẫn dắt...</em></p>
+                            <a href="6kinh-thien-than-ban-menh.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Lạy LinhHồn ChúaKitô</h4>
-                        <p><em>Lạy linh hồn Chúa Kitô...</em></p>
-                        <a href="8kinh-lay-linh-hon-chua-kito.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Nghỉ yên muôn đời</h4>
+                            <p class="card-text"><em>Lạy Chúa, xin cho các linh hồn được nghỉ yên muôn đời, và cho ánh sáng ngàn thu chiếu soi...</em></p>
+                            <a href="7kinh-nghi-yen.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Tin - Cậy - Mến</h4>
-                        <p><em>Lạy Chúa,con tin thật có một Đức ...</em></p>
-                        <a href="9kinh-tin-cay-men.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Lạy Linh Hồn Chúa Kitô</h4>
+                            <p class="card-text"><em>Lạy linh hồn Chúa Kitô, xin thánh hóa con. Lạy Thánh Thể Chúa Kitô...</em></p>
+                            <a href="8kinh-lay-linh-hon-chua-kito.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Ăn Năn Tội</h4>
-                        <p><em>Lạy Chúa con, Chúa là Đấng trọn tốt...</em></p>
-                        <a href="10kinh-an-nan-toi.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Tin - Cậy - Mến</h4>
+                            <p class="card-text"><em>Lạy Chúa, con tin thật có một Đức Chúa Trời là Đấng thưởng phạt vô cùng...</em></p>
+                            <a href="9kinh-tin-cay-men.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Xin ngự đến</h4>
-                        <p><em>Xin ngự đến, lạy Thánh Thần...</em></p>
-                        <a href="11kinh-xin-ngu-den.html" class="btn btn-hover">Đọc Kinh</a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Ăn Năn Tội</h4>
+                            <p class="card-text"><em>Lạy Chúa con, Chúa là Đấng trọn tốt trọn lành vô cùng, Chúa đã dựng nên con...</em></p>
+                            <a href="10kinh-an-nan-toi.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <h4>Kinh Hãy Nhớ</h4>
-                        <p><em>Lạy Thánh Nữ Đồng Trinh Maria...</em></p>
-                        <a href="12kinh-hay-nho.html" class="btn btn-hover">Đọc Kinh</a>
-                    </div> 
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Xin ngự đến</h4>
+                            <p class="card-text"><em>Xin ngự đến, lạy Thánh Thần, xin sai Thánh Thần Chúa từ trời cao...</em></p>
+                            <a href="11kinh-xin-ngu-den.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card prayer-card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Kinh Hãy Nhớ</h4>
+                            <p class="card-text"><em>Lạy Thánh Nữ Đồng Trinh Maria là Mẹ rất nhân từ, xin hãy nhớ...</em></p>
+                            <a href="12kinh-hay-nho.html" class="btn btn-prayer">Đọc Kinh</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="text-center">
-        <p>&copy; 2024 Giáo Họ Trung Đồng. All Rights Reserved.</p>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Giáo Họ Trung Đồng</h4>
+                    <p>Giáo họ Trung Đồng thuộc Giáo xứ Xứ Lạc Thành,  Giáo phận Bùi Chu.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/GHtrungdong" class="text-light mr-3" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@nhothogiaohotrungong7117" class="text-light mr-3" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Liên Kết</h4>
+                    <div class="footer-links">
+                        <a href="../index.html">Trang Chủ</a>
+                        <a href="../about.html">Giới Thiệu</a>
+                        <a href="kinh-nguyen.html">Kinh Nguyện</a>
+                        <a href="../news.html">Tin Tức</a>
+                        <a href="../contact.html">Liên Hệ</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Thông Tin Liên Hệ</h4>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i>  Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</p>
+                    <p><i class="fas fa-phone mr-2"></i> Điện thoại: +84 039 572 9624</p>
+                    <p><i class="fas fa-envelope mr-2"></i> Email: <nhathogiaohotrungdong class="gmail com"></nhathogiaohotrungdong></p>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p>&copy; 2024 Giáo Họ Trung Đồng. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
