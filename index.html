@@ -2,7 +2,7 @@
   @Author: Your name
   @Date:   2025-04-01 21:54:37
   @Last Modified by:   Your name
-  @Last Modified time: 2025-04-14 21:08:16
+  @Last Modified time: 2025-08-10 19:53:22
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -60,6 +60,27 @@
             --primary-color: #ff7e5f;
             --secondary-color: #2c3e50;
             --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #fff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #343a40;
+            --nav-link-color: #333;
+            --section-bg: #ffffff;
+            --service-box-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Dark mode variables */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --footer-bg: #121212;
+            --secondary-color: #1a1a1a;
+            --nav-link-color: #f8f9fa;
+            --section-bg: #1e1e1e;
+            --service-box-bg: rgba(30, 30, 30, 0.5);
         }
         
         @keyframes fadeIn {
@@ -69,20 +90,21 @@
         
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat fixed;
-            background-color: var(--secondary-color);
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             animation: fadeIn 0.8s ease-out;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* Navigation */
         .navbar {
             transition: all 0.3s ease;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--header-bg) !important;
         }
         
         .navbar.scrolled {
-            background-color: rgba(44, 62, 80, 0.95) !important;
+            background-color: var(--header-bg) !important;
             padding-top: 5px;
             padding-bottom: 5px;
         }
@@ -97,6 +119,7 @@
             position: relative;
             margin: 0 10px;
             font-weight: 500;
+            color: var(--nav-link-color) !important;
         }
         
         .nav-link::after {
@@ -124,6 +147,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat fixed;
+            color: white; /* Giữ màu chữ trắng cho hero dù ở chế độ nào */
         }
         
         .hero-content {
@@ -153,6 +177,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s;
+            color: white;
         }
         
         .btn:hover {
@@ -161,14 +186,27 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
+        .btn-outline-light {
+            border-color: var(--text-color);
+            color: var(--text-color);
+            background-color: transparent;
+        }
+        
         .btn-outline-light:hover {
-            color: var(--secondary-color);
+            background-color: var(--primary-color);
+            color: white;
         }
         
         /* Sections */
         .section {
             padding: 80px 0;
             position: relative;
+            background-color: var(--section-bg);
+            transition: background-color 0.3s ease;
+        }
+        
+        .section.bg-dark {
+            background-color: var(--secondary-color) !important;
         }
         
         .section-title {
@@ -176,6 +214,7 @@
             display: inline-block;
             margin-bottom: 50px;
             font-weight: 700;
+            color: var(--text-color);
         }
         
         .section-title::after {
@@ -191,7 +230,7 @@
         
         /* Pagination */
         .pagination-nav {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
             padding: 15px 0;
             margin-bottom: 30px;
         }
@@ -206,27 +245,28 @@
         }
         
         .page-link {
-            color: white;
-            background-color: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             margin: 0 5px;
             transition: all 0.3s;
         }
         
         .page-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
         }
         
         /* Service Boxes */
         .service-box {
             padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--service-box-bg);
             border-radius: 10px;
             transition: all 0.3s;
             height: 100%;
             margin-bottom: 30px;
             backdrop-filter: blur(5px);
+            color: var(--text-color);
         }
         
         .service-box i {
@@ -238,11 +278,12 @@
         .service-box h4 {
             font-weight: 600;
             margin-bottom: 15px;
+            color: var(--text-color);
         }
         
         .service-box:hover {
             transform: translateY(-10px);
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: var(--service-box-bg);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
@@ -277,13 +318,17 @@
             border-radius: 50%;
             padding: 0;
             font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
         }
         
         /* Footer */
         footer {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: var(--footer-bg);
             color: white;
             padding: 30px 0;
+            transition: background-color 0.3s ease;
         }
         
         .social-icons a {
@@ -310,12 +355,40 @@
         
         /* Modal styling */
         .modal-content {
-            color: #333; /* Màu chữ tối cho dễ đọc trên nền trắng */
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .modal-title {
             color: var(--primary-color);
             font-weight: 700;
+        }
+        
+        /* Theme toggle button */
+        #themeToggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            color: var(--text-color);
+        }
+        
+        /* Contact info box */
+        .contact-info {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         /* Responsive adjustments */
@@ -392,6 +465,11 @@
                     <li class="nav-item"><a class="nav-link" href="#services">Hoạt Động</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gallery">Hình Ảnh</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Liên Hệ</a></li>
+                    <li class="nav-item">
+                        <button id="themeToggle" class="btn btn-link nav-link" title="Chuyển đổi chế độ sáng/tối">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
                 </ul>
                 <ul class="navbar-nav social-icons ml-3">
                     <li class="nav-item">
@@ -530,9 +608,9 @@
                         <h4>Thánh Lễ</h4>
                         <p>Các buổi thánh lễ hàng tuần để kết nối và cầu nguyện cùng nhau.</p>
                         <ul class="list-unstyled">
-                            <li><a href="loichuahangngay.html" class="text-white">Lời Chúa hàng ngày</a></li>
-                            <li><a href="thanhle.html" class="text-white">Lịch Thánh Lễ</a></li>
-                            <li><a href="baihatthanhca.html" class="text-white">Bài Hát Thánh Ca</a></li>
+                            <li><a href="loichuahangngay.html" class="text-reset">Lời Chúa hàng ngày</a></li>
+                            <li><a href="thanhle.html" class="text-reset">Lịch Thánh Lễ</a></li>
+                            <li><a href="baihatthanhca.html" class="text-reset">Bài Hát Thánh Ca</a></li>
                         </ul>
                         <a href="thanhle.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
                     </div>
@@ -543,9 +621,9 @@
                         <h4>Các Chương Trình</h4>
                         <p>Hoạt động xã hội và công tác thiện nguyện phục vụ cộng đồng.</p>
                         <ul class="list-unstyled">
-                            <li><a href="noel2024.html" class="text-white">Đêm hoan ca Noel 2024</a></li>
-                            <li><a href="dsunghodoibong.html" class="text-white">Danh Sách Ủng Hộ</a></li>
-                            <li><a href="hoatdongxahoi.html" class="text-white">Hoạt Động Xã Hội</a></li>
+                            <li><a href="noel2024.html" class="text-reset">Đêm hoan ca Noel 2024</a></li>
+                            <li><a href="dsunghodoibong.html" class="text-reset">Danh Sách Ủng Hộ</a></li>
+                            <li><a href="hoatdongxahoi.html" class="text-reset">Hoạt Động Xã Hội</a></li>
                         </ul>
                         <a href="hoatdong.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
                     </div>
@@ -556,9 +634,9 @@
                         <h4>Các Lớp Học Giáo Lý</h4>
                         <p>Giúp các thành viên học hỏi và phát triển đức tin.</p>
                         <ul class="list-unstyled">
-                            <li><a href="lopgiaoly.html" class="text-white">Lớp học giáo lý trẻ em</a></li>
-                            <li><a href="lopgiaolynguoilon.html" class="text-white">Lớp học người lớn</a></li>
-                            <li><a href="hoithao.html" class="text-white">Hội Thảo Tâm Linh</a></li>
+                            <li><a href="lopgiaoly.html" class="text-reset">Lớp học giáo lý trẻ em</a></li>
+                            <li><a href="lopgiaolynguoilon.html" class="text-reset">Lớp học người lớn</a></li>
+                            <li><a href="hoithao.html" class="text-reset">Hội Thảo Tâm Linh</a></li>
                         </ul>
                         <a href="giaoly.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
                     </div>
@@ -567,46 +645,47 @@
         </div>
     </section>
 
-<!-- Contact Section -->
-<section id="contact" class="section bg-dark">
-    <div class="container">
-        <h2 class="text-center section-title">Liên Hệ</h2>
-        <div class="row align-items-stretch">
-            <!-- Thông tin liên hệ (chiếm 6 cột) -->
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="contact-info h-100 p-4" style="background-color: rgba(255,255,255,0.1); border-radius: 10px;">
-                    <h4 class="text-center mb-4">Thông Tin Liên Hệ</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><i class="fas fa-map-marker-alt mr-2"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
-                        <li class="mb-3"><i class="fas fa-phone mr-2"></i> Điện thoại: 0395.729.624</li>
-                        <li class="mb-3"><i class="fas fa-envelope mr-2"></i> Email: nhathogiaohotrungdong@gmail.com</li>
-                        <li class="mb-3"><i class="fas fa-clock mr-2"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
-                    </ul>
-                    <div class="social-icons text-center mt-4">
-                        <a href="https://www.facebook.com/GHtrungdong" target="_blank" class="mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" class="mx-2"><i class="fab fa-youtube fa-lg"></i></a>
-                        <a href="#" target="_blank" class="mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" target="_blank" class="mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-dark">
+        <div class="container">
+            <h2 class="text-center section-title">Liên Hệ</h2>
+            <div class="row align-items-stretch">
+                <!-- Thông tin liên hệ (chiếm 6 cột) -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="contact-info h-100 p-4">
+                        <h4 class="text-center mb-4">Thông Tin Liên Hệ</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-map-marker-alt mr-2"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
+                            <li class="mb-3"><i class="fas fa-phone mr-2"></i> Điện thoại: 0395.729.624</li>
+                            <li class="mb-3"><i class="fas fa-envelope mr-2"></i> Email: nhathogiaohotrungdong@gmail.com</li>
+                            <li class="mb-3"><i class="fas fa-clock mr-2"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
+                        </ul>
+                        <div class="social-icons text-center mt-4">
+                            <a href="https://www.facebook.com/GHtrungdong" target="_blank" class="mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" class="mx-2"><i class="fab fa-youtube fa-lg"></i></a>
+                            <a href="#" target="_blank" class="mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" target="_blank" class="mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bản đồ (chiếm 6 cột) -->
+                <div class="col-lg-6">
+                    <div class="h-100" style="border-radius: 10px; overflow: hidden;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; min-height: 300px;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                title="Bản đồ Nhà thờ Giáo họ Trung Đồng">
+                        </iframe>
                     </div>
                 </div>
             </div>
-            
-            <!-- Bản đồ (chiếm 6 cột) -->
-            <div class="col-lg-6">
-                <div class="h-100" style="border-radius: 10px; overflow: hidden;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0; min-height: 300px;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            title="Bản đồ Nhà thờ Giáo họ Trung Đồng">
-                    </iframe>
-                </div>
-            </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- Footer -->
     <footer class="text-center">
         <div class="container">
@@ -679,8 +758,40 @@
     
     <!-- Custom JS -->
     <script>
-        // Lazy loading images
-        document.addEventListener("DOMContentLoaded", function() {
+        // Dark/Light mode toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            
+            // Kiểm tra theme đã lưu hoặc preference của hệ thống
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            // Áp dụng theme
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+            
+            // Xử lý click nút
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+            
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+
+            // Lazy loading images
             const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
             
             if ("IntersectionObserver" in window) {
@@ -746,11 +857,9 @@
             setTimeout(function() {
                 $('#announcementModal').modal('show');
             }, 5000);
-            
         });
-    </script>
-    <!-- Service Worker Registration -->
-    <script>
+
+        // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js').then(function(registration) {
