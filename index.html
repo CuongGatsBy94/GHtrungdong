@@ -1,9 +1,3 @@
-<!-- 
-  @Author: Your name
-  @Date:   2025-04-01 21:54:37
-  @Last Modified by:   Your name
-  @Last Modified time: 2025-08-10 19:53:22
--->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -391,6 +385,40 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
+        /* DevTools Warning Modal */
+        #devtoolsWarning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+        }
+        
+        .devtools-content {
+            background-color: #ff4444;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .devtools-content h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .devtools-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .hero h1 {
@@ -452,6 +480,16 @@
     </style>
 </head>
 <body>
+    <!-- DevTools Warning (hidden by default) -->
+    <div id="devtoolsWarning" style="display: none;">
+        <div class="devtools-content">
+            <h2><i class="fas fa-exclamation-triangle"></i> Cảnh báo!</h2>
+            <p>Việc sử dụng Developer Tools (Công cụ dành cho nhà phát triển) trên trang web này không được cho phép.</p>
+            <p>Vui lòng đóng DevTools để tiếp tục sử dụng trang web.</p>
+            <button id="closeWarning" class="btn btn-light">Tôi đã hiểu</button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
@@ -857,6 +895,67 @@
             setTimeout(function() {
                 $('#announcementModal').modal('show');
             }, 5000);
+            
+            // DevTools Detection and Prevention
+            const devtoolsWarning = document.getElementById('devtoolsWarning');
+            const closeWarningBtn = document.getElementById('closeWarning');
+            
+            // Function to check if DevTools is open
+            function checkDevTools() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+                const orientation = widthThreshold ? 'vertical' : 'horizontal';
+                
+                if (
+                    !(heightThreshold && widthThreshold) &&
+                    ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || 
+                    widthThreshold || heightThreshold)
+                ) {
+                    devtoolsWarning.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            
+            // Check periodically
+            setInterval(checkDevTools, 1000);
+            
+            // Check on resize
+            window.addEventListener('resize', checkDevTools);
+            
+            // Check on key shortcuts (F12, Ctrl+Shift+I, etc.)
+            document.addEventListener('keydown', function(e) {
+                // F12
+                if (e.keyCode === 123) {
+                    e.preventDefault();
+                    devtoolsWarning.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+                // Ctrl+Shift+I
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                    e.preventDefault();
+                    devtoolsWarning.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+                // Ctrl+U
+                if (e.ctrlKey && e.keyCode === 85) {
+                    e.preventDefault();
+                    devtoolsWarning.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+            
+            // Close warning button
+            closeWarningBtn.addEventListener('click', function() {
+                devtoolsWarning.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Right-click disable
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                devtoolsWarning.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
         });
 
         // Service Worker Registration
