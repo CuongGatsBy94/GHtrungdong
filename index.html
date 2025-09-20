@@ -1,3 +1,9 @@
+<!-- 
+  @Author: Cường GatsBy
+  @Date:   2025-09-10 20:42:33
+  @Last Modified by:   Cường GatsBy
+  @Last Modified time: 2025-09-21 01:53:33
+-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -36,8 +42,14 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8MXG2YVYK"></script>
@@ -49,11 +61,11 @@
     </script>
     
     <style>
-        /* Custom CSS */
+        /* Custom CSS với thiết kế mới */
         :root {
-            --primary-color: #ff7e5f;
+            --primary-color: #8e7c4a; /* Màu vàng nâu trang trọng */
             --secondary-color: #2c3e50;
-            --accent-color: #3498db;
+            --accent-color: #c9a86d; /* Màu vàng nhạt */
             --bg-color: #f8f9fa;
             --text-color: #333;
             --card-bg: #fff;
@@ -62,6 +74,8 @@
             --nav-link-color: #333;
             --section-bg: #ffffff;
             --service-box-bg: rgba(255, 255, 255, 0.1);
+            --gold-light: #d4c198;
+            --gold-dark: #8a6d3b;
         }
 
         /* Dark mode variables */
@@ -75,19 +89,32 @@
             --nav-link-color: #f8f9fa;
             --section-bg: #1e1e1e;
             --service-box-bg: rgba(30, 30, 30, 0.5);
+            --gold-light: #c9a86d;
+            --gold-dark: #d4c198;
         }
         
+        /* Font chữ */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        .animate-fade-in {
             animation: fadeIn 0.8s ease-out;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* Navigation */
@@ -95,25 +122,29 @@
             transition: all 0.3s ease;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             background-color: var(--header-bg) !important;
+            padding: 15px 0;
         }
         
         .navbar.scrolled {
             background-color: var(--header-bg) !important;
-            padding-top: 5px;
-            padding-bottom: 5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .navbar-brand {
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary-color) !important;
+            font-family: 'Playfair Display', serif;
         }
         
         .nav-link {
             position: relative;
-            margin: 0 10px;
+            margin: 0 15px;
             font-weight: 500;
             color: var(--nav-link-color) !important;
+            transition: color 0.3s;
         }
         
         .nav-link::after {
@@ -131,17 +162,21 @@
             width: 100%;
         }
         
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
         /* Hero Section */
         .hero {
-            padding: 120px 0;
+            padding: 160px 0 120px;
             text-align: center;
             position: relative;
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/6102365/pexels-photo-6102365.jpeg') center/cover no-repeat fixed;
-            color: white; /* Giữ màu chữ trắng cho hero dù ở chế độ nào */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat fixed;
+            color: white;
         }
         
         .hero-content {
@@ -150,50 +185,54 @@
         }
         
         .hero h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
+            font-size: 3.5rem;
             letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            font-weight: 700;
         }
         
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
         
         /* Buttons */
         .btn {
             background-color: var(--primary-color);
             border: none;
-            padding: 12px 30px;
+            padding: 12px 35px;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s;
             color: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
         
         .btn:hover {
-            background-color: #e06b4d;
+            background-color: var(--gold-dark);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
         }
         
         .btn-outline-light {
-            border-color: var(--text-color);
-            color: var(--text-color);
+            border: 2px solid white;
+            color: white;
             background-color: transparent;
         }
         
         .btn-outline-light:hover {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: white;
+            color: var(--primary-color);
         }
         
         /* Sections */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
             position: relative;
             background-color: var(--section-bg);
             transition: background-color 0.3s ease;
@@ -206,27 +245,28 @@
         .section-title {
             position: relative;
             display: inline-block;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             font-weight: 700;
             color: var(--text-color);
+            padding-bottom: 15px;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            width: 50px;
+            width: 80px;
             height: 3px;
             background-color: var(--primary-color);
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
         }
         
         /* Pagination */
         .pagination-nav {
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
-            margin-bottom: 30px;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            margin-bottom: 40px;
         }
         
         .pagination {
@@ -244,48 +284,55 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             margin: 0 5px;
             transition: all 0.3s;
+            border-radius: 5px;
         }
         
         .page-link:hover {
             background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-color);
         }
         
         /* Service Boxes */
         .service-box {
             padding: 40px 30px;
-            background-color: var(--service-box-bg);
-            border-radius: 10px;
-            transition: all 0.3s;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            transition: all 0.4s;
             height: 100%;
             margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-            color: var(--text-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
         }
         
         .service-box i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            display: block;
         }
         
         .service-box h4 {
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-weight: 700;
+            margin-bottom: 20px;
             color: var(--text-color);
         }
         
+        .service-box p {
+            margin-bottom: 25px;
+        }
+        
         .service-box:hover {
-            transform: translateY(-10px);
-            background-color: var(--service-box-bg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
         /* Image Slider */
         .image-slider {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
         .carousel-item img {
@@ -294,53 +341,100 @@
         }
         
         .carousel-caption {
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 5px;
-            padding: 20px;
-            bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 700px;
+        }
+        
+        .carousel-caption h5 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold-light);
         }
         
         /* Back to top button */
         #backToTop {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 40px;
+            right: 40px;
             display: none;
             z-index: 99;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             padding: 0;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             background-color: var(--primary-color);
             color: white;
             border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        #backToTop:hover {
+            background-color: var(--gold-dark);
+            transform: translateY(-5px);
         }
         
         /* Footer */
         footer {
             background-color: var(--footer-bg);
             color: white;
-            padding: 30px 0;
+            padding: 60px 0 30px;
             transition: background-color 0.3s ease;
         }
         
+        footer h5 {
+            color: var(--gold-light);
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        footer ul li {
+            margin-bottom: 12px;
+        }
+        
+        footer a {
+            color: #ddd;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+        
         .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
+            font-size: 1.2rem;
+            margin: 0 8px;
             transition: all 0.3s;
         }
         
         .social-icons a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
         }
         
         /* Lazy loading */
         img.lazy {
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.5s;
+            border-radius: 10px;
         }
         
         img.lazy-loaded {
@@ -351,14 +445,23 @@
         .modal-content {
             background-color: var(--card-bg);
             color: var(--text-color);
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
         .modal-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px 25px;
         }
         
         .modal-footer {
             border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+        }
+        
+        .modal-body {
+            padding: 25px;
         }
         
         .modal-title {
@@ -371,18 +474,38 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px 10px;
+            font-size: 1.3rem;
+            padding: 8px 15px;
             color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        #themeToggle:hover {
+            color: var(--primary-color);
         }
         
         /* Contact info box */
         .contact-info {
-            background-color: var(--card-bg);
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg) 100%);
             color: var(--text-color);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .contact-info ul li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 3px;
         }
         
         /* DevTools Warning Modal */
@@ -392,7 +515,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -402,61 +525,120 @@
         
         .devtools-content {
             background-color: #ff4444;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 40px;
+            border-radius: 15px;
             text-align: center;
-            max-width: 500px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            max-width: 600px;
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.3);
         }
         
         .devtools-content h2 {
             margin-bottom: 20px;
             color: white;
+            font-size: 2rem;
         }
         
         .devtools-content p {
-            margin-bottom: 20px;
-            font-size: 18px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Decorative elements */
+        .decorative-divider {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            margin: 30px auto;
+        }
+        
+        .gold-border {
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
         }
         
         /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
         @media (max-width: 992px) {
+            .hero {
+                padding: 140px 0 100px;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .carousel-item img {
+                height: 500px;
             }
         }
         
         @media (max-width: 768px) {
             .hero {
-                padding: 100px 0;
-                min-height: 70vh;
+                padding: 120px 0 80px;
+                min-height: 80vh;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .section {
                 padding: 60px 0;
             }
             
+            .section-title {
+                margin-bottom: 40px;
+            }
+            
             .carousel-item img {
                 height: 400px;
+            }
+            
+            .carousel-caption {
+                bottom: 30px;
+                padding: 15px;
+            }
+            
+            .carousel-caption h5 {
+                font-size: 1.4rem;
+            }
+            
+            .service-box {
+                padding: 30px 20px;
             }
         }
         
         @media (max-width: 576px) {
             .hero {
-                padding: 80px 0;
-                min-height: 60vh;
+                padding: 100px 0 60px;
+                min-height: 70vh;
             }
             
             .hero h1 {
                 font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
             }
             
             .carousel-item img {
@@ -464,17 +646,25 @@
             }
             
             .carousel-caption {
-                bottom: 10px;
+                bottom: 20px;
                 padding: 10px;
             }
             
             .carousel-caption h5 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .carousel-caption p {
                 font-size: 0.8rem;
                 display: none;
+            }
+            
+            #backToTop {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -532,10 +722,11 @@
 
     <!-- Hero Section -->
     <header class="hero">
-        <div class="container hero-content">
+        <div class="container hero-content animate-fade-in">
             <h1 class="animate__animated animate__fadeInDown">Chào Mừng Đến Giáo Họ Trung Đồng</h1>
-            <p class="animate__animated animate__fadeInUp animate__delay-1s">Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm</p>
-            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="decorative-divider"></div>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">"Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm"</p>
+            <div class="animate__animated animate__fadeInUp animate__delay-2s mt-4">
                 <a href="kinhnguyen/kinh-nguyen.html" class="btn btn-primary btn-lg mr-3">Kinh Nguyện</a>
                 <a href="#about" class="btn btn-outline-light btn-lg">Tìm Hiểu Thêm</a>
             </div>
@@ -546,7 +737,10 @@
     <nav class="pagination-nav">
         <div class="container">
             <ul class="pagination">
-
+                <li class="page-item"><a class="page-link" href="#about">Giới Thiệu</a></li>
+                <li class="page-item"><a class="page-link" href="#gallery">Hình Ảnh</a></li>
+                <li class="page-item"><a class="page-link" href="#services">Hoạt Động</a></li>
+                <li class="page-item"><a class="page-link" href="#contact">Liên Hệ</a></li>
             </ul>
         </div>
     </nav>
@@ -555,16 +749,16 @@
     <section id="about" class="section">
         <div class="container">
             <h2 class="text-center section-title">Giới Thiệu</h2>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <img data-src="images/9_.png" alt="Giáo Họ Trung Đồng" class="img-fluid rounded lazy lazy-loaded" style="opacity: 1;">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img data-src="images/9_.png" alt="Giáo Họ Trung Đồng" class="img-fluid rounded shadow-lg lazy lazy-loaded" style="opacity: 1;">
                 </div>
                 <div class="col-lg-6">
-                    <h3>Nhà Thờ Giáo Họ Trung Đồng</h3>
-                    <p>Nhà thờ Giáo họ Trung Đồng mang nét đẹp giản dị nhưng trang nghiêm, nằm giữa cánh đồng xanh mướt của vùng quê Nam Định. Đây là nơi mà các tín hữu cùng nhau cầu nguyện, tham gia hoạt động tôn giáo và gìn giữ những giá trị văn hóa, truyền thống của giáo họ qua nhiều thế hệ.</p>
-                    <p>Với lịch sử hình thành và phát triển lâu đời, Giáo họ Trung Đồng đã trở thành một phần không thể thiếu trong đời sống tâm linh của cộng đồng giáo dân nơi đây.</p>
-                    <div class="mt-4">
-                        <a href="lichsu.html" class="btn btn-outline-light">Lịch Sử Hình Thành</a>
+                    <h3 class="mb-4">Nhà Thờ Giáo Họ Trung Đồng</h3>
+                    <p class="mb-4">Nhà thờ Giáo họ Trung Đồng mang nét đẹp giản dị nhưng trang nghiêm, nằm giữa cánh đồng xanh mướt của vùng quê Nam Định. Đây là nơi mà các tín hữu cùng nhau cầu nguyện, tham gia hoạt động tôn giáo và gìn giữ những giá trị văn hóa, truyền thống của giáo họ qua nhiều thế hệ.</p>
+                    <p class="mb-4">Với lịch sử hình thành và phát triển lâu đời, Giáo họ Trung Đồng đã trở thành một phần không thể thiếu trong đời sống tâm linh của cộng đồng giáo dân nơi đây.</p>
+                    <div class="mt-5">
+                        <a href="lichsu.html" class="btn btn-outline-primary">Lịch Sử Hình Thành</a>
                     </div>
                 </div>
             </div>
@@ -629,8 +823,8 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="text-center mt-4">
-                <a href="gallery.html" class="btn btn-primary">Xem Thêm Hình Ảnh</a>
+            <div class="text-center mt-5">
+                <a href="gallery.html" class="btn btn-primary btn-lg">Xem Thêm Hình Ảnh</a>
             </div>
         </div>
     </section>
@@ -641,42 +835,42 @@
             <h2 class="text-center section-title">Hoạt Động</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="service-box text-center">
-                        <i class="fas fa-church mb-4"></i>
+                    <div class="service-box">
+                        <i class="fas fa-church"></i>
                         <h4>Thánh Lễ</h4>
                         <p>Các buổi thánh lễ hàng tuần để kết nối và cầu nguyện cùng nhau.</p>
-                        <ul class="list-unstyled">
-                            <li><a href="loichuahangngay.html" class="text-reset">Lời Chúa hàng ngày</a></li>
-                            <li><a href="thanhle.html" class="text-reset">Lịch Thánh Lễ</a></li>
-                            <li><a href="baihatthanhca.html" class="text-reset">Bài Hát Thánh Ca</a></li>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><a href="loichuahangngay.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lời Chúa hàng ngày</a></li>
+                            <li class="mb-2"><a href="thanhle.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lịch Thánh Lễ</a></li>
+                            <li><a href="baihatthanhca.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Bài Hát Thánh Ca</a></li>
                         </ul>
-                        <a href="thanhle.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
+                        <a href="thanhle.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="service-box text-center">
-                        <i class="fas fa-hands-helping mb-4"></i>
+                    <div class="service-box">
+                        <i class="fas fa-hands-helping"></i>
                         <h4>Các Chương Trình</h4>
                         <p>Hoạt động xã hội và công tác thiện nguyện phục vụ cộng đồng.</p>
-                        <ul class="list-unstyled">
-                            <li><a href="noel2024.html" class="text-reset">Đêm hoan ca Noel 2024</a></li>
-                            <li><a href="dsunghodoibong.html" class="text-reset">Danh Sách Ủng Hộ</a></li>
-                            <li><a href="hoatdongxahoi.html" class="text-reset">Hoạt Động Xã Hội</a></li>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><a href="noel2024.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Đêm hoan ca Noel 2024</a></li>
+                            <li class="mb-2"><a href="dsunghodoibong.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Danh Sách Ủng Hộ</a></li>
+                            <li><a href="hoatdongxahoi.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hoạt Động Xã Hội</a></li>
                         </ul>
-                        <a href="hoatdong.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
+                        <a href="hoatdong.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="service-box text-center">
-                        <i class="fas fa-book-open mb-4"></i>
+                    <div class="service-box">
+                        <i class="fas fa-book-open"></i>
                         <h4>Các Lớp Học Giáo Lý</h4>
                         <p>Giúp các thành viên học hỏi và phát triển đức tin.</p>
-                        <ul class="list-unstyled">
-                            <li><a href="lopgiaoly.html" class="text-reset">Lớp học giáo lý trẻ em</a></li>
-                            <li><a href="lopgiaolynguoilon.html" class="text-reset">Lớp học người lớn</a></li>
-                            <li><a href="hoithao.html" class="text-reset">Hội Thảo Tâm Linh</a></li>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><a href="lopgiaoly.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học giáo lý trẻ em</a></li>
+                            <li class="mb-2"><a href="lopgiaolynguoilon.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học người lớn</a></li>
+                            <li><a href="hoithao.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hội Thảo Tâm Linh</a></li>
                         </ul>
-                        <a href="giaoly.html" class="btn btn-sm btn-outline-light mt-3">Chi Tiết</a>
+                        <a href="giaoly.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
                     </div>
                 </div>
             </div>
@@ -690,26 +884,26 @@
             <div class="row align-items-stretch">
                 <!-- Thông tin liên hệ (chiếm 6 cột) -->
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="contact-info h-100 p-4">
+                    <div class="contact-info">
                         <h4 class="text-center mb-4">Thông Tin Liên Hệ</h4>
                         <ul class="list-unstyled">
-                            <li class="mb-3"><i class="fas fa-map-marker-alt mr-2"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
-                            <li class="mb-3"><i class="fas fa-phone mr-2"></i> Điện thoại: 0395.729.624</li>
-                            <li class="mb-3"><i class="fas fa-envelope mr-2"></i> Email: nhathogiaohotrungdong@gmail.com</li>
-                            <li class="mb-3"><i class="fas fa-clock mr-2"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
+                            <li><i class="fas fa-phone"></i> Điện thoại: 0395.729.624</li>
+                            <li><i class="fas fa-envelope"></i> Email: nhathogiaohotrungdong@gmail.com</li>
+                            <li><i class="fas fa-clock"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
                         </ul>
-                        <div class="social-icons text-center mt-4">
-                            <a href="https://www.facebook.com/GHtrungdong" target="_blank" class="mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
-                            <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" class="mx-2"><i class="fab fa-youtube fa-lg"></i></a>
-                            <a href="#" target="_blank" class="mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                            <a href="#" target="_blank" class="mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                        <div class="social-icons text-center mt-5">
+                            <a href="https://www.facebook.com/GHtrungdong" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Bản đồ (chiếm 6 cột) -->
                 <div class="col-lg-6">
-                    <div class="h-100" style="border-radius: 10px; overflow: hidden;">
+                    <div class="h-100 rounded shadow-lg" style="overflow: hidden;">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
                                 width="100%" 
                                 height="100%" 
@@ -727,7 +921,7 @@
     <!-- Footer -->
     <footer class="text-center">
         <div class="container">
-            <div class="row">
+            <div class="row text-md-left">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Giáo Họ Trung Đồng</h5>
                     <p>Giáo họ Trung Đồng - Giáo xứ Lạc Thành</p>
@@ -736,10 +930,10 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Liên Kết Nhanh</h5>
                     <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-white">Trang Chủ</a></li>
-                        <li><a href="#about" class="text-white">Giới Thiệu</a></li>
-                        <li><a href="#services" class="text-white">Hoạt Động</a></li>
-                        <li><a href="#contact" class="text-white">Liên Hệ</a></li>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="#about">Giới Thiệu</a></li>
+                        <li><a href="#services">Hoạt Động</a></li>
+                        <li><a href="#contact">Liên Hệ</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -749,13 +943,13 @@
                 </div>
             </div>
             <hr class="my-4 bg-light">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-6 text-md-left mb-3 mb-md-0">
                     <p class="mb-0">&copy; 2024 Giáo Họ Trung Đồng. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-right">
-                    <a href="privacy.html" class="text-white mr-3">Chính Sách Bảo Mật</a>
-                    <a href="terms.html" class="text-white">Điều Khoản Sử Dụng</a>
+                    <a href="privacy.html" class="mr-3">Chính Sách Bảo Mật</a>
+                    <a href="terms.html">Điều Khoản Sử Dụng</a>
                 </div>
             </div>
         </div>
@@ -880,15 +1074,17 @@
             
             // Smooth scrolling for anchor links
             $('a[href*="#"]').on('click', function(e) {
-                e.preventDefault();
-                
-                $('html, body').animate(
-                    {
-                        scrollTop: $($(this).attr('href')).offset().top - 70,
-                    },
-                    500,
-                    'linear'
-                );
+                if (this.pathname === window.location.pathname && this.hash !== "") {
+                    e.preventDefault();
+                    
+                    $('html, body').animate(
+                        {
+                            scrollTop: $($(this).attr('href')).offset().top - 70,
+                        },
+                        500,
+                        'linear'
+                    );
+                }
             });
             
             // Show announcement modal after 5 seconds
@@ -904,7 +1100,6 @@
             function checkDevTools() {
                 const widthThreshold = window.outerWidth - window.innerWidth > 160;
                 const heightThreshold = window.outerHeight - window.innerHeight > 160;
-                const orientation = widthThreshold ? 'vertical' : 'horizontal';
                 
                 if (
                     !(heightThreshold && widthThreshold) &&
