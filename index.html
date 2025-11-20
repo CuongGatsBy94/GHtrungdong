@@ -1,8 +1,8 @@
 <!-- 
   @Author: Cường GatsBy
   @Date:   2025-09-10 20:42:33
-  @Last Modified by:   Cường GatsBy
-  @Last Modified time: 2025-09-21 01:53:33
+  @Last Modified by:   Your name
+  @Last Modified time: 2025-11-20 23:00:43
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -51,6 +51,9 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
+    <!-- Cloudflare Turnstile CAPTCHA -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8MXG2YVYK"></script>
     <script>
@@ -91,6 +94,58 @@
             --service-box-bg: rgba(30, 30, 30, 0.5);
             --gold-light: #c9a86d;
             --gold-dark: #d4c198;
+        }
+        
+        /* CAPTCHA Modal Styles */
+        .captcha-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .captcha-container {
+            background: linear-gradient(135deg, #8e7c4a 0%, #2c3e50 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .captcha-container h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        .captcha-container p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .captcha-verified {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Ẩn nội dung chính khi chưa xác thực */
+        body.captcha-required #main-content {
+            display: none;
         }
         
         /* Font chữ */
@@ -669,319 +724,348 @@
         }
     </style>
 </head>
-<body>
-    <!-- DevTools Warning (hidden by default) -->
-    <div id="devtoolsWarning" style="display: none;">
-        <div class="devtools-content">
-            <h2><i class="fas fa-exclamation-triangle"></i> Cảnh báo!</h2>
-            <p>Việc sử dụng Developer Tools (Công cụ dành cho nhà phát triển) trên trang web này không được cho phép.</p>
-            <p>Vui lòng đóng DevTools để tiếp tục sử dụng trang web.</p>
-            <button id="closeWarning" class="btn btn-light">Tôi đã hiểu</button>
+<body class="captcha-required">
+    <!-- CAPTCHA Verification Modal -->
+    <div id="captchaModal" class="captcha-modal">
+        <div class="captcha-container">
+            <h2><i class="fas fa-shield-alt"></i> Xác Thực Truy Cập</h2>
+            <p>Vui lòng xác thực bạn không phải là robot để tiếp tục truy cập website Giáo Họ Trung Đồng.</p>
+            
+            <div class="cf-turnstile" 
+                 data-sitekey="0x4AAAAAACCB5ra2TvF-gfc9"
+                 data-callback="onCaptchaSuccess"
+                 data-error-callback="onCaptchaError"
+                 data-expired-callback="onCaptchaExpired"
+                 style="display: inline-block; margin: 20px 0;">
+            </div>
+            
+            <div id="captchaSuccess" class="captcha-verified">
+                <i class="fas fa-check-circle"></i> Xác thực thành công! Đang chuyển hướng...
+            </div>
+            
+            <div class="mt-4">
+                <p style="font-size: 0.9rem; opacity: 0.8;">
+                    <i class="fas fa-info-circle"></i> Bảo vệ bởi Cloudflare Turnstile
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Giáo Họ Trung Đồng</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">Giới Thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Hoạt Động</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Hình Ảnh</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Liên Hệ</a></li>
-                    <li class="nav-item">
-                        <button id="themeToggle" class="btn btn-link nav-link" title="Chuyển đổi chế độ sáng/tối">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
-                </ul>
-                <ul class="navbar-nav social-icons ml-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.facebook.com/GHtrungdong" target="_blank" title="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" title="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sitemap.xml" target="_blank" title="Sitemap">
-                            <i class="fas fa-sitemap"></i>
-                        </a>
-                    </li>
-                </ul>
+    <!-- Main Content (sẽ được hiển thị sau khi xác thực CAPTCHA) -->
+    <div id="main-content">
+        <!-- DevTools Warning (hidden by default) -->
+        <div id="devtoolsWarning" style="display: none;">
+            <div class="devtools-content">
+                <h2><i class="fas fa-exclamation-triangle"></i> Cảnh báo!</h2>
+                <p>Việc sử dụng Developer Tools (Công cụ dành cho nhà phát triển) trên trang web này không được cho phép.</p>
+                <p>Vui lòng đóng DevTools để tiếp tục sử dụng trang web.</p>
+                <button id="closeWarning" class="btn btn-light">Tôi đã hiểu</button>
             </div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container hero-content animate-fade-in">
-            <h1 class="animate__animated animate__fadeInDown">Chào Mừng Đến Giáo Họ Trung Đồng</h1>
-            <div class="decorative-divider"></div>
-            <p class="animate__animated animate__fadeInUp animate__delay-1s">"Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm"</p>
-            <div class="animate__animated animate__fadeInUp animate__delay-2s mt-4">
-                <a href="kinhnguyen/kinh-nguyen.html" class="btn btn-primary btn-lg mr-3">Kinh Nguyện</a>
-                <a href="#about" class="btn btn-outline-light btn-lg">Tìm Hiểu Thêm</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Pagination Navigation -->
-    <nav class="pagination-nav">
-        <div class="container">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#about">Giới Thiệu</a></li>
-                <li class="page-item"><a class="page-link" href="#gallery">Hình Ảnh</a></li>
-                <li class="page-item"><a class="page-link" href="#services">Hoạt Động</a></li>
-                <li class="page-item"><a class="page-link" href="#contact">Liên Hệ</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="text-center section-title">Giới Thiệu</h2>
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img data-src="images/9_.png" alt="Giáo Họ Trung Đồng" class="img-fluid rounded shadow-lg lazy lazy-loaded" style="opacity: 1;">
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="mb-4">Nhà Thờ Giáo Họ Trung Đồng</h3>
-                    <p class="mb-4">Nhà thờ Giáo họ Trung Đồng mang nét đẹp giản dị nhưng trang nghiêm, nằm giữa cánh đồng xanh mướt của vùng quê Nam Định. Đây là nơi mà các tín hữu cùng nhau cầu nguyện, tham gia hoạt động tôn giáo và gìn giữ những giá trị văn hóa, truyền thống của giáo họ qua nhiều thế hệ.</p>
-                    <p class="mb-4">Với lịch sử hình thành và phát triển lâu đời, Giáo họ Trung Đồng đã trở thành một phần không thể thiếu trong đời sống tâm linh của cộng đồng giáo dân nơi đây.</p>
-                    <div class="mt-5">
-                        <a href="lichsu.html" class="btn btn-outline-primary">Lịch Sử Hình Thành</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Image Slider Section -->
-    <section id="gallery" class="section bg-dark">
-        <div class="container">
-            <h2 class="text-center section-title">Hình Ảnh Hoạt Động</h2>
-            <div class="image-slider carousel slide" id="mainSlider" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
-                    <li data-target="#mainSlider" data-slide-to="1"></li>
-                    <li data-target="#mainSlider" data-slide-to="2"></li>
-                    <li data-target="#mainSlider" data-slide-to="3"></li>
-                    <li data-target="#mainSlider" data-slide-to="4"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img data-src="images/1.jpg" alt="Hoạt động 1" class="d-block w-100 lazy">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Thánh lễ Chúa Nhật</h5>
-                            <p>Cộng đoàn cùng tham dự thánh lễ</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img data-src="images/2.jpg" alt="Hoạt động 2" class="d-block w-100 lazy">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Lễ Giáng Sinh</h5>
-                            <p>Không khí ấm áp trong đêm Noel</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img data-src="images/9.jpg" alt="Hoạt động 3" class="d-block w-100 lazy">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Lớp Giáo Lý</h5>
-                            <p>Các em thiếu nhi học giáo lý</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img data-src="images/4.jpg" alt="Hoạt động 4" class="d-block w-100 lazy">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Hoạt Động Thiện Nguyện</h5>
-                            <p>Giúp đỡ những người có hoàn cảnh khó khăn</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img data-src="images/6.jpg" alt="Hoạt động 5" class="d-block w-100 lazy">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Đại Hội Giới Trẻ</h5>
-                            <p>Các bạn trẻ tham gia hoạt động cộng đồng</p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#mainSlider" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#mainSlider" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-            <div class="text-center mt-5">
-                <a href="gallery.html" class="btn btn-primary btn-lg">Xem Thêm Hình Ảnh</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="text-center section-title">Hoạt Động</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <i class="fas fa-church"></i>
-                        <h4>Thánh Lễ</h4>
-                        <p>Các buổi thánh lễ hàng tuần để kết nối và cầu nguyện cùng nhau.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><a href="loichuahangngay.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lời Chúa hàng ngày</a></li>
-                            <li class="mb-2"><a href="thanhle.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lịch Thánh Lễ</a></li>
-                            <li><a href="baihatthanhca.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Bài Hát Thánh Ca</a></li>
-                        </ul>
-                        <a href="thanhle.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <i class="fas fa-hands-helping"></i>
-                        <h4>Các Chương Trình</h4>
-                        <p>Hoạt động xã hội và công tác thiện nguyện phục vụ cộng đồng.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><a href="noel2024.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Đêm hoan ca Noel 2024</a></li>
-                            <li class="mb-2"><a href="dsunghodoibong.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Danh Sách Ủng Hộ</a></li>
-                            <li><a href="hoatdongxahoi.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hoạt Động Xã Hội</a></li>
-                        </ul>
-                        <a href="hoatdong.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="service-box">
-                        <i class="fas fa-book-open"></i>
-                        <h4>Các Lớp Học Giáo Lý</h4>
-                        <p>Giúp các thành viên học hỏi và phát triển đức tin.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><a href="lopgiaoly.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học giáo lý trẻ em</a></li>
-                            <li class="mb-2"><a href="lopgiaolynguoilon.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học người lớn</a></li>
-                            <li><a href="hoithao.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hội Thảo </a></li>
-                        </ul>
-                        <a href="giaoly.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section bg-dark">
-        <div class="container">
-            <h2 class="text-center section-title">Liên Hệ</h2>
-            <div class="row align-items-stretch">
-                <!-- Thông tin liên hệ (chiếm 6 cột) -->
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="contact-info">
-                        <h4 class="text-center mb-4">Thông Tin Liên Hệ</h4>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-map-marker-alt"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
-                            <li><i class="fas fa-phone"></i> Điện thoại: 0395.729.624</li>
-                            <li><i class="fas fa-envelope"></i> Email: nhathogiaohotrungdong@gmail.com</li>
-                            <li><i class="fas fa-clock"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
-                        </ul>
-                        <div class="social-icons text-center mt-5">
-                            <a href="https://www.facebook.com/GHtrungdong" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank"><i class="fab fa-youtube"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Bản đồ (chiếm 6 cột) -->
-                <div class="col-lg-6">
-                    <div class="h-100 rounded shadow-lg" style="overflow: hidden;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0; min-height: 300px;" 
-                                allowfullscreen="" 
-                                loading="lazy"
-                                title="Bản đồ Nhà thờ Giáo họ Trung Đồng">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="container">
-            <div class="row text-md-left">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5>Giáo Họ Trung Đồng</h5>
-                    <p>Giáo họ Trung Đồng - Giáo xứ Lạc Thành</p>
-                    <p>Giáo phận Bùi Chu</p>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5>Liên Kết Nhanh</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Trang Chủ</a></li>
-                        <li><a href="#about">Giới Thiệu</a></li>
-                        <li><a href="#services">Hoạt Động</a></li>
-                        <li><a href="#contact">Liên Hệ</a></li>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Giáo Họ Trung Đồng</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="#about">Giới Thiệu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Hoạt Động</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#gallery">Hình Ảnh</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Liên Hệ</a></li>
+                        <li class="nav-item">
+                            <button id="themeToggle" class="btn btn-link nav-link" title="Chuyển đổi chế độ sáng/tối">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav social-icons ml-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.facebook.com/GHtrungdong" target="_blank" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sitemap.xml" target="_blank" title="Sitemap">
+                                <i class="fas fa-sitemap"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h5>Liên Hệ</h5>
-                    <p>Xóm 4 Xuân Phú - Xuân Trường - Nam Định</p>
-                    <p>Email: nhathogiaohotrungdong@gmail.com</p>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="container hero-content animate-fade-in">
+                <h1 class="animate__animated animate__fadeInDown">Chào Mừng Đến Giáo Họ Trung Đồng</h1>
+                <div class="decorative-divider"></div>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s">"Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm"</p>
+                <div class="animate__animated animate__fadeInUp animate__delay-2s mt-4">
+                    <a href="kinhnguyen/kinh-nguyen.html" class="btn btn-primary btn-lg mr-3">Kinh Nguyện</a>
+                    <a href="#about" class="btn btn-outline-light btn-lg">Tìm Hiểu Thêm</a>
                 </div>
             </div>
-            <hr class="my-4 bg-light">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-md-left mb-3 mb-md-0">
-                    <p class="mb-0">&copy; 2024 Giáo Họ Trung Đồng. All Rights Reserved.</p>
+        </header>
+
+        <!-- Pagination Navigation -->
+        <nav class="pagination-nav">
+            <div class="container">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#about">Giới Thiệu</a></li>
+                    <li class="page-item"><a class="page-link" href="#gallery">Hình Ảnh</a></li>
+                    <li class="page-item"><a class="page-link" href="#services">Hoạt Động</a></li>
+                    <li class="page-item"><a class="page-link" href="#contact">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="text-center section-title">Giới Thiệu</h2>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <img data-src="images/9_.png" alt="Giáo Họ Trung Đồng" class="img-fluid rounded shadow-lg lazy lazy-loaded" style="opacity: 1;">
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Nhà Thờ Giáo Họ Trung Đồng</h3>
+                        <p class="mb-4">Nhà thờ Giáo họ Trung Đồng mang nét đẹp giản dị nhưng trang nghiêm, nằm giữa cánh đồng xanh mướt của vùng quê Nam Định. Đây là nơi mà các tín hữu cùng nhau cầu nguyện, tham gia hoạt động tôn giáo và gìn giữ những giá trị văn hóa, truyền thống của giáo họ qua nhiều thế hệ.</p>
+                        <p class="mb-4">Với lịch sử hình thành và phát triển lâu đời, Giáo họ Trung Đồng đã trở thành một phần không thể thiếu trong đời sống tâm linh của cộng đồng giáo dân nơi đây.</p>
+                        <div class="mt-5">
+                            <a href="lichsu.html" class="btn btn-outline-primary">Lịch Sử Hình Thành</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 text-md-right">
-                    <a href="privacy.html" class="mr-3">Chính Sách Bảo Mật</a>
-                    <a href="terms.html">Điều Khoản Sử Dụng</a>
+            </div>
+        </section>
+
+        <!-- Image Slider Section -->
+        <section id="gallery" class="section bg-dark">
+            <div class="container">
+                <h2 class="text-center section-title">Hình Ảnh Hoạt Động</h2>
+                <div class="image-slider carousel slide" id="mainSlider" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
+                        <li data-target="#mainSlider" data-slide-to="1"></li>
+                        <li data-target="#mainSlider" data-slide-to="2"></li>
+                        <li data-target="#mainSlider" data-slide-to="3"></li>
+                        <li data-target="#mainSlider" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img data-src="images/1.jpg" alt="Hoạt động 1" class="d-block w-100 lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Thánh lễ Chúa Nhật</h5>
+                                <p>Cộng đoàn cùng tham dự thánh lễ</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img data-src="images/2.jpg" alt="Hoạt động 2" class="d-block w-100 lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Lễ Giáng Sinh</h5>
+                                <p>Không khí ấm áp trong đêm Noel</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img data-src="images/9.jpg" alt="Hoạt động 3" class="d-block w-100 lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Lớp Giáo Lý</h5>
+                                <p>Các em thiếu nhi học giáo lý</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img data-src="images/4.jpg" alt="Hoạt động 4" class="d-block w-100 lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Hoạt Động Thiện Nguyện</h5>
+                                <p>Giúp đỡ những người có hoàn cảnh khó khăn</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img data-src="images/6.jpg" alt="Hoạt động 5" class="d-block w-100 lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Đại Hội Giới Trẻ</h5>
+                                <p>Các bạn trẻ tham gia hoạt động cộng đồng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#mainSlider" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#mainSlider" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="gallery.html" class="btn btn-primary btn-lg">Xem Thêm Hình Ảnh</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="text-center section-title">Hoạt Động</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <i class="fas fa-church"></i>
+                            <h4>Thánh Lễ</h4>
+                            <p>Các buổi thánh lễ hàng tuần để kết nối và cầu nguyện cùng nhau.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><a href="loichuahangngay.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lời Chúa hàng ngày</a></li>
+                                <li class="mb-2"><a href="thanhle.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lịch Thánh Lễ</a></li>
+                                <li><a href="baihatthanhca.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Bài Hát Thánh Ca</a></li>
+                            </ul>
+                            <a href="thanhle.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <i class="fas fa-hands-helping"></i>
+                            <h4>Các Chương Trình</h4>
+                            <p>Hoạt động xã hội và công tác thiện nguyện phục vụ cộng đồng.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><a href="noel2024.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Đêm hoan ca Noel 2024</a></li>
+                                <li class="mb-2"><a href="dsunghodoibong.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Danh Sách Ủng Hộ</a></li>
+                                <li><a href="hoatdongxahoi.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hoạt Động Xã Hội</a></li>
+                            </ul>
+                            <a href="hoatdong.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <i class="fas fa-book-open"></i>
+                            <h4>Các Lớp Học Giáo Lý</h4>
+                            <p>Giúp các thành viên học hỏi và phát triển đức tin.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><a href="lopgiaoly.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học giáo lý trẻ em</a></li>
+                                <li class="mb-2"><a href="lopgiaolynguoilon.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Lớp học người lớn</a></li>
+                                <li><a href="hoithao.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hội Thảo </a></li>
+                            </ul>
+                            <a href="giaoly.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-dark">
+            <div class="container">
+                <h2 class="text-center section-title">Liên Hệ</h2>
+                <div class="row align-items-stretch">
+                    <!-- Thông tin liên hệ (chiếm 6 cột) -->
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="contact-info">
+                            <h4 class="text-center mb-4">Thông Tin Liên Hệ</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-map-marker-alt"></i> Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</li>
+                                <li><i class="fas fa-phone"></i> Điện thoại: 0395.729.624</li>
+                                <li><i class="fas fa-envelope"></i> Email: nhathogiaohotrungdong@gmail.com</li>
+                                <li><i class="fas fa-clock"></i> Giờ Lễ Chúa Nhật: 7:00 - 9:00 - 18:30</li>
+                            </ul>
+                            <div class="social-icons text-center mt-5">
+                                <a href="https://www.facebook.com/GHtrungdong" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank"><i class="fab fa-youtube"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bản đồ (chiếm 6 cột) -->
+                    <div class="col-lg-6">
+                        <div class="h-100 rounded shadow-lg" style="overflow: hidden;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0; min-height: 300px;" 
+                                    allowfullscreen="" 
+                                    loading="lazy"
+                                    title="Bản đồ Nhà thờ Giáo họ Trung Đồng">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="container">
+                <div class="row text-md-left">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h5>Giáo Họ Trung Đồng</h5>
+                        <p>Giáo họ Trung Đồng - Giáo xứ Lạc Thành</p>
+                        <p>Giáo phận Bùi Chu</p>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h5>Liên Kết Nhanh</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="index.html">Trang Chủ</a></li>
+                            <li><a href="#about">Giới Thiệu</a></li>
+                            <li><a href="#services">Hoạt Động</a></li>
+                            <li><a href="#contact">Liên Hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Liên Hệ</h5>
+                        <p>Xóm 4 Xuân Phú - Xuân Trường - Nam Định</p>
+                        <p>Email: nhathogiaohotrungdong@gmail.com</p>
+                    </div>
+                </div>
+                <hr class="my-4 bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-md-left mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2024 Giáo Họ Trung Đồng. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="privacy.html" class="mr-3">Chính Sách Bảo Mật</a>
+                        <a href="terms.html">Điều Khoản Sử Dụng</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" class="btn btn-primary" title="Lên đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Announcement Modal -->
+        <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="announcementModalLabel">Thông Báo Mới</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Tuần Thánh 2015</h6>
+                        <p>Chương trình Tuần Thánh - Giáo Họ Trung Đồng.</p>
+                        <p>Chương trình Tuần Thánh tại Giáo Họ Trung Đồng, Giáo Xứ Lạc Thành.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <a href="tuanthanh.html" class="btn btn-primary">Xem Chi Tiết</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="btn btn-primary" title="Lên đầu trang">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Announcement Modal -->
-    <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="announcementModalLabel">Thông Báo Mới</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h6>Tuần Thánh 2015</h6>
-                    <p>Chương trình Tuần Thánh - Giáo Họ Trung Đồng.</p>
-                    <p>Chương trình Tuần Thánh tại Giáo Họ Trung Đồng, Giáo Xứ Lạc Thành.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <a href="tuanthanh.html" class="btn btn-primary">Xem Chi Tiết</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div> <!-- Kết thúc #main-content -->
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -990,8 +1074,61 @@
     
     <!-- Custom JS -->
     <script>
-        // Dark/Light mode toggle
+        // CAPTCHA Handling
+        let captchaVerified = false;
+
+        function onCaptchaSuccess(token) {
+            console.log('CAPTCHA success:', token);
+            captchaVerified = true;
+            
+            // Hiển thị thông báo thành công
+            document.getElementById('captchaSuccess').style.display = 'block';
+            
+            // Xác thực phía server (trong thực tế cần gửi token đến server)
+            // Ở đây chúng ta giả lập xác thực thành công sau 1 giây
+            setTimeout(function() {
+                // Lưu trạng thái đã xác thực vào sessionStorage
+                sessionStorage.setItem('captcha_verified', 'true');
+                sessionStorage.setItem('captcha_timestamp', Date.now().toString());
+                
+                // Ẩn modal CAPTCHA
+                document.getElementById('captchaModal').style.display = 'none';
+                
+                // Hiển thị nội dung chính
+                document.body.classList.remove('captcha-required');
+                
+                console.log('CAPTCHA verification completed');
+            }, 1000);
+        }
+
+        function onCaptchaError() {
+            console.log('CAPTCHA error');
+            alert('Có lỗi xảy ra trong quá trình xác thực. Vui lòng thử lại.');
+        }
+
+        function onCaptchaExpired() {
+            console.log('CAPTCHA expired');
+            captchaVerified = false;
+        }
+
+        // Kiểm tra trạng thái xác thực khi trang load
         document.addEventListener('DOMContentLoaded', function() {
+            const verified = sessionStorage.getItem('captcha_verified');
+            const timestamp = sessionStorage.getItem('captcha_timestamp');
+            const now = Date.now();
+            
+            // Nếu đã xác thực trong vòng 24 giờ
+            if (verified === 'true' && timestamp && (now - parseInt(timestamp)) < 24 * 60 * 60 * 1000) {
+                document.getElementById('captchaModal').style.display = 'none';
+                document.body.classList.remove('captcha-required');
+            } else {
+                // Hiển thị CAPTCHA và ẩn nội dung
+                document.body.classList.add('captcha-required');
+                sessionStorage.removeItem('captcha_verified');
+                sessionStorage.removeItem('captcha_timestamp');
+            }
+
+            // Dark/Light mode toggle
             const themeToggle = document.getElementById('themeToggle');
             const icon = themeToggle.querySelector('i');
             
@@ -1166,5 +1303,3 @@
     </script>
 </body>
 </html>
-
-

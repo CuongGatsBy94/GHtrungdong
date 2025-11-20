@@ -1,0 +1,8 @@
+{
+    "name": "giaohotrungdong",
+    "version": "1.0.0",
+    "description": "Giáo Họ Trung Đồng",
+    "dependencies": {
+      "node-fetch": "^2.6.7"
+    }
+  }
