@@ -2,7 +2,7 @@
   @Author: Cường GatsBy
   @Date:   2025-09-10 20:42:33
   @Last Modified by:   Your name
-  @Last Modified time: 2025-12-28 14:18:50
+  @Last Modified time: 2025-12-28 15:30:50
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -79,6 +79,9 @@
             --service-box-bg: rgba(255, 255, 255, 0.1);
             --gold-light: #d4c198;
             --gold-dark: #8a6d3b;
+            --christmas-red: #e74c3c;
+            --christmas-green: #1a472a;
+            --christmas-gold: #f1c40f;
         }
 
         /* Dark mode variables */
@@ -94,6 +97,306 @@
             --service-box-bg: rgba(30, 30, 30, 0.5);
             --gold-light: #c9a86d;
             --gold-dark: #d4c198;
+        }
+        
+        /* Christmas & New Year Effects */
+        .christmas-newyear-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .christmas-newyear-overlay.active {
+            opacity: 1;
+        }
+
+        /* Floating Decorations */
+        .floating-decoration {
+            position: fixed;
+            color: var(--christmas-red);
+            font-size: 24px;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-decoration.snowflake {
+            color: #3498db;
+            animation-delay: 0.5s;
+        }
+
+        .floating-decoration.star {
+            color: var(--christmas-gold);
+            animation-delay: 1s;
+        }
+
+        .floating-decoration.gift {
+            color: var(--christmas-red);
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Christmas Lights */
+        .christmas-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: transparent;
+            z-index: 9997;
+            overflow: hidden;
+        }
+
+        .christmas-lights .light {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--christmas-red);
+            animation: twinkle 1.5s infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Holiday Banner */
+        .holiday-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--christmas-red), var(--secondary-color));
+            color: white;
+            padding: 10px 0;
+            z-index: 10000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            transition: opacity 0.3s;
+        }
+
+        .holiday-banner marquee {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .greeting-text {
+            margin: 0 20px;
+        }
+
+        .greeting-text i {
+            margin: 0 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .holiday-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10001;
+        }
+
+        .holiday-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Holiday Modal */
+        .holiday-modal {
+            background: linear-gradient(135deg, var(--christmas-green) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: 2px solid var(--christmas-gold);
+            border-radius: 15px;
+        }
+
+        .holiday-modal .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .holiday-modal .modal-title {
+            color: var(--christmas-gold);
+        }
+
+        .holiday-icon {
+            font-size: 3rem;
+        }
+
+        .holiday-icon i {
+            margin: 0 10px;
+            animation: spin 3s linear infinite;
+        }
+
+        .holiday-icon i:nth-child(2) {
+            animation-delay: 0.5s;
+            color: var(--christmas-gold);
+        }
+
+        .holiday-icon i:nth-child(3) {
+            animation-delay: 1s;
+            color: var(--christmas-red);
+        }
+
+        @keyframes spin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* Countdown */
+        .countdown-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .countdown-item {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--christmas-gold);
+        }
+
+        .countdown-item small {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Festive Button */
+        .btn-festive {
+            background: linear-gradient(45deg, var(--christmas-red), var(--christmas-gold));
+            color: white;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-festive::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-festive:hover::before {
+            left: 100%;
+        }
+
+        /* Festive Theme Updates */
+        .festive-theme .navbar {
+            background: linear-gradient(90deg, var(--secondary-color), var(--christmas-green), var(--secondary-color)) !important;
+        }
+
+        .festive-theme .service-box {
+            border-bottom: 4px solid var(--christmas-red);
+        }
+
+        .festive-theme .service-box:hover {
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            z-index: 10001;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: var(--gold-dark);
+        }
+
+        /* Responsive Adjustments for Holiday Elements */
+        @media (max-width: 768px) {
+            .floating-decoration {
+                font-size: 18px;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 8px 10px;
+            }
+            
+            .countdown-item span {
+                font-size: 1.5rem;
+            }
+            
+            .holiday-banner marquee {
+                font-size: 0.8rem;
+            }
+            
+            .holiday-toggle {
+                right: 10px;
+                width: 30px;
+                height: 30px;
+            }
+            
+            .music-control {
+                bottom: 70px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
         }
         
         /* CAPTCHA Modal Styles */
@@ -232,6 +535,12 @@
             justify-content: center;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat fixed;
             color: white;
+            transition: background 0.5s ease;
+        }
+
+        .festive-theme .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(26, 71, 42, 0.7)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat fixed;
         }
         
         .hero-content {
@@ -381,6 +690,15 @@
         .service-box:hover {
             transform: translateY(-15px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Holiday Service Box */
+        .holiday-service {
+            border-bottom: 4px solid var(--christmas-red) !important;
+        }
+
+        .holiday-service i {
+            color: var(--christmas-red) !important;
         }
         
         /* Image Slider */
@@ -751,6 +1069,53 @@
         </div>
     </div>
 
+    <!-- Christmas & New Year Elements -->
+    <div class="christmas-newyear-overlay">
+        <!-- Snow Effect Container -->
+        <div id="snow"></div>
+        
+        <!-- Floating Decorations -->
+        <div class="floating-decoration snowflake" style="left: 10%; top: 20%;">
+            <i class="fas fa-snowflake"></i>
+        </div>
+        <div class="floating-decoration star" style="left: 85%; top: 40%;">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="floating-decoration gift" style="left: 70%; top: 70%;">
+            <i class="fas fa-gift"></i>
+        </div>
+        
+        <!-- Christmas Lights -->
+        <div class="christmas-lights">
+            <div class="light" style="--i:0"></div>
+            <div class="light" style="--i:1"></div>
+            <div class="light" style="--i:2"></div>
+            <div class="light" style="--i:3"></div>
+            <div class="light" style="--i:4"></div>
+            <div class="light" style="--i:5"></div>
+            <div class="light" style="--i:6"></div>
+            <div class="light" style="--i:7"></div>
+            <div class="light" style="--i:8"></div>
+            <div class="light" style="--i:9"></div>
+        </div>
+    </div>
+
+    <!-- Holiday Greeting Banner -->
+    <div class="holiday-banner">
+        <div class="container">
+            <marquee behavior="scroll" direction="left">
+                <span class="greeting-text">
+                    <i class="fas fa-star"></i> CHÚC MỪNG GIÁNG SINH & NĂM MỚI 2025 
+                    <i class="fas fa-tree"></i> Giáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc 
+                    <i class="fas fa-gift"></i> "Vinh danh Thiên Chúa trên các tầng trời"
+                </span>
+            </marquee>
+            <button class="holiday-toggle" onclick="toggleHolidayEffects()">
+                <i class="fas fa-snowflake"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Main Content (sẽ được hiển thị sau khi xác thực CAPTCHA) -->
     <div id="main-content">
         <!-- DevTools Warning (hidden by default) -->
@@ -806,12 +1171,17 @@
         <!-- Hero Section -->
         <header class="hero">
             <div class="container hero-content animate-fade-in">
-                <h1 class="animate__animated animate__fadeInDown">Chào Mừng Đến Giáo Họ Trung Đồng</h1>
+                <h1 class="animate__animated animate__fadeInDown" id="heroTitle">Chào Mừng Đến Giáo Họ Trung Đồng</h1>
                 <div class="decorative-divider"></div>
-                <p class="animate__animated animate__fadeInUp animate__delay-1s">"Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm"</p>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s" id="heroSubtitle">"Vinh danh Thiên Chúa trên các tầng trời và bình an dưới thế cho người thiện tâm"</p>
                 <div class="animate__animated animate__fadeInUp animate__delay-2s mt-4">
-                    <a href="kinhnguyen/kinh-nguyen.html" class="btn btn-primary btn-lg mr-3">Kinh Nguyện</a>
+                    <a href="kinhnguyen/kinh-nguyen.html" class="btn btn-primary btn-lg mr-3">
+                        <i class="fas fa-pray"></i> Kinh Nguyện
+                    </a>
                     <a href="#about" class="btn btn-outline-light btn-lg">Tìm Hiểu Thêm</a>
+                    <a href="noel2024.html" class="btn btn-festive btn-lg ml-3 d-none" id="festiveButton" onclick="addConfetti()">
+                        <i class="fas fa-gift"></i> Mùa Giáng Sinh
+                    </a>
                 </div>
             </div>
         </header>
@@ -931,16 +1301,16 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <i class="fas fa-hands-helping"></i>
-                            <h4>Các Chương Trình</h4>
-                            <p>Hoạt động xã hội và công tác thiện nguyện phục vụ cộng đồng.</p>
+                        <div class="service-box holiday-service">
+                            <i class="fas fa-tree"></i>
+                            <h4>Mùa Giáng Sinh & Năm Mới</h4>
+                            <p>Chương trình đặc biệt mừng Chúa Giáng Sinh và đón năm mới 2025.</p>
                             <ul class="list-unstyled mb-4">
-                                <li class="mb-2"><a href="noel2024.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Đêm hoan ca Noel 2024</a></li>
-                                <li class="mb-2"><a href="dsunghodoibong.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Danh Sách Ủng Hộ</a></li>
-                                <li><a href="hoatdongxahoi.html" class="text-reset"><i class="fas fa-arrow-right mr-2"></i>Hoạt Động Xã Hội</a></li>
+                                <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Thánh Lễ Nửa Đêm: 24/12</li>
+                                <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Lễ Giáng Sinh: 25/12</li>
+                                <li><i class="fas fa-calendar-alt mr-2"></i>Lễ Tạ Ơn Cuối Năm: 31/12</li>
                             </ul>
-                            <a href="hoatdong.html" class="btn btn-sm btn-outline-primary mt-3">Chi Tiết</a>
+                            <a href="noel2024.html" class="btn btn-sm btn-festive mt-3" onclick="addConfetti()">Chi Tiết</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
@@ -1065,6 +1435,56 @@
                 </div>
             </div>
         </div>
+
+        <!-- Holiday Modal -->
+        <div class="modal fade" id="holidayModal" tabindex="-1" role="dialog" aria-labelledby="holidayModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content holiday-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="holidayModalLabel">
+                            <i class="fas fa-tree mr-2"></i>Chúc Mừng Giáng Sinh & Năm Mới 2025!
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="holiday-icon mb-3">
+                            <i class="fas fa-tree"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4 class="mb-3">"Bình an dưới thế cho người thiện tâm"</h4>
+                        <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một mùa Giáng Sinh an lành và một Năm Mới 2025 tràn đầy hồng ân Chúa.</p>
+                        <div class="countdown-container mt-4">
+                            <h6>Đếm ngược đến Năm Mới 2025:</h6>
+                            <div id="newYearCountdown" class="countdown">
+                                <div class="countdown-item">
+                                    <span id="days">00</span>
+                                    <small>Ngày</small>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="hours">00</span>
+                                    <small>Giờ</small>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="minutes">00</span>
+                                    <small>Phút</small>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="seconds">00</span>
+                                    <small>Giây</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <a href="noel2024.html" class="btn btn-primary">Xem Hoạt Động Noel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div> <!-- Kết thúc #main-content -->
 
     <!-- Bootstrap JS and dependencies -->
@@ -1098,6 +1518,9 @@
                 document.body.classList.remove('captcha-required');
                 
                 console.log('CAPTCHA verification completed');
+                
+                // Initialize holiday effects after CAPTCHA
+                initializePageAfterCaptcha();
             }, 1000);
         }
 
@@ -1111,6 +1534,228 @@
             captchaVerified = false;
         }
 
+        // Initialize page after CAPTCHA verification
+        function initializePageAfterCaptcha() {
+            // Check if it's holiday season
+            if (isHolidaySeason()) {
+                initHolidayEffects();
+                updateHeroSection();
+                
+                // Show festive button
+                document.getElementById('festiveButton').classList.remove('d-none');
+            }
+        }
+
+        // Holiday Functions
+        function initHolidayEffects() {
+            // Create snow particles
+            createSnow();
+            
+            // Set Christmas theme
+            document.body.classList.add('festive-theme');
+            document.querySelector('.christmas-newyear-overlay').classList.add('active');
+            
+            // Show holiday modal after 3 seconds
+            setTimeout(() => {
+                $('#holidayModal').modal('show');
+            }, 3000);
+            
+            // Initialize countdown
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Add holiday music (optional)
+            // addHolidayMusic();
+        }
+
+        // Snow Effect
+        function createSnow() {
+            const snow = document.getElementById('snow');
+            snow.innerHTML = '';
+            
+            for (let i = 0; i < 80; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake-particle';
+                snowflake.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 8 + 4}px;
+                    height: ${Math.random() * 8 + 4}px;
+                    background: white;
+                    border-radius: 50%;
+                    opacity: ${Math.random() * 0.5 + 0.3};
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    animation: fall ${Math.random() * 5 + 5}s linear infinite;
+                    animation-delay: ${Math.random() * 5}s;
+                    pointer-events: none;
+                `;
+                snow.appendChild(snowflake);
+            }
+            
+            // Add CSS for fall animation
+            if (!document.querySelector('#snow-animation-style')) {
+                const style = document.createElement('style');
+                style.id = 'snow-animation-style';
+                style.textContent = `
+                    @keyframes fall {
+                        to {
+                            transform: translateY(100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                    .snowflake-particle {
+                        filter: blur(${Math.random()}px);
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Countdown to New Year
+        function updateCountdown() {
+            const now = new Date();
+            const newYear = new Date(now.getFullYear() + 1, 0, 1);
+            const diff = newYear - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Toggle holiday effects
+        function toggleHolidayEffects() {
+            const overlay = document.querySelector('.christmas-newyear-overlay');
+            const banner = document.querySelector('.holiday-banner');
+            const body = document.body;
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                body.classList.remove('festive-theme');
+                banner.style.opacity = '0.5';
+                localStorage.setItem('holidayEffects', 'disabled');
+            } else {
+                overlay.classList.add('active');
+                body.classList.add('festive-theme');
+                banner.style.opacity = '1';
+                localStorage.setItem('holidayEffects', 'enabled');
+            }
+        }
+
+        // Update hero section with holiday message
+        function updateHeroSection() {
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            
+            // Save original content
+            if (!heroTitle.dataset.original) {
+                heroTitle.dataset.original = heroTitle.textContent;
+                heroSubtitle.dataset.original = heroSubtitle.textContent;
+            }
+            
+            // Update with holiday message
+            heroTitle.innerHTML = 'Chúc Mừng Giáng Sinh & Năm Mới 2025';
+            heroSubtitle.innerHTML = '"Bình an dưới thế cho người thiện tâm" - Chúc mừng Chúa Giáng Sinh';
+        }
+
+        // Check if it's holiday season (Dec 1 - Jan 10)
+        function isHolidaySeason() {
+            const now = new Date();
+            const month = now.getMonth() + 1; // 1-12
+            const day = now.getDate();
+            
+            return (month === 12 || (month === 1 && day <= 10));
+        }
+
+        // Optional: Holiday Background Music
+        function addHolidayMusic() {
+            // Create audio element
+            const audio = document.createElement('audio');
+            audio.id = 'holidayMusic';
+            audio.src = 'https://assets.mixkit.co/music/preview/mixkit-jingle-bells-311.mp3';
+            audio.loop = true;
+            audio.volume = 0.2;
+            audio.style.display = 'none';
+            
+            // Add play/pause control
+            const musicControl = document.createElement('button');
+            musicControl.className = 'music-control';
+            musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            musicControl.title = 'Bật/Tắt nhạc Giáng Sinh';
+            
+            musicControl.onclick = function() {
+                if (audio.paused) {
+                    audio.play().catch(e => console.log('Autoplay prevented:', e));
+                    this.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    this.innerHTML = '<i class="fas fa-music"></i>';
+                }
+            };
+            
+            document.body.appendChild(audio);
+            document.body.appendChild(musicControl);
+        }
+
+        // Add festive confetti on button click
+        function addConfetti() {
+            const confettiCount = 80;
+            const container = document.createElement('div');
+            container.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 10000;
+            `;
+            
+            const colors = ['#e74c3c', '#f1c40f', '#3498db', '#2ecc71'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    animation: confetti-fall ${Math.random() * 3 + 2}s linear forwards;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    pointer-events: none;
+                `;
+                container.appendChild(confetti);
+            }
+            
+            document.body.appendChild(container);
+            
+            setTimeout(() => {
+                document.body.removeChild(container);
+            }, 3000);
+            
+            // Add confetti animation style if not exists
+            if (!document.querySelector('#confetti-animation-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-animation-style';
+                style.textContent = `
+                    @keyframes confetti-fall {
+                        to {
+                            transform: translateY(100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
         // Kiểm tra trạng thái xác thực khi trang load
         document.addEventListener('DOMContentLoaded', function() {
             const verified = sessionStorage.getItem('captcha_verified');
@@ -1121,6 +1766,17 @@
             if (verified === 'true' && timestamp && (now - parseInt(timestamp)) < 24 * 60 * 60 * 1000) {
                 document.getElementById('captchaModal').style.display = 'none';
                 document.body.classList.remove('captcha-required');
+                
+                // Initialize holiday effects if it's holiday season
+                if (isHolidaySeason()) {
+                    // Check user preference
+                    const holidayPref = localStorage.getItem('holidayEffects');
+                    if (holidayPref !== 'disabled') {
+                        initHolidayEffects();
+                        updateHeroSection();
+                        document.getElementById('festiveButton').classList.remove('d-none');
+                    }
+                }
             } else {
                 // Hiển thị CAPTCHA và ẩn nội dung
                 document.body.classList.add('captcha-required');
@@ -1288,6 +1944,14 @@
                 devtoolsWarning.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
+            
+            // Add festive greeting to console
+            if (isHolidaySeason()) {
+                console.log('%c🎄 Chúc Mừng Giáng Sinh & Năm Mới 2025 🎉', 
+                    'color: #e74c3c; font-size: 18px; font-weight: bold;');
+                console.log('%cGiáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc!', 
+                    'color: #2ecc71; font-size: 14px;');
+            }
         });
 
         // Service Worker Registration
