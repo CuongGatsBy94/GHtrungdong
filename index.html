@@ -2,7 +2,7 @@
   @Author: Cường GatsBy
   @Date:   2025-09-10 20:42:33
   @Last Modified by:   Your name
-  @Last Modified time: 2025-12-28 14:50:10
+  @Last Modified time: 2025-12-28 16:48:09
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -50,9 +50,6 @@
     
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <!-- Cloudflare Turnstile CAPTCHA -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8MXG2YVYK"></script>
@@ -397,58 +394,6 @@
                 width: 40px;
                 height: 40px;
             }
-        }
-        
-        /* CAPTCHA Modal Styles */
-        .captcha-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .captcha-container {
-            background: linear-gradient(135deg, #8e7c4a 0%, #2c3e50 100%);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .captcha-container h2 {
-            margin-bottom: 20px;
-            color: #fff;
-            font-size: 1.8rem;
-        }
-
-        .captcha-container p {
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .captcha-verified {
-            display: none;
-            background: #27ae60;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        /* Ẩn nội dung chính khi chưa xác thực */
-        body.captcha-required #main-content {
-            display: none;
         }
         
         /* Font chữ */
@@ -1042,33 +987,7 @@
         }
     </style>
 </head>
-<body class="captcha-required">
-    <!-- CAPTCHA Verification Modal -->
-    <div id="captchaModal" class="captcha-modal">
-        <div class="captcha-container">
-            <h2><i class="fas fa-shield-alt"></i> Xác Thực Truy Cập</h2>
-            <p>Vui lòng xác thực bạn không phải là robot để tiếp tục truy cập website Giáo Họ Trung Đồng.</p>
-            
-            <div class="cf-turnstile" 
-                 data-sitekey="0x4AAAAAACJZVilDkba-lDL6"
-                 data-callback="onCaptchaSuccess"
-                 data-error-callback="onCaptchaError"
-                 data-expired-callback="onCaptchaExpired"
-                 style="display: inline-block; margin: 20px 0;">
-            </div>
-            
-            <div id="captchaSuccess" class="captcha-verified">
-                <i class="fas fa-check-circle"></i> Xác thực thành công! Đang chuyển hướng...
-            </div>
-            
-            <div class="mt-4">
-                <p style="font-size: 0.9rem; opacity: 0.8;">
-                    <i class="fas fa-info-circle"></i> Bảo vệ bởi Cloudflare Turnstile
-                </p>
-            </div>
-        </div>
-    </div>
-
+<body>
     <!-- Christmas & New Year Elements -->
     <div class="christmas-newyear-overlay">
         <!-- Snow Effect Container -->
@@ -1116,7 +1035,7 @@
         </div>
     </div>
 
-    <!-- Main Content (sẽ được hiển thị sau khi xác thực CAPTCHA) -->
+    <!-- Main Content -->
     <div id="main-content">
         <!-- DevTools Warning (hidden by default) -->
         <div id="devtoolsWarning" style="display: none;">
@@ -1304,7 +1223,7 @@
                         <div class="service-box holiday-service">
                             <i class="fas fa-tree"></i>
                             <h4>Mùa Giáng Sinh & Năm Mới</h4>
-                            <p>Chương trình đặc biệt mừng Chúa Giáng Sinh và đón năm mới 2025.</p>
+                            <p>Chương trình đặc biệt mừng Chúa Giáng Sinh và đón năm mới 2026.</p>
                             <ul class="list-unstyled mb-4">
                                 <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Thánh Lễ Nửa Đêm: 24/12</li>
                                 <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Lễ Giáng Sinh: 25/12</li>
@@ -1455,9 +1374,9 @@
                             <i class="fas fa-gift"></i>
                         </div>
                         <h4 class="mb-3">"Bình an dưới thế cho người thiện tâm"</h4>
-                        <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một mùa Giáng Sinh an lành và một Năm Mới 2025 tràn đầy hồng ân Chúa.</p>
+                        <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một mùa Giáng Sinh an lành và một Năm Mới 2026 tràn đầy hồng ân Chúa.</p>
                         <div class="countdown-container mt-4">
-                            <h6>Đếm ngược đến Năm Mới 2025:</h6>
+                            <h6>Đếm ngược đến Năm Mới 2026:</h6>
                             <div id="newYearCountdown" class="countdown">
                                 <div class="countdown-item">
                                     <span id="days">00</span>
@@ -1494,58 +1413,6 @@
     
     <!-- Custom JS -->
     <script>
-        // CAPTCHA Handling
-        let captchaVerified = false;
-
-        function onCaptchaSuccess(token) {
-            console.log('CAPTCHA success:', token);
-            captchaVerified = true;
-            
-            // Hiển thị thông báo thành công
-            document.getElementById('captchaSuccess').style.display = 'block';
-            
-            // Xác thực phía server (trong thực tế cần gửi token đến server)
-            // Ở đây chúng ta giả lập xác thực thành công sau 1 giây
-            setTimeout(function() {
-                // Lưu trạng thái đã xác thực vào sessionStorage
-                sessionStorage.setItem('captcha_verified', 'true');
-                sessionStorage.setItem('captcha_timestamp', Date.now().toString());
-                
-                // Ẩn modal CAPTCHA
-                document.getElementById('captchaModal').style.display = 'none';
-                
-                // Hiển thị nội dung chính
-                document.body.classList.remove('captcha-required');
-                
-                console.log('CAPTCHA verification completed');
-                
-                // Initialize holiday effects after CAPTCHA
-                initializePageAfterCaptcha();
-            }, 1000);
-        }
-
-        function onCaptchaError() {
-            console.log('CAPTCHA error');
-            alert('Có lỗi xảy ra trong quá trình xác thực. Vui lòng thử lại.');
-        }
-
-        function onCaptchaExpired() {
-            console.log('CAPTCHA expired');
-            captchaVerified = false;
-        }
-
-        // Initialize page after CAPTCHA verification
-        function initializePageAfterCaptcha() {
-            // Check if it's holiday season
-            if (isHolidaySeason()) {
-                initHolidayEffects();
-                updateHeroSection();
-                
-                // Show festive button
-                document.getElementById('festiveButton').classList.remove('d-none');
-            }
-        }
-
         // Holiday Functions
         function initHolidayEffects() {
             // Create snow particles
@@ -1756,32 +1623,29 @@
             }
         }
 
-        // Kiểm tra trạng thái xác thực khi trang load
-        document.addEventListener('DOMContentLoaded', function() {
-            const verified = sessionStorage.getItem('captcha_verified');
-            const timestamp = sessionStorage.getItem('captcha_timestamp');
-            const now = Date.now();
-            
-            // Nếu đã xác thực trong vòng 24 giờ
-            if (verified === 'true' && timestamp && (now - parseInt(timestamp)) < 24 * 60 * 60 * 1000) {
-                document.getElementById('captchaModal').style.display = 'none';
-                document.body.classList.remove('captcha-required');
+        // Initialize page after CAPTCHA verification
+        function initializePageAfterCaptcha() {
+            // Check if it's holiday season
+            if (isHolidaySeason()) {
+                initHolidayEffects();
+                updateHeroSection();
                 
-                // Initialize holiday effects if it's holiday season
-                if (isHolidaySeason()) {
-                    // Check user preference
-                    const holidayPref = localStorage.getItem('holidayEffects');
-                    if (holidayPref !== 'disabled') {
-                        initHolidayEffects();
-                        updateHeroSection();
-                        document.getElementById('festiveButton').classList.remove('d-none');
-                    }
+                // Show festive button
+                document.getElementById('festiveButton').classList.remove('d-none');
+            }
+        }
+
+        // Kiểm tra trạng thái khi trang load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if it's holiday season
+            if (isHolidaySeason()) {
+                // Check user preference
+                const holidayPref = localStorage.getItem('holidayEffects');
+                if (holidayPref !== 'disabled') {
+                    initHolidayEffects();
+                    updateHeroSection();
+                    document.getElementById('festiveButton').classList.remove('d-none');
                 }
-            } else {
-                // Hiển thị CAPTCHA và ẩn nội dung
-                document.body.classList.add('captcha-required');
-                sessionStorage.removeItem('captcha_verified');
-                sessionStorage.removeItem('captcha_timestamp');
             }
 
             // Dark/Light mode toggle
