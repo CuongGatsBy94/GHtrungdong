@@ -1,0 +1,1445 @@
+<!-- 
+  @Author: DeepSeek Assistant
+  @Date: 2026-01-05
+  @Description: Nâng cấp hiệu ứng pháo hoa - Phiên bản nâng cao
+-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pháo Hoa Nâng Cao - Năm Mới 2026</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        :root {
+            --gold-1: #FFD700;
+            --gold-2: #FFC400;
+            --gold-3: #FFAB00;
+            --red-1: #FF5252;
+            --red-2: #FF1744;
+            --blue-1: #2979FF;
+            --blue-2: #2962FF;
+            --green-1: #00E676;
+            --green-2: #00C853;
+            --purple-1: #D500F9;
+            --purple-2: #AA00FF;
+            --orange-1: #FF9100;
+            --orange-2: #FF6D00;
+            --pink-1: #FF4081;
+            --pink-2: #F50057;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            color: white;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .control-panel h3 {
+            color: var(--gold-1);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #ddd;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider-container input[type="range"] {
+            flex: 1;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--gold-1);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .slider-value {
+            min-width: 40px;
+            text-align: right;
+            font-size: 14px;
+            color: var(--gold-1);
+        }
+        
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold-2), var(--orange-1));
+            color: #000;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .info-panel h3 {
+            color: var(--gold-1);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--gold-1);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .fireworks-list {
+            margin-top: 15px;
+        }
+        
+        .firework-type {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .firework-type:last-child {
+            border-bottom: none;
+        }
+        
+        .firework-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .firework-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+        
+        .title-section h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--gold-1), var(--orange-1), var(--red-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            font-family: 'Playfair Display', serif;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            100% { text-shadow: 0 0 40px rgba(255, 87, 34, 0.5); }
+        }
+        
+        .title-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+        
+        .firework-preview {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .preview-title {
+            color: var(--gold-1);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .preview-item {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 24px;
+        }
+        
+        .preview-item:hover {
+            transform: scale(1.1);
+            border-color: var(--gold-1);
+        }
+        
+        .preview-item.active {
+            border-color: var(--gold-1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Fullscreen button */
+        .fullscreen-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: var(--gold-1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.1);
+        }
+        
+        /* Canvas styles */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .control-panel, .info-panel {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+            
+            .title-section h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title-section h1 {
+                font-size: 2rem;
+            }
+            
+            .preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-btn {
+                min-width: 150px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Particle trail effect */
+        .trail {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+    
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <h3><i class="fas fa-sliders-h"></i> Điều Khiển Pháo Hoa</h3>
+        
+        <div class="control-group">
+            <label>Số lượng pháo hoa:</label>
+            <div class="slider-container">
+                <input type="range" id="fireworkCount" min="1" max="20" value="5">
+                <span class="slider-value" id="countValue">5</span>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label>Kích thước pháo hoa:</label>
+            <div class="slider-container">
+                <input type="range" id="fireworkSize" min="50" max="300" value="150">
+                <span class="slider-value" id="sizeValue">150</span>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label>Tốc độ bung:</label>
+            <div class="slider-container">
+                <input type="range" id="explosionSpeed" min="1" max="10" value="5">
+                <span class="slider-value" id="speedValue">5</span>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label>Thời gian tồn tại:</label>
+            <div class="slider-container">
+                <input type="range" id="particleLife" min="50" max="300" value="150">
+                <span class="slider-value" id="lifeValue">150</span>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="launchCustomFireworks()">
+                <i class="fas fa-rocket"></i> Bắn Pháo Hoa
+            </button>
+            <button class="btn btn-secondary" onclick="clearAllFireworks()">
+                <i class="fas fa-trash"></i> Xóa Tất Cả
+            </button>
+        </div>
+        
+        <div class="btn-group" style="margin-top: 10px;">
+            <button class="btn btn-secondary" onclick="toggleAutoMode()" id="autoBtn">
+                <i class="fas fa-play"></i> Tự Động
+            </button>
+            <button class="btn btn-secondary" onclick="startFireworksShow()">
+                <i class="fas fa-fire"></i> Trình Diễn
+            </button>
+        </div>
+    </div>
+    
+    <!-- Info Panel -->
+    <div class="info-panel">
+        <h3><i class="fas fa-chart-bar"></i> Thông Số Hệ Thống</h3>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="particleCount">0</div>
+                <div class="stat-label">SỐ HẠT</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="fireworkCountDisplay">0</div>
+                <div class="stat-label">PHÁO HOA</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="fpsCounter">60</div>
+                <div class="stat-label">FPS</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="autoCount">0</div>
+                <div class="stat-label">TỰ ĐỘNG</div>
+            </div>
+        </div>
+        
+        <div class="fireworks-list">
+            <h4 style="margin-top: 15px; margin-bottom: 10px; color: #ddd; font-size: 14px;">LOẠI PHÁO HOA:</h4>
+            <div class="firework-type">
+                <div class="firework-name">
+                    <div class="firework-color" style="background: var(--gold-1);"></div>
+                    <span>Pháo Hoa Vàng</span>
+                </div>
+                <span id="type1Count">0</span>
+            </div>
+            <div class="firework-type">
+                <div class="firework-name">
+                    <div class="firework-color" style="background: var(--red-1);"></div>
+                    <span>Pháo Hoa Đỏ</span>
+                </div>
+                <span id="type2Count">0</span>
+            </div>
+            <div class="firework-type">
+                <div class="firework-name">
+                    <div class="firework-color" style="background: var(--blue-1);"></div>
+                    <span>Pháo Hoa Xanh</span>
+                </div>
+                <span id="type3Count">0</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="title-section">
+            <h1>PHÁO HOA NĂM MỚI 2026</h1>
+            <p>Phiên bản nâng cao với hiệu ứng 3D, chuyển màu và âm thanh sống động</p>
+            <p>Chúc mừng năm mới Bính Ngọ - An khang thịnh vượng</p>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('heart')">
+                <i class="fas fa-heart"></i> Trái Tim
+            </button>
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('star')">
+                <i class="fas fa-star"></i> Ngôi Sao
+            </button>
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('smiley')">
+                <i class="fas fa-smile"></i> Mặt Cười
+            </button>
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('spiral')">
+                <i class="fas fa-circle-notch"></i> Xoáy Ốc
+            </button>
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('ring')">
+                <i class="fas fa-ring"></i> Vòng Tròn
+            </button>
+            <button class="action-btn btn-primary" onclick="launchSpecialFirework('flower')">
+                <i class="fas fa-seedling"></i> Hoa Nở
+            </button>
+        </div>
+    </div>
+    
+    <!-- Firework Preview -->
+    <div class="firework-preview">
+        <div class="preview-title">Chọn Loại Pháo Hoa:</div>
+        <div class="preview-grid">
+            <div class="preview-item active" style="background: linear-gradient(45deg, var(--gold-1), var(--orange-1));" 
+                 onclick="selectFireworkType('gold')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--red-1), var(--pink-1));" 
+                 onclick="selectFireworkType('red')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--blue-1), var(--purple-1));" 
+                 onclick="selectFireworkType('blue')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--green-1), var(--blue-2));" 
+                 onclick="selectFireworkType('green')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--purple-1), var(--pink-2));" 
+                 onclick="selectFireworkType('purple')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--orange-1), var(--red-2));" 
+                 onclick="selectFireworkType('orange')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, #fff, #aaa);" 
+                 onclick="selectFireworkType('white')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="preview-item" style="background: linear-gradient(45deg, var(--gold-1), var(--red-1), var(--blue-1));" 
+                 onclick="selectFireworkType('rainbow')">
+                <i class="fas fa-rainbow"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Fullscreen Button -->
+    <div class="fullscreen-btn" onclick="toggleFullscreen()">
+        <i class="fas fa-expand"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // ==================== CẤU HÌNH HỆ THỐNG ====================
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Thiết lập canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Biến hệ thống
+        let fireworks = [];
+        let particles = [];
+        let trails = [];
+        let animationId = null;
+        let autoMode = false;
+        let autoTimer = null;
+        let frameCount = 0;
+        let lastTime = 0;
+        let fps = 60;
+        let selectedType = 'gold';
+        let specialShapes = ['heart', 'star', 'smiley', 'spiral', 'ring', 'flower'];
+        
+        // Thống kê
+        let stats = {
+            totalParticles: 0,
+            activeFireworks: 0,
+            goldCount: 0,
+            redCount: 0,
+            blueCount: 0,
+            autoLaunched: 0
+        };
+        
+        // ==================== LỚP PHÁO HOA ====================
+        class Firework {
+            constructor(x, y, type = 'normal', colorType = selectedType) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = canvas.height;
+                this.targetX = x || this.x;
+                this.targetY = y || Math.random() * canvas.height * 0.5;
+                this.type = type;
+                this.colorType = colorType;
+                this.speed = 5 + Math.random() * 5;
+                this.size = parseInt(document.getElementById('fireworkSize').value) / 100;
+                this.exploded = false;
+                this.trail = [];
+                this.maxTrail = 10;
+                this.color = this.getColor();
+                this.sparkles = [];
+                
+                // Thêm vào thống kê
+                stats.activeFireworks++;
+                this.updateTypeCount();
+            }
+            
+            getColor() {
+                const colors = {
+                    'gold': [varColors.gold1, varColors.gold2, varColors.gold3],
+                    'red': [varColors.red1, varColors.red2],
+                    'blue': [varColors.blue1, varColors.blue2],
+                    'green': [varColors.green1, varColors.green2],
+                    'purple': [varColors.purple1, varColors.purple2],
+                    'orange': [varColors.orange1, varColors.orange2],
+                    'pink': [varColors.pink1, varColors.pink2],
+                    'white': ['#FFFFFF', '#CCCCCC'],
+                    'rainbow': [varColors.gold1, varColors.red1, varColors.blue1, varColors.green1, varColors.purple1]
+                };
+                
+                const colorSet = colors[this.colorType] || colors.gold;
+                return colorSet[Math.floor(Math.random() * colorSet.length)];
+            }
+            
+            updateTypeCount() {
+                switch(this.colorType) {
+                    case 'gold': stats.goldCount++; break;
+                    case 'red': stats.redCount++; break;
+                    case 'blue': stats.blueCount++; break;
+                }
+            }
+            
+            update() {
+                // Lưu vị trí vào trail
+                this.trail.push({x: this.x, y: this.y});
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+                
+                // Di chuyển lên trên
+                this.y -= this.speed;
+                
+                // Di chuyển ngang nếu có mục tiêu
+                const dx = this.targetX - this.x;
+                this.x += dx * 0.05;
+                
+                // Kiểm tra nổ
+                if (this.y <= this.targetY && !this.exploded) {
+                    this.explode();
+                }
+                
+                // Cập nhật sparkles
+                this.sparkles.forEach((sparkle, index) => {
+                    sparkle.x += sparkle.vx;
+                    sparkle.y += sparkle.vy;
+                    sparkle.life--;
+                    
+                    if (sparkle.life <= 0) {
+                        this.sparkles.splice(index, 1);
+                    }
+                });
+                
+                // Thêm sparkle mới
+                if (Math.random() < 0.3) {
+                    this.sparkles.push({
+                        x: this.x,
+                        y: this.y,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        life: 20,
+                        size: Math.random() * 2 + 1
+                    });
+                }
+            }
+            
+            explode() {
+                this.exploded = true;
+                const particleCount = parseInt(document.getElementById('fireworkCount').value) * 10;
+                const explosionSpeed = parseInt(document.getElementById('explosionSpeed').value) / 5;
+                const particleLife = parseInt(document.getElementById('particleLife').value);
+                
+                // Tạo hiệu ứng nổ đặc biệt
+                switch(this.type) {
+                    case 'heart':
+                        this.createHeartExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    case 'star':
+                        this.createStarExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    case 'smiley':
+                        this.createSmileyExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    case 'spiral':
+                        this.createSpiralExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    case 'ring':
+                        this.createRingExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    case 'flower':
+                        this.createFlowerExplosion(particleCount, explosionSpeed, particleLife);
+                        break;
+                    default:
+                        this.createNormalExplosion(particleCount, explosionSpeed, particleLife);
+                }
+                
+                // Tạo âm thanh nổ
+                this.createExplosionSound();
+                
+                // Tạo hiệu ứng shockwave
+                this.createShockwave();
+                
+                // Xóa pháo hoa khỏi mảng
+                const index = fireworks.indexOf(this);
+                if (index > -1) {
+                    fireworks.splice(index, 1);
+                    stats.activeFireworks--;
+                }
+            }
+            
+            createNormalExplosion(count, speed, life) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = {
+                        x: Math.cos(angle) * speed * (Math.random() * 3 + 1),
+                        y: Math.sin(angle) * speed * (Math.random() * 3 + 1)
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, 
+                        velocity, 
+                        this.color, 
+                        life * (Math.random() * 0.5 + 0.5),
+                        Math.random() * 3 + 2
+                    ));
+                }
+            }
+            
+            createHeartExplosion(count, speed, life) {
+                for (let i = 0; i < count; i++) {
+                    const t = Math.random() * Math.PI * 2;
+                    const scale = 15 * (Math.random() * 0.5 + 0.5);
+                    const x = 16 * Math.pow(Math.sin(t), 3);
+                    const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                    
+                    const velocity = {
+                        x: (x / scale) * speed,
+                        y: (y / scale) * speed
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, 
+                        velocity, 
+                        this.color, 
+                        life * 1.2,
+                        Math.random() * 4 + 3
+                    ));
+                }
+            }
+            
+            createStarExplosion(count, speed, life) {
+                const points = 5;
+                for (let i = 0; i < count; i++) {
+                    const angle = (i / count) * Math.PI * 2;
+                    const radius = 10 * (Math.random() * 0.5 + 0.5);
+                    
+                    const velocity = {
+                        x: Math.cos(angle) * speed * radius * 0.1,
+                        y: Math.sin(angle) * speed * radius * 0.1
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, 
+                        velocity, 
+                        this.color, 
+                        life,
+                        Math.random() * 3 + 2
+                    ));
+                }
+            }
+            
+            createSmileyExplosion(count, speed, life) {
+                // Tạo mặt cười với các hạt ở vị trí đặc biệt
+                const smileyPoints = [];
+                
+                // Vòng tròn mặt
+                for (let i = 0; i < count * 0.7; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = 20;
+                    
+                    const velocity = {
+                        x: Math.cos(angle) * speed * radius * 0.05,
+                        y: Math.sin(angle) * speed * radius * 0.05
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, 
+                        velocity, 
+                        this.color, 
+                        life,
+                        Math.random() * 2 + 1
+                    ));
+                }
+                
+                // Mắt
+                for (let i = 0; i < count * 0.1; i++) {
+                    const offsetX = -8 + Math.random() * 4;
+                    const offsetY = -8 + Math.random() * 4;
+                    
+                    particles.push(new Particle(
+                        this.x + offsetX, this.y + offsetY,
+                        {x: 0, y: 0},
+                        '#000000',
+                        life * 0.8,
+                        3
+                    ));
+                }
+                
+                for (let i = 0; i < count * 0.1; i++) {
+                    const offsetX = 8 + Math.random() * 4;
+                    const offsetY = -8 + Math.random() * 4;
+                    
+                    particles.push(new Particle(
+                        this.x + offsetX, this.y + offsetY,
+                        {x: 0, y: 0},
+                        '#000000',
+                        life * 0.8,
+                        3
+                    ));
+                }
+                
+                // Miệng cười
+                for (let i = 0; i < count * 0.1; i++) {
+                    const angle = Math.PI * 0.7 + Math.random() * Math.PI * 0.6;
+                    const radius = 15;
+                    
+                    const velocity = {
+                        x: Math.cos(angle) * speed * radius * 0.03,
+                        y: Math.sin(angle) * speed * radius * 0.03
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, 
+                        velocity, 
+                        '#000000',
+                        life * 0.8,
+                        2
+                    ));
+                }
+            }
+            
+            createSpiralExplosion(count, speed, life) {
+                const spirals = 3;
+                for (let s = 0; s < spirals; s++) {
+                    for (let i = 0; i < count / spirals; i++) {
+                        const angle = (i / (count / spirals)) * Math.PI * 4 + (s * Math.PI * 2 / spirals);
+                        const radius = 0.5 + (i / (count / spirals)) * 15;
+                        
+                        const velocity = {
+                            x: Math.cos(angle) * speed * radius * 0.1,
+                            y: Math.sin(angle) * speed * radius * 0.1
+                        };
+                        
+                        particles.push(new Particle(
+                            this.x, this.y, 
+                            velocity, 
+                            this.color, 
+                            life * (0.5 + (i / (count / spirals)) * 0.5),
+                            Math.random() * 2 + 1
+                        ));
+                    }
+                }
+            }
+            
+            createRingExplosion(count, speed, life) {
+                const rings = 3;
+                for (let r = 0; r < rings; r++) {
+                    const ringRadius = 10 * (r + 1);
+                    for (let i = 0; i < count / rings; i++) {
+                        const angle = (i / (count / rings)) * Math.PI * 2;
+                        
+                        const velocity = {
+                            x: Math.cos(angle) * speed * (r + 1) * 0.5,
+                            y: Math.sin(angle) * speed * (r + 1) * 0.5
+                        };
+                        
+                        particles.push(new Particle(
+                            this.x, this.y, 
+                            velocity, 
+                            this.color, 
+                            life * (0.3 + r * 0.3),
+                            Math.random() * 2 + 1
+                        ));
+                    }
+                }
+            }
+            
+            createFlowerExplosion(count, speed, life) {
+                const petals = 8;
+                for (let p = 0; p < petals; p++) {
+                    const petalAngle = (p / petals) * Math.PI * 2;
+                    for (let i = 0; i < count / petals; i++) {
+                        const t = (i / (count / petals)) * Math.PI;
+                        const radius = Math.sin(t * 2) * 20;
+                        
+                        const velocity = {
+                            x: Math.cos(petalAngle) * speed * radius * 0.05,
+                            y: Math.sin(petalAngle) * speed * radius * 0.05
+                        };
+                        
+                        particles.push(new Particle(
+                            this.x, this.y, 
+                            velocity, 
+                            this.color, 
+                            life * (0.3 + (i / (count / petals)) * 0.7),
+                            Math.random() * 2 + 1
+                        ));
+                    }
+                }
+            }
+            
+            createExplosionSound() {
+                // Tạo âm thanh nổ sử dụng Web Audio API
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 100 + Math.random() * 200;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } catch (e) {
+                    console.log("Audio không khả dụng");
+                }
+            }
+            
+            createShockwave() {
+                // Tạo hiệu ứng sóng xung kích
+                trails.push({
+                    x: this.x,
+                    y: this.y,
+                    radius: 0,
+                    maxRadius: 100,
+                    color: this.color,
+                    life: 100
+                });
+            }
+            
+            draw() {
+                // Vẽ trail
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                
+                if (this.trail.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                    
+                    for (let i = 1; i < this.trail.length; i++) {
+                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                    }
+                    
+                    ctx.stroke();
+                }
+                
+                // Vẽ sparkles
+                ctx.fillStyle = this.color;
+                this.sparkles.forEach(sparkle => {
+                    ctx.beginPath();
+                    ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                // Vẽ thân pháo hoa
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Vẽ đuôi
+                const tailLength = 20;
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y + 4);
+                ctx.lineTo(this.x, this.y + tailLength);
+                ctx.stroke();
+            }
+        }
+        
+        // ==================== LỚP HẠT PHÁO HOA ====================
+        class Particle {
+            constructor(x, y, velocity, color, life, size) {
+                this.x = x;
+                this.y = y;
+                this.velocity = velocity;
+                this.color = color;
+                this.life = life;
+                this.maxLife = life;
+                this.size = size;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                this.gravity = 0.05;
+                this.friction = 0.97;
+                this.sparkle = Math.random() > 0.7;
+                this.sparkleTimer = 0;
+                this.trail = [];
+                this.maxTrail = 5;
+                
+                stats.totalParticles++;
+            }
+            
+            update() {
+                // Lưu vị trí vào trail
+                this.trail.push({x: this.x, y: this.y});
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+                
+                // Áp dụng vận tốc và lực
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.velocity.y += this.gravity;
+                
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                
+                // Xoay
+                this.rotation += this.rotationSpeed;
+                
+                // Giảm tuổi thọ
+                this.life--;
+                
+                // Cập nhật sparkle
+                if (this.sparkle) {
+                    this.sparkleTimer++;
+                }
+                
+                return this.life > 0;
+            }
+            
+            draw() {
+                // Vẽ trail
+                if (this.trail.length > 1) {
+                    ctx.strokeStyle = this.color + '40';
+                    ctx.lineWidth = this.size * 0.5;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                    
+                    for (let i = 1; i < this.trail.length; i++) {
+                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                    }
+                    
+                    ctx.stroke();
+                }
+                
+                // Tính độ trong suốt dựa trên tuổi thọ
+                const opacity = this.life / this.maxLife;
+                
+                // Vẽ hạt với hiệu ứng sparkle
+                if (this.sparkle && this.sparkleTimer % 10 < 5) {
+                    // Hiệu ứng lấp lánh
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Vẽ hạt chính
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                
+                // Tạo gradient màu
+                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+                gradient.addColorStop(0, this.color + 'FF');
+                gradient.addColorStop(1, this.color + '00');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                
+                // Tạo hình dạng ngẫu nhiên
+                if (Math.random() > 0.5) {
+                    // Hình tròn
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                } else {
+                    // Hình sao
+                    this.drawStar(0, 0, this.size, this.size * 0.5, 5);
+                }
+                
+                ctx.fill();
+                ctx.restore();
+            }
+            
+            drawStar(x, y, radius1, radius2, points) {
+                ctx.beginPath();
+                for (let i = 0; i < points * 2; i++) {
+                    const angle = (i * Math.PI) / points;
+                    const radius = i % 2 === 0 ? radius1 : radius2;
+                    const px = x + Math.cos(angle) * radius;
+                    const py = y + Math.sin(angle) * radius;
+                    
+                    if (i === 0) {
+                        ctx.moveTo(px, py);
+                    } else {
+                        ctx.lineTo(px, py);
+                    }
+                }
+                ctx.closePath();
+            }
+        }
+        
+        // ==================== HÀM TIỆN ÍCH ====================
+        const varColors = {
+            gold1: '#FFD700', gold2: '#FFC400', gold3: '#FFAB00',
+            red1: '#FF5252', red2: '#FF1744',
+            blue1: '#2979FF', blue2: '#2962FF',
+            green1: '#00E676', green2: '#00C853',
+            purple1: '#D500F9', purple2: '#AA00FF',
+            orange1: '#FF9100', orange2: '#FF6D00',
+            pink1: '#FF4081', pink2: '#F50057'
+        };
+        
+        function selectFireworkType(type) {
+            selectedType = type;
+            
+            // Cập nhật giao diện
+            document.querySelectorAll('.preview-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.preview-item').classList.add('active');
+        }
+        
+        function launchCustomFireworks() {
+            const count = parseInt(document.getElementById('fireworkCount').value);
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    fireworks.push(new Firework(
+                        Math.random() * canvas.width * 0.8 + canvas.width * 0.1,
+                        Math.random() * canvas.height * 0.3 + canvas.height * 0.1,
+                        'normal',
+                        selectedType
+                    ));
+                }, i * 200);
+            }
+        }
+        
+        function launchSpecialFirework(type) {
+            if (!specialShapes.includes(type)) return;
+            
+            fireworks.push(new Firework(
+                canvas.width * 0.5,
+                canvas.height * 0.3,
+                type,
+                selectedType
+            ));
+        }
+        
+        function startFireworksShow() {
+            // Trình diễn pháo hoa tự động
+            clearInterval(autoTimer);
+            autoMode = true;
+            
+            const showInterval = setInterval(() => {
+                if (!autoMode) {
+                    clearInterval(showInterval);
+                    return;
+                }
+                
+                // Bắn nhiều loại pháo hoa khác nhau
+                const types = ['normal', 'heart', 'star', 'spiral', 'ring', 'flower'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                const colorTypes = ['gold', 'red', 'blue', 'green', 'purple', 'orange', 'rainbow'];
+                const colorType = colorTypes[Math.floor(Math.random() * colorTypes.length)];
+                
+                fireworks.push(new Firework(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height * 0.4,
+                    type,
+                    colorType
+                ));
+                
+                stats.autoLaunched++;
+                
+                // Dừng sau 30 lần bắn
+                if (stats.autoLaunched >= 30) {
+                    clearInterval(showInterval);
+                    autoMode = false;
+                    document.getElementById('autoBtn').innerHTML = '<i class="fas fa-play"></i> Tự Động';
+                }
+            }, 500);
+        }
+        
+        function toggleAutoMode() {
+            autoMode = !autoMode;
+            
+            if (autoMode) {
+                document.getElementById('autoBtn').innerHTML = '<i class="fas fa-pause"></i> Dừng';
+                autoTimer = setInterval(() => {
+                    if (fireworks.length < 5) {
+                        fireworks.push(new Firework(
+                            Math.random() * canvas.width,
+                            Math.random() * canvas.height * 0.4,
+                            'normal',
+                            ['gold', 'red', 'blue', 'green'][Math.floor(Math.random() * 4)]
+                        ));
+                        stats.autoLaunched++;
+                    }
+                }, 1000);
+            } else {
+                document.getElementById('autoBtn').innerHTML = '<i class="fas fa-play"></i> Tự Động';
+                clearInterval(autoTimer);
+            }
+        }
+        
+        function clearAllFireworks() {
+            fireworks = [];
+            particles = [];
+            trails = [];
+            stats.totalParticles = 0;
+            stats.activeFireworks = 0;
+            stats.goldCount = 0;
+            stats.redCount = 0;
+            stats.blueCount = 0;
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Lỗi fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+        
+        // ==================== VÒNG LẶP CHÍNH ====================
+        function animate(currentTime) {
+            // Tính FPS
+            frameCount++;
+            if (currentTime - lastTime >= 1000) {
+                fps = frameCount;
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+            
+            // Xóa canvas với hiệu ứng mờ dần
+            ctx.fillStyle = 'rgba(0, 4, 40, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Cập nhật và vẽ trails (shockwaves)
+            trails.forEach((trail, index) => {
+                trail.radius += 2;
+                trail.life -= 2;
+                
+                if (trail.life <= 0) {
+                    trails.splice(index, 1);
+                } else {
+                    const opacity = trail.life / 100;
+                    ctx.strokeStyle = trail.color.replace(')', `, ${opacity})`).replace('rgb', 'rgba');
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(trail.x, trail.y, trail.radius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            });
+            
+            // Cập nhật và vẽ pháo hoa
+            fireworks.forEach(firework => {
+                firework.update();
+                firework.draw();
+            });
+            
+            // Cập nhật và vẽ hạt
+            particles.forEach((particle, index) => {
+                if (!particle.update()) {
+                    particles.splice(index, 1);
+                    stats.totalParticles--;
+                } else {
+                    particle.draw();
+                }
+            });
+            
+            // Cập nhật thông số
+            updateStats();
+            
+            // Tiếp tục vòng lặp
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        function updateStats() {
+            document.getElementById('particleCount').textContent = stats.totalParticles;
+            document.getElementById('fireworkCountDisplay').textContent = stats.activeFireworks;
+            document.getElementById('fpsCounter').textContent = fps;
+            document.getElementById('autoCount').textContent = stats.autoLaunched;
+            document.getElementById('type1Count').textContent = stats.goldCount;
+            document.getElementById('type2Count').textContent = stats.redCount;
+            document.getElementById('type3Count').textContent = stats.blueCount;
+            
+            // Cập nhật giá trị slider
+            document.getElementById('countValue').textContent = document.getElementById('fireworkCount').value;
+            document.getElementById('sizeValue').textContent = document.getElementById('fireworkSize').value;
+            document.getElementById('speedValue').textContent = document.getElementById('explosionSpeed').value;
+            document.getElementById('lifeValue').textContent = document.getElementById('particleLife').value;
+        }
+        
+        // ==================== SỰ KIỆN ====================
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        canvas.addEventListener('click', (e) => {
+            fireworks.push(new Firework(
+                e.clientX,
+                e.clientY,
+                'normal',
+                selectedType
+            ));
+        });
+        
+        canvas.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            launchSpecialFirework(specialShapes[Math.floor(Math.random() * specialShapes.length)]);
+        });
+        
+        // Khởi động
+        document.addEventListener('DOMContentLoaded', () => {
+            // Bắt đầu vòng lặp animation
+            animate(0);
+            
+            // Bắn pháo hoa chào mừng
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        fireworks.push(new Firework(
+                            canvas.width * 0.3 + i * canvas.width * 0.2,
+                            canvas.height * 0.4,
+                            'normal',
+                            ['gold', 'red', 'blue'][i]
+                        ));
+                    }, i * 500);
+                }
+            }, 1000);
+        });
+        
+        // Thêm phím tắt
+        document.addEventListener('keydown', (e) => {
+            switch(e.key.toLowerCase()) {
+                case ' ':
+                    launchCustomFireworks();
+                    break;
+                case 'c':
+                    clearAllFireworks();
+                    break;
+                case 'a':
+                    toggleAutoMode();
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                    const index = parseInt(e.key) - 1;
+                    if (index < specialShapes.length) {
+                        launchSpecialFirework(specialShapes[index]);
+                    }
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>

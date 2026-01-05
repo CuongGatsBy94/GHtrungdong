@@ -2,7 +2,7 @@
   @Author: Cường GatsBy
   @Date:   2025-09-10 20:42:33
   @Last Modified by:   Your name
-  @Last Modified time: 2025-12-28 16:48:09
+  @Last Modified time: 2026-01-05 20:36:32
 -->
 <!DOCTYPE html>
 <html lang="vi">
@@ -79,6 +79,10 @@
             --christmas-red: #e74c3c;
             --christmas-green: #1a472a;
             --christmas-gold: #f1c40f;
+            --tet-red: #e74c3c;
+            --tet-gold: #f1c40f;
+            --tet-yellow: #f39c12;
+            --tet-green: #27ae60;
         }
 
         /* Dark mode variables */
@@ -137,6 +141,21 @@
         .floating-decoration.gift {
             color: var(--christmas-red);
             animation-delay: 1.5s;
+        }
+
+        .floating-decoration.dragon {
+            color: var(--tet-red);
+            animation-delay: 2s;
+        }
+
+        .floating-decoration.coin {
+            color: var(--tet-gold);
+            animation-delay: 2.5s;
+        }
+
+        .floating-decoration.fire {
+            color: var(--tet-yellow);
+            animation-delay: 3s;
         }
 
         @keyframes float {
@@ -323,6 +342,30 @@
             left: 100%;
         }
 
+        /* Tết Button */
+        .btn-tet {
+            background: linear-gradient(45deg, var(--tet-red), var(--tet-gold));
+            color: white;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-tet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-tet:hover::before {
+            left: 100%;
+        }
+
         /* Festive Theme Updates */
         .festive-theme .navbar {
             background: linear-gradient(90deg, var(--secondary-color), var(--christmas-green), var(--secondary-color)) !important;
@@ -334,6 +377,24 @@
 
         .festive-theme .service-box:hover {
             box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Tết Theme Updates */
+        .tet-theme .navbar {
+            background: linear-gradient(90deg, var(--secondary-color), var(--tet-red), var(--secondary-color)) !important;
+        }
+
+        .tet-theme .service-box {
+            border-bottom: 4px solid var(--tet-red);
+        }
+
+        .tet-theme .service-box:hover {
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2);
+        }
+
+        .tet-theme .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(231, 76, 60, 0.3)), 
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat fixed;
         }
 
         /* Music Control Button */
@@ -1023,7 +1084,7 @@
     <div class="holiday-banner">
         <div class="container">
             <marquee behavior="scroll" direction="left">
-                <span class="greeting-text">
+                <span class="greeting-text" id="dynamicGreeting">
                     <i class="fas fa-star"></i> Chúc Mừng Giáng Sinh & Năm Mới 2026 
                     <i class="fas fa-tree"></i> Giáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc 
                     <i class="fas fa-gift"></i> "Vinh danh Thiên Chúa trên các tầng trời"
@@ -1098,8 +1159,8 @@
                         <i class="fas fa-pray"></i> Kinh Nguyện
                     </a>
                     <a href="#about" class="btn btn-outline-light btn-lg">Tìm Hiểu Thêm</a>
-                    <a href="noel2024.html" class="btn btn-festive btn-lg ml-3 d-none" id="festiveButton" onclick="addConfetti()">
-                        <i class="fas fa-gift"></i> Mùa Giáng Sinh
+                    <a href="#" class="btn btn-festive btn-lg ml-3 d-none" id="festiveButton" onclick="addTetConfetti(); $('#holidayModal').modal('show');">
+                        <i class="fas fa-dragon"></i> Mùa Lễ Hội
                     </a>
                 </div>
             </div>
@@ -1223,7 +1284,7 @@
                         <div class="service-box holiday-service">
                             <i class="fas fa-tree"></i>
                             <h4>Mùa Giáng Sinh & Năm Mới</h4>
-                            <p>Chương trình đặc biệt mừng Chúa Giáng Sinh và đón năm mới 2026.</p>
+                            <p>Chương trình đặc biệt mừng Chúa Giáng Sinh và đón năm mới 2025.</p>
                             <ul class="list-unstyled mb-4">
                                 <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Thánh Lễ Nửa Đêm: 24/12</li>
                                 <li class="mb-2"><i class="fas fa-calendar-alt mr-2"></i>Lễ Giáng Sinh: 25/12</li>
@@ -1276,7 +1337,7 @@
                     <!-- Bản đồ (chiếm 6 cột) -->
                     <div class="col-lg-6">
                         <div class="h-100 rounded shadow-lg" style="overflow: hidden;">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhbyBo4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2268.42633364598!2d106.40508772447271!3d20.289048905010894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3136076dd93e8fad%3A0x59521bfb4123e299!2zTmjDoCB0aOG7nSBHacOhby ho4buNIFRydW5nIMSQ4buTbmc!5e0!3m2!1svi!2s!4v1743525274633!5m2!1svi!2s" 
                                     width="100%" 
                                     height="100%" 
                                     style="border:0; min-height: 300px;" 
@@ -1361,7 +1422,7 @@
                 <div class="modal-content holiday-modal">
                     <div class="modal-header">
                         <h5 class="modal-title" id="holidayModalLabel">
-                            <i class="fas fa-tree mr-2"></i>Chúc Mừng Giáng Sinh & Năm Mới 2026!
+                            <i class="fas fa-dragon mr-2"></i>Chúc Mừng Năm Mới Bính Ngọ 2026!
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -1369,14 +1430,14 @@
                     </div>
                     <div class="modal-body text-center">
                         <div class="holiday-icon mb-3">
-                            <i class="fas fa-tree"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-gift"></i>
+                            <i class="fas fa-dragon"></i>
+                            <i class="fas fa-wine-bottle"></i>
+                            <i class="fas fa-money-bill-wave"></i>
                         </div>
-                        <h4 class="mb-3">"Bình an dưới thế cho người thiện tâm"</h4>
-                        <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một mùa Giáng Sinh an lành và một Năm Mới 2026 tràn đầy hồng ân Chúa.</p>
+                        <h4 class="mb-3">"Xuân Bính Ngọ - An Khang Thịnh Vượng"</h4>
+                        <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một năm mới tràn đầy hồng ân Chúa, sức khỏe dồi dào và bình an trong tâm hồn.</p>
                         <div class="countdown-container mt-4">
-                            <h6>Đếm ngược đến Năm Mới 2026:</h6>
+                            <h6 id="countdownTitle">Đếm ngược đến Tết Nguyên Đán 2026 (Bính Ngọ):</h6>
                             <div id="newYearCountdown" class="countdown">
                                 <div class="countdown-item">
                                     <span id="days">00</span>
@@ -1399,7 +1460,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <a href="noel2024.html" class="btn btn-primary">Xem Hoạt Động Noel</a>
+                        <a href="2026.html" class="btn btn-primary">Xem Hoạt Động Năm Mới</a>
                     </div>
                 </div>
             </div>
@@ -1413,13 +1474,21 @@
     
     <!-- Custom JS -->
     <script>
-        // Holiday Functions
+        // Holiday Functions - Updated for Lunar New Year 2026
         function initHolidayEffects() {
-            // Create snow particles
-            createSnow();
+            const now = new Date();
+            const month = now.getMonth() + 1; // 1-12
             
-            // Set Christmas theme
-            document.body.classList.add('festive-theme');
+            if (month === 12) {
+                // Giáng Sinh
+                createSnow();
+                document.body.classList.add('festive-theme');
+            } else if (month === 1 || month === 2) {
+                // Tết Nguyên Đán
+                createTetDecorations();
+                document.body.classList.add('tet-theme');
+            }
+            
             document.querySelector('.christmas-newyear-overlay').classList.add('active');
             
             // Show holiday modal after 3 seconds
@@ -1431,8 +1500,65 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
             
-            // Add holiday music (optional)
-            // addHolidayMusic();
+            // Update banner text
+            updateBannerText();
+            
+            // Update hero section
+            updateHeroSection();
+        }
+
+        // Countdown to Lunar New Year 2026 (Bính Ngọ)
+        function updateCountdown() {
+            const now = new Date();
+            
+            // Tết Nguyên Đán 2026 (Bính Ngọ) - 17/02/2026, 00:00 GMT+7
+            const lunarNewYear2026 = new Date('2026-02-17T00:00:00+07:00');
+            
+            // Tết Nguyên Đán 2027 (Đinh Mùi) - 05/02/2027, 00:00 GMT+7
+            const lunarNewYear2027 = new Date('2027-02-05T00:00:00+07:00');
+            
+            let targetDate = lunarNewYear2026;
+            let targetYear = 2026;
+            let lunarYear = 'Bính Ngọ';
+            
+            // Nếu đã qua Tết 2026, tính đến Tết 2027
+            if (now > lunarNewYear2026) {
+                targetDate = lunarNewYear2027;
+                targetYear = 2027;
+                lunarYear = 'Đinh Mùi';
+            }
+            
+            const diff = targetDate - now;
+            
+            // Tính toán thời gian
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Cập nhật DOM
+            const countdownTitle = document.getElementById('countdownTitle');
+            if (countdownTitle) {
+                countdownTitle.textContent = `Đếm ngược đến Tết Nguyên Đán ${targetYear} (${lunarYear}):`;
+            }
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Check if it's holiday season (Dec 1 - Feb 20)
+        function isHolidaySeason() {
+            const now = new Date();
+            const month = now.getMonth() + 1; // 1-12
+            const day = now.getDate();
+            
+            // Giáng Sinh + Năm Mới dương lịch (Dec 1 - Jan 10) và Tết âm lịch (Jan - Feb)
+            return (month === 12 || 
+                    (month === 1 && day <= 10) || 
+                    (month === 1) || 
+                    (month === 2 && day <= 20));
         }
 
         // Snow Effect
@@ -1478,46 +1604,78 @@
             }
         }
 
-        // Countdown to New Year
-        function updateCountdown() {
-            const now = new Date();
-            const newYear = new Date(now.getFullYear() + 1, 0, 1);
-            const diff = newYear - now;
+        // Create Tet decorations
+        function createTetDecorations() {
+            const overlay = document.querySelector('.christmas-newyear-overlay');
+            const decorations = ['dragon', 'fire', 'coin', 'wine-bottle', 'money-bill-wave', 'star'];
+            const colors = ['#e74c3c', '#f1c40f', '#f39c12', '#27ae60', '#3498db', '#9b59b6'];
             
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            // Xóa decorations cũ
+            document.querySelectorAll('.floating-decoration').forEach(el => el.remove());
             
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            // Tạo decorations mới
+            for (let i = 0; i < 15; i++) {
+                const deco = document.createElement('div');
+                const decoType = decorations[Math.floor(Math.random() * decorations.length)];
+                deco.className = `floating-decoration ${decoType}`;
+                
+                deco.style.cssText = `
+                    position: fixed;
+                    font-size: ${Math.random() * 20 + 16}px;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    color: ${colors[Math.floor(Math.random() * colors.length)]};
+                    z-index: 9999;
+                    pointer-events: none;
+                    opacity: 0.7;
+                    animation: float ${Math.random() * 5 + 3}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                
+                const icon = document.createElement('i');
+                icon.className = `fas fa-${decoType}`;
+                deco.appendChild(icon);
+                
+                overlay.appendChild(deco);
+            }
+            
+            // Cập nhật đèn lồng với màu Tết
+            document.querySelectorAll('.christmas-lights .light').forEach((light, i) => {
+                const colors = ['#e74c3c', '#f1c40f', '#27ae60'];
+                light.style.backgroundColor = colors[i % 3];
+            });
         }
 
-        // Toggle holiday effects
-        function toggleHolidayEffects() {
-            const overlay = document.querySelector('.christmas-newyear-overlay');
-            const banner = document.querySelector('.holiday-banner');
-            const body = document.body;
+        // Update banner text
+        function updateBannerText() {
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            const bannerText = document.querySelector('.greeting-text');
             
-            if (overlay.classList.contains('active')) {
-                overlay.classList.remove('active');
-                body.classList.remove('festive-theme');
-                banner.style.opacity = '0.5';
-                localStorage.setItem('holidayEffects', 'disabled');
-            } else {
-                overlay.classList.add('active');
-                body.classList.add('festive-theme');
-                banner.style.opacity = '1';
-                localStorage.setItem('holidayEffects', 'enabled');
+            if (!bannerText) return;
+            
+            if (month === 12) {
+                bannerText.innerHTML = `
+                    <i class="fas fa-star"></i> Chúc Mừng Giáng Sinh & Năm Mới 2026 
+                    <i class="fas fa-tree"></i> Giáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc 
+                    <i class="fas fa-gift"></i> "Vinh danh Thiên Chúa trên các tầng trời"
+                `;
+            } else if (month === 1 || month === 2) {
+                bannerText.innerHTML = `
+                    <i class="fas fa-dragon"></i> Chúc Mừng Năm Mới Bính Ngọ 2026 
+                    <i class="fas fa-pray"></i> Giáo Họ Trung Đồng kính chúc quý vị An Khang Thịnh Vượng 
+                    <i class="fas fa-heart"></i> "Năm mới bình an, hồng ân Chúa tràn đầy"
+                `;
             }
         }
 
-        // Update hero section with holiday message
+        // Update hero section
         function updateHeroSection() {
             const heroTitle = document.getElementById('heroTitle');
             const heroSubtitle = document.getElementById('heroSubtitle');
+            const festiveButton = document.getElementById('festiveButton');
+            const now = new Date();
+            const month = now.getMonth() + 1;
             
             // Save original content
             if (!heroTitle.dataset.original) {
@@ -1525,48 +1683,112 @@
                 heroSubtitle.dataset.original = heroSubtitle.textContent;
             }
             
-            // Update with holiday message
-            heroTitle.innerHTML = 'Chúc Mừng Giáng Sinh & Năm Mới 2026';
-            heroSubtitle.innerHTML = '"Bình an dưới thế cho người thiện tâm" - Chúc mừng Chúa Giáng Sinh';
-        }
-
-        // Check if it's holiday season (Dec 1 - Jan 10)
-        function isHolidaySeason() {
-            const now = new Date();
-            const month = now.getMonth() + 1; // 1-12
-            const day = now.getDate();
-            
-            return (month === 12 || (month === 1 && day <= 10));
-        }
-
-        // Optional: Holiday Background Music
-        function addHolidayMusic() {
-            // Create audio element
-            const audio = document.createElement('audio');
-            audio.id = 'holidayMusic';
-            audio.src = 'https://assets.mixkit.co/music/preview/mixkit-jingle-bells-311.mp3';
-            audio.loop = true;
-            audio.volume = 0.2;
-            audio.style.display = 'none';
-            
-            // Add play/pause control
-            const musicControl = document.createElement('button');
-            musicControl.className = 'music-control';
-            musicControl.innerHTML = '<i class="fas fa-music"></i>';
-            musicControl.title = 'Bật/Tắt nhạc Giáng Sinh';
-            
-            musicControl.onclick = function() {
-                if (audio.paused) {
-                    audio.play().catch(e => console.log('Autoplay prevented:', e));
-                    this.innerHTML = '<i class="fas fa-pause"></i>';
-                } else {
-                    audio.pause();
-                    this.innerHTML = '<i class="fas fa-music"></i>';
+            if (month === 12) {
+                // Giáng Sinh
+                heroTitle.innerHTML = 'Chúc Mừng Giáng Sinh & Năm Mới 2026';
+                heroSubtitle.innerHTML = '"Bình an dưới thế cho người thiện tâm" - Chúc mừng Chúa Giáng Sinh';
+                if (festiveButton) {
+                    festiveButton.innerHTML = '<i class="fas fa-gift"></i> Mùa Giáng Sinh';
+                    festiveButton.classList.remove('btn-tet');
+                    festiveButton.classList.add('btn-festive');
                 }
-            };
+            } else if (month === 1 || month === 2) {
+                // Tết
+                heroTitle.innerHTML = 'Chúc Mừng Năm Mới Bính Ngọ 2026';
+                heroSubtitle.innerHTML = '"Xuân Bính Ngọ - An Khang Thịnh Vượng" - Chúc mừng Tết Nguyên Đán';
+                if (festiveButton) {
+                    festiveButton.innerHTML = '<i class="fas fa-dragon"></i> Mùa Tết';
+                    festiveButton.classList.remove('btn-festive');
+                    festiveButton.classList.add('btn-tet');
+                }
+            }
             
-            document.body.appendChild(audio);
-            document.body.appendChild(musicControl);
+            // Show festive button
+            if (festiveButton) {
+                festiveButton.classList.remove('d-none');
+            }
+        }
+
+        // Toggle holiday effects
+        function toggleHolidayEffects() {
+            const overlay = document.querySelector('.christmas-newyear-overlay');
+            const banner = document.querySelector('.holiday-banner');
+            const body = document.body;
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                body.classList.remove('festive-theme', 'tet-theme');
+                banner.style.opacity = '0.5';
+                localStorage.setItem('holidayEffects', 'disabled');
+            } else {
+                overlay.classList.add('active');
+                if (month === 12) {
+                    body.classList.add('festive-theme');
+                } else if (month === 1 || month === 2) {
+                    body.classList.add('tet-theme');
+                }
+                banner.style.opacity = '1';
+                localStorage.setItem('holidayEffects', 'enabled');
+            }
+        }
+
+        // Add Tet confetti
+        function addTetConfetti() {
+            const confettiCount = 100;
+            const container = document.createElement('div');
+            container.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 10000;
+            `;
+            
+            const colors = ['#e74c3c', '#f1c40f', '#f39c12', '#27ae60', '#3498db'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -10px;
+                    left: ${Math.random() * 100}%;
+                    animation: confetti-fall ${Math.random() * 3 + 2}s linear forwards;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    pointer-events: none;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                container.appendChild(confetti);
+            }
+            
+            document.body.appendChild(container);
+            
+            setTimeout(() => {
+                if (container.parentNode) {
+                    document.body.removeChild(container);
+                }
+            }, 3000);
+            
+            // Add confetti animation style if not exists
+            if (!document.querySelector('#confetti-animation-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-animation-style';
+                style.textContent = `
+                    @keyframes confetti-fall {
+                        to {
+                            transform: translateY(100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
         }
 
         // Add festive confetti on button click
@@ -1623,28 +1845,51 @@
             }
         }
 
-        // Initialize page after CAPTCHA verification
-        function initializePageAfterCaptcha() {
-            // Check if it's holiday season
-            if (isHolidaySeason()) {
-                initHolidayEffects();
-                updateHeroSection();
-                
-                // Show festive button
-                document.getElementById('festiveButton').classList.remove('d-none');
-            }
+        // Optional: Holiday Background Music
+        function addHolidayMusic() {
+            // Create audio element
+            const audio = document.createElement('audio');
+            audio.id = 'holidayMusic';
+            audio.src = 'https://assets.mixkit.co/music/preview/mixkit-jingle-bells-311.mp3';
+            audio.loop = true;
+            audio.volume = 0.2;
+            audio.style.display = 'none';
+            
+            // Add play/pause control
+            const musicControl = document.createElement('button');
+            musicControl.className = 'music-control';
+            musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            musicControl.title = 'Bật/Tắt nhạc Giáng Sinh';
+            
+            musicControl.onclick = function() {
+                if (audio.paused) {
+                    audio.play().catch(e => console.log('Autoplay prevented:', e));
+                    this.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    this.innerHTML = '<i class="fas fa-music"></i>';
+                }
+            };
+            
+            document.body.appendChild(audio);
+            document.body.appendChild(musicControl);
         }
 
-        // Kiểm tra trạng thái khi trang load
+        // Kiểm tra trạng thái xác thực khi trang load
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if it's holiday season
+            // Initialize holiday effects if it's holiday season
             if (isHolidaySeason()) {
                 // Check user preference
                 const holidayPref = localStorage.getItem('holidayEffects');
                 if (holidayPref !== 'disabled') {
-                    initHolidayEffects();
-                    updateHeroSection();
+                    // Update banner text immediately
+                    updateBannerText();
+                    
+                    // Show festive button
                     document.getElementById('festiveButton').classList.remove('d-none');
+                    
+                    // Initialize holiday effects
+                    initHolidayEffects();
                 }
             }
 
@@ -1811,10 +2056,20 @@
             
             // Add festive greeting to console
             if (isHolidaySeason()) {
-                console.log('%c🎄 Chúc Mừng Giáng Sinh & Năm Mới 2026 🎉', 
-                    'color: #e74c3c; font-size: 18px; font-weight: bold;');
-                console.log('%cGiáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc!', 
-                    'color: #2ecc71; font-size: 14px;');
+                const now = new Date();
+                const month = now.getMonth() + 1;
+                
+                if (month === 12) {
+                    console.log('%c🎄 Chúc Mừng Giáng Sinh & Năm Mới 2026 🎉', 
+                        'color: #e74c3c; font-size: 18px; font-weight: bold;');
+                    console.log('%cGiáo Họ Trung Đồng kính chúc quý vị bình an và hạnh phúc!', 
+                        'color: #2ecc71; font-size: 14px;');
+                } else if (month === 1 || month === 2) {
+                    console.log('%c🐉 Chúc Mừng Năm Mới Bính Ngọ 2026 🎊', 
+                        'color: #e74c3c; font-size: 18px; font-weight: bold;');
+                    console.log('%cGiáo Họ Trung Đồng kính chúc quý vị An Khang Thịnh Vượng!', 
+                        'color: #f1c40f; font-size: 14px;');
+                }
             }
         });
 
