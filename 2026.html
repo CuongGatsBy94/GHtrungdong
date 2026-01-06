@@ -1,9 +1,29 @@
+<!-- 
+  @Author: Your name
+  @Date:   2026-01-05 20:02:07
+  @Last Modified by:   Your name
+  @Last Modified time: 2026-01-06 19:51:08
+-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đếm Ngược Tết 2026 - Pháo Hoa Chúc Mừng</title>
+    <title>Giáo Họ Trung Đồng - Đếm Ngược Tết 2026 - Pháo Hoa Chúc Mừng</title>
+    
+    <!-- Open Graph Meta Tags for Social Media Sharing -->
+    <meta property="og:title" content="Giáo Họ Trung Đồng - Đếm Ngược Tết 2026">
+    <meta property="og:description" content="Cùng đếm ngược Tết Bính Ngọ 2026 và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng">
+    <meta property="og:image" content="https://www.giaohotrungdong.io.vn/images/tet2026-thumbnail.jpg">
+    <meta property="og:url" content="https://www.giaohotrungdong.io.vn/2026">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Giáo Họ Trung Đồng">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Giáo Họ Trung Đồng - Đếm Ngược Tết 2026">
+    <meta name="twitter:description" content="Cùng đếm ngược Tết Bính Ngọ 2026 và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng">
+    <meta name="twitter:image" content="https://www.giaohotrungdong.io.vn/images/tet2026-thumbnail.jpg">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -108,6 +128,7 @@
             align-items: center;
         }
         
+        /* UPDATED: Logo with Giáo Họ Trung Đồng */
         .logo {
             font-size: var(--font-2xl);
             font-weight: 700;
@@ -115,10 +136,40 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
         }
         
-        /* Navigation */
+        .logo:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--tet-red);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-main {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .logo-sub {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        /* Navigation - Updated for admin highlight */
         .main-nav {
             display: flex;
             align-items: center;
@@ -136,11 +187,33 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
+            position: relative;
         }
         
         .nav-item:hover, .nav-item.active {
             color: var(--tet-gold);
             background: rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Highlight for admin login */
+        .nav-item.admin-highlight {
+            background: linear-gradient(45deg, var(--tet-purple), var(--tet-pink));
+            color: white !important;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            animation: adminPulse 2s infinite;
+        }
+        
+        .nav-item.admin-highlight:hover {
+            background: linear-gradient(45deg, var(--tet-pink), var(--tet-purple));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+        }
+        
+        @keyframes adminPulse {
+            0% { box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5); }
+            100% { box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3); }
         }
         
         .admin-badge {
@@ -331,39 +404,56 @@
             padding: 1rem;
         }
         
-        /* Control Panel - Responsive */
-        .control-panel {
+        /* UPDATED: Panel Styles for Collapsing to Bottom */
+        .collapsible-panel {
             background: rgba(26, 26, 58, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
             border: 2px solid var(--tet-gold);
-            position: relative;
-            z-index: 10;
-            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 1000px;
             overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .control-panel.minimized {
-            height: 60px;
-            padding: 0.5rem 1rem;
+        .collapsible-panel.collapsed {
+            max-height: 60px;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 1000;
+            margin-bottom: 0;
+            background: rgba(10, 10, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         }
         
-        .control-panel.minimized .panel-content {
-            display: none;
+        .collapsible-panel.collapsed:hover {
+            background: rgba(26, 26, 58, 0.98);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
         
         .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            padding: 1.2rem 1.5rem;
             cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
         
-        .control-panel.minimized .panel-header {
-            margin-bottom: 0;
+        .collapsible-panel.collapsed .panel-header {
+            padding: 0.8rem 1.2rem;
+            border-bottom: none;
+            background: transparent;
         }
         
         .panel-title {
@@ -373,6 +463,16 @@
             align-items: center;
             gap: 0.5rem;
             margin: 0;
+            font-weight: 600;
+        }
+        
+        .collapsible-panel.collapsed .panel-title {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+        
+        .collapsible-panel.collapsed:hover .panel-title {
+            color: var(--tet-gold);
         }
         
         .panel-controls {
@@ -400,7 +500,12 @@
         }
         
         .panel-content {
+            padding: 1.5rem;
             transition: all 0.3s ease;
+        }
+        
+        .collapsible-panel.collapsed .panel-content {
+            display: none;
         }
         
         .control-grid {
@@ -515,22 +620,7 @@
         
         /* Stats Panel */
         .stats-panel {
-            background: rgba(26, 26, 58, 0.95);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border: 2px solid var(--tet-blue);
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .stats-panel.minimized {
-            height: 60px;
-            padding: 0.5rem 1rem;
-        }
-        
-        .stats-panel.minimized .panel-content {
-            display: none;
+            border-color: var(--tet-blue);
         }
         
         .stats-grid {
@@ -562,23 +652,7 @@
         
         /* Share Section */
         .share-section {
-            background: rgba(56, 142, 60, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border: 2px solid var(--tet-green);
-            text-align: center;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .share-section.minimized {
-            height: 60px;
-            padding: 0.5rem 1rem;
-        }
-        
-        .share-section.minimized .panel-content {
-            display: none;
+            border-color: var(--tet-green);
         }
         
         .share-title {
@@ -629,29 +703,67 @@
             color: #000;
         }
         
-        /* Admin Panel (ẩn mặc định) */
-        .admin-panel {
-            background: rgba(156, 39, 176, 0.1);
-            border-radius: 15px;
+        /* NEW: Share Preview */
+        .share-preview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
             padding: 1.5rem;
-            margin-top: 2rem;
-            border: 2px solid var(--tet-purple);
-            display: none; /* Ẩn mặc định */
-            transition: all 0.3s ease;
-            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .admin-panel.minimized {
-            height: 60px;
-            padding: 0.5rem 1rem;
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
         
-        .admin-panel.minimized .panel-content {
+        .preview-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: linear-gradient(45deg, var(--tet-red), var(--tet-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .preview-info {
+            flex: 1;
+        }
+        
+        .preview-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .preview-url {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+        
+        .preview-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            border-color: var(--tet-purple);
             display: none;
         }
         
         .admin-panel.show {
-            display: block; /* Chỉ hiển thị khi admin đăng nhập */
+            display: block;
         }
         
         .admin-title {
@@ -664,6 +776,136 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
+        }
+        
+        /* UPDATED: Beautiful Icons for Control Bars */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .icon-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .icon-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--tet-gold);
+            transform: translateY(-5px);
+        }
+        
+        .icon-item.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--tet-gold);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .icon-item:hover .icon-wrapper {
+            transform: scale(1.1);
+        }
+        
+        .icon-label {
+            font-size: var(--font-sm);
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .icon-item:hover .icon-label {
+            color: var(--tet-gold);
+        }
+        
+        /* Specific Icon Styles */
+        .icon-share .icon-wrapper {
+            background: linear-gradient(135deg, #388E3C, #4CAF50);
+            color: white;
+        }
+        
+        .icon-admin .icon-wrapper {
+            background: linear-gradient(135deg, #9C27B0, #E91E63);
+            color: white;
+        }
+        
+        .icon-control .icon-wrapper {
+            background: linear-gradient(135deg, #2196F3, #03A9F4);
+            color: white;
+        }
+        
+        .icon-firework .icon-wrapper {
+            background: linear-gradient(135deg, #FF9800, #FF5722);
+            color: white;
+        }
+        
+        .icon-stats .icon-wrapper {
+            background: linear-gradient(135deg, #607D8B, #78909C);
+            color: white;
+        }
+        
+        .icon-joy .icon-wrapper {
+            background: linear-gradient(135deg, #FFC107, #FF9800);
+            color: white;
+        }
+        
+        .icon-win .icon-wrapper {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+        
+        .icon-type .icon-wrapper {
+            background: linear-gradient(135deg, #D32F2F, #F44336);
+            color: white;
+        }
+        
+        .icon-click .icon-wrapper {
+            background: linear-gradient(135deg, #3F51B5, #2196F3);
+            color: white;
+        }
+        
+        .icon-arrow {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--tet-gold);
+            color: #000;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .icon-item.active .icon-arrow {
+            opacity: 1;
+            transform: scale(1);
         }
         
         /* NÚT ẨN BẮN PHÁO HOA KHI CLICK */
@@ -820,7 +1062,7 @@
             background: var(--bg-secondary);
             border-radius: 20px;
             padding: 2rem;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -910,6 +1152,107 @@
             animation: pulse 2s infinite;
         }
         
+        /* User Management Styles */
+        .user-management {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .user-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+        
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .user-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: var(--tet-gold);
+        }
+        
+        .user-role {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: var(--font-xs);
+        }
+        
+        .btn-success {
+            background: var(--tet-green);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--tet-red);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--tet-orange);
+            color: white;
+        }
+        
+        /* Admin Login Highlight */
+        .login-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-highlight::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                var(--tet-purple), 
+                var(--tet-pink), 
+                var(--tet-blue), 
+                var(--tet-green));
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.5;
+            animation: loginHighlight 3s infinite alternate;
+        }
+        
+        @keyframes loginHighlight {
+            0% { filter: blur(15px) hue-rotate(0deg); }
+            100% { filter: blur(20px) hue-rotate(45deg); }
+        }
+        
+        /* Quick Minimize Buttons - Removed as we have new collapse system */
+        
         /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             :root {
@@ -921,6 +1264,10 @@
             
             .click-fireworks-toggle {
                 bottom: 70px;
+            }
+            
+            .icon-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -945,6 +1292,18 @@
                 display: block;
             }
             
+            .logo {
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .logo-main {
+                font-size: 1rem;
+            }
+            
+            .logo-sub {
+                font-size: 0.7rem;
+            }
+            
             .control-grid {
                 grid-template-columns: 1fr;
             }
@@ -964,6 +1323,21 @@
             
             .toggle-label {
                 font-size: var(--font-xs);
+            }
+            
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            
+            .icon-item {
+                padding: 1rem 0.75rem;
+            }
+            
+            .icon-wrapper {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
         }
         
@@ -1000,6 +1374,25 @@
                 bottom: 90px;
                 padding: 0.5rem 1rem;
             }
+            
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .icon-item {
+                padding: 0.8rem 0.5rem;
+            }
+            
+            .icon-wrapper {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .icon-label {
+                font-size: 0.75rem;
+            }
         }
         
         /* Fullscreen Click Mode */
@@ -1012,54 +1405,6 @@
         .fullscreen-click-mode canvas {
             pointer-events: auto;
         }
-        
-        /* Quick Minimize Buttons */
-        .quick-minimize {
-            position: fixed;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .minimize-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--tet-gold);
-            color: var(--tet-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-        
-        .minimize-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 215, 0, 0.1);
-        }
-        
-        .minimize-btn.active {
-            background: var(--tet-gold);
-            color: #000;
-        }
-        
-        @media (max-width: 768px) {
-            .quick-minimize {
-                right: 10px;
-                bottom: 150px;
-            }
-            
-            .minimize-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1071,23 +1416,13 @@
     
     <!-- Click Mode Info -->
     <div id="clickModeInfo" class="click-mode-info">
-        <i class="fas fa-mouse-pointer"></i> Click vào màn hình để bắn pháo hoa!
-    </div>
-    
-    <!-- Quick Minimize Buttons -->
-    <div class="quick-minimize" id="quickMinimize">
-        <button class="minimize-btn" title="Thu nhỏ tất cả" onclick="minimizeAllPanels()">
-            <i class="fas fa-window-minimize"></i>
-        </button>
-        <button class="minimize-btn" title="Mở rộng tất cả" onclick="expandAllPanels()">
-            <i class="fas fa-window-maximize"></i>
-        </button>
+        <i class="fas fa-hand-point-up"></i> Click vào màn hình để bắn pháo hoa!
     </div>
     
     <!-- Click Fireworks Toggle Button -->
     <div class="click-fireworks-toggle">
         <span class="toggle-label">
-            <i class="fas fa-mouse-pointer"></i> Click Bắn Pháo Hoa
+            <i class="fas fa-hand-point-up"></i> Click Bắn Pháo Hoa
         </span>
         <div class="toggle-switch">
             <input type="checkbox" id="clickFireworksToggle" class="toggle-checkbox">
@@ -1099,9 +1434,15 @@
     <header class="main-header">
         <div class="container-fluid">
             <div class="header-content">
-                <a href="#" class="logo" onclick="switchPage('countdown')">
-                    <i class="fas fa-fire"></i>
-                    <span>Tết 2026</span>
+                <!-- UPDATED: Logo Giáo Họ Trung Đồng -->
+                <a href="#" class="logo" onclick="switchToHome()">
+                    <div class="logo-icon">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">Giáo Họ Trung Đồng</span>
+                        <span class="logo-sub">Tết Bính Ngọ 2026</span>
+                    </div>
                 </a>
                 
                 <nav class="main-nav" id="mainNav">
@@ -1110,16 +1451,16 @@
                         <span class="nav-text">Đếm Ngược</span>
                     </a>
                     <a href="#" class="nav-item" onclick="switchPage('fireworks')">
-                        <i class="fas fa-fireworks"></i>
+                        <i class="fas fa-fire"></i>
                         <span class="nav-text">Pháo Hoa</span>
                     </a>
                     <a href="#" class="nav-item" onclick="showShareModal()">
                         <i class="fas fa-share-alt"></i>
                         <span class="nav-text">Chia Sẻ</span>
                     </a>
-                    <a href="#" class="nav-item" onclick="showAdminModal()">
+                    <a href="#" class="nav-item admin-highlight login-highlight" onclick="showAdminModal()">
                         <i class="fas fa-user-shield"></i>
-                        <span class="nav-text">Admin</span>
+                        <span class="nav-text">Đăng Nhập Admin</span>
                         <span class="admin-badge" id="adminBadge" style="display: none;">Đã Đăng Nhập</span>
                     </a>
                 </nav>
@@ -1210,15 +1551,120 @@
             <!-- Fireworks Page -->
             <div id="fireworksPage" class="page-container">
                 <div class="fireworks-page">
+                    <!-- NEW: Icon Grid for Quick Actions -->
+                    <div class="collapsible-panel" id="iconPanel">
+                        <div class="panel-header" onclick="togglePanel('iconPanel')">
+                            <h3 class="panel-title">
+                                <i class="fas fa-th-large"></i> Công Cụ Nhanh
+                            </h3>
+                            <div class="panel-controls">
+                                <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('iconPanel', event)">
+                                    <i class="fas fa-window-minimize"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="icon-grid">
+                                <!-- Chia Sẻ Niềm Vui -->
+                                <div class="icon-item icon-share" onclick="showShareModal()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-share-alt"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Chia Sẻ Niềm Vui</div>
+                                </div>
+                                
+                                <!-- Chức Năng Admin -->
+                                <div class="icon-item icon-admin" onclick="showAdminModal()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-user-shield"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-lock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Chức Năng Admin</div>
+                                </div>
+                                
+                                <!-- Châu Năng Admin -->
+                                <div class="icon-item icon-control" onclick="togglePanel('controlPanel')">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-sliders-h"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-cog"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Điều Khiển</div>
+                                </div>
+                                
+                                <!-- Châu sẽ Viêm Vui -->
+                                <div class="icon-item icon-joy active" onclick="startFireworksShow()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-laugh-beam"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Trình Diễn Vui</div>
+                                </div>
+                                
+                                <!-- Thắng Kè -->
+                                <div class="icon-item icon-win" onclick="toggleAutoMode()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-trophy"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-flag-checkered"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Tự Động</div>
+                                </div>
+                                
+                                <!-- Loại Phân Hua -->
+                                <div class="icon-item icon-type" onclick="togglePanel('fireworkTypesPanel')">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-fire"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Loại Pháo Hoa</div>
+                                </div>
+                                
+                                <!-- Phía Khiến Phân Hua -->
+                                <div class="icon-item icon-firework" onclick="launchCustomFireworks()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-rocket"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-bullseye"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Bắn Pháo Hoa</div>
+                                </div>
+                                
+                                <!-- Click Đấu Phân Hua -->
+                                <div class="icon-item icon-click" onclick="toggleClickFireworksFromIcon()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-hand-point-up"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-mouse-pointer"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Click Bắn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Control Panel -->
-                    <div class="control-panel" id="controlPanel">
+                    <div class="collapsible-panel" id="controlPanel">
                         <div class="panel-header" onclick="togglePanel('controlPanel')">
                             <h3 class="panel-title">
                                 <i class="fas fa-sliders-h"></i> Điều Khiển Pháo Hoa
                             </h3>
                             <div class="panel-controls">
                                 <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('controlPanel', event)">
-                                    <i class="fas fa-minus"></i>
+                                    <i class="fas fa-window-minimize"></i>
                                 </button>
                             </div>
                         </div>
@@ -1275,14 +1721,14 @@
                     </div>
                     
                     <!-- Firework Types -->
-                    <div class="control-panel" id="fireworkTypesPanel">
+                    <div class="collapsible-panel" id="fireworkTypesPanel">
                         <div class="panel-header" onclick="togglePanel('fireworkTypesPanel')">
                             <h3 class="panel-title">
                                 <i class="fas fa-fire"></i> Loại Pháo Hoa
                             </h3>
                             <div class="panel-controls">
                                 <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('fireworkTypesPanel', event)">
-                                    <i class="fas fa-minus"></i>
+                                    <i class="fas fa-window-minimize"></i>
                                 </button>
                             </div>
                         </div>
@@ -1329,14 +1775,14 @@
                     </div>
                     
                     <!-- Stats Panel -->
-                    <div class="stats-panel" id="statsPanel">
+                    <div class="collapsible-panel stats-panel" id="statsPanel">
                         <div class="panel-header" onclick="togglePanel('statsPanel')">
                             <h3 class="panel-title">
                                 <i class="fas fa-chart-bar"></i> Thống Kê
                             </h3>
                             <div class="panel-controls">
                                 <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('statsPanel', event)">
-                                    <i class="fas fa-minus"></i>
+                                    <i class="fas fa-window-minimize"></i>
                                 </button>
                             </div>
                         </div>
@@ -1365,14 +1811,14 @@
             </div>
             
             <!-- Share Section -->
-            <div class="share-section" id="sharePanel">
+            <div class="collapsible-panel share-section" id="sharePanel">
                 <div class="panel-header" onclick="togglePanel('sharePanel')">
                     <h3 class="panel-title">
                         <i class="fas fa-share-alt"></i> Chia Sẻ Niềm Vui
                     </h3>
                     <div class="panel-controls">
                         <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('sharePanel', event)">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-window-minimize"></i>
                         </button>
                     </div>
                 </div>
@@ -1397,14 +1843,14 @@
             </div>
             
             <!-- Admin Panel (Chỉ hiển thị khi admin đăng nhập) -->
-            <div class="admin-panel" id="adminPanel">
+            <div class="collapsible-panel admin-panel" id="adminPanel">
                 <div class="panel-header" onclick="togglePanel('adminPanel')">
                     <h3 class="panel-title">
                         <i class="fas fa-user-shield"></i> Chức Năng Admin
                     </h3>
                     <div class="panel-controls">
                         <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('adminPanel', event)">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-window-minimize"></i>
                         </button>
                     </div>
                 </div>
@@ -1424,7 +1870,7 @@
                         <button class="btn btn-primary" onclick="showMessageModal()">
                             <i class="fas fa-edit"></i> Sửa Lời Chúc
                         </button>
-                        <button class="btn btn-secondary" onclick="showUserManagement()">
+                        <button class="btn btn-secondary" onclick="showUserManagementModal()">
                             <i class="fas fa-users"></i> Quản Lý Người Dùng
                         </button>
                         <button class="btn btn-primary" onclick="adminLogout()">
@@ -1441,6 +1887,7 @@
         <div class="container-fluid">
             <p>&copy; 2025-2026 Giáo Họ Trung Đồng - Chúc Mừng Năm Mới Bính Ngọ</p>
             <p>Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</p>
+            <p>Website: <a href="https://www.giaohotrungdong.io.vn/2026" target="_blank" style="color: var(--tet-gold);">https://www.giaohotrungdong.io.vn/2026</a></p>
         </div>
     </footer>
     
@@ -1454,6 +1901,46 @@
                 <button class="close-modal" onclick="hideShareModal()">&times;</button>
             </div>
             <div class="modal-body">
+                <!-- NEW: Share Preview Section -->
+                <div class="share-preview">
+                    <div class="preview-header">
+                        <div class="preview-image">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <div class="preview-info">
+                            <div class="preview-title" id="previewTitle">Giáo Họ Trung Đồng - Đếm Ngược Tết 2026</div>
+                            <div class="preview-url" id="previewUrl">https://www.giaohotrungdong.io.vn/2026</div>
+                            <div class="preview-description" id="previewDescription">
+                                Cùng đếm ngược Tết Bính Ngọ 2026 và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Tiêu đề chia sẻ:</label>
+                    <input type="text" class="form-control" id="shareTitle" 
+                           value="Giáo Họ Trung Đồng - Đếm Ngược Tết 2026" maxlength="100"
+                           oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Mô tả chia sẻ:</label>
+                    <textarea class="form-control" id="shareDescription" rows="3" maxlength="300"
+                              oninput="updatePreview()">Cùng đếm ngược Tết Bính Ngọ 2026 và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng 🐉🎆 Chúc mừng năm mới an khang thịnh vượng!</textarea>
+                </div>
+                
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label">Link chia sẻ:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="shareLink" 
+                               value="https://www.giaohotrungdong.io.vn/2026" readonly>
+                        <button class="btn btn-primary" onclick="copyShareLink()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                
                 <div class="share-buttons">
                     <a href="#" class="share-btn facebook-btn" onclick="shareToFacebook()">
                         <i class="fab fa-facebook-f"></i> Facebook
@@ -1464,20 +1951,9 @@
                     <a href="#" class="share-btn twitter-btn" onclick="shareToTwitter()">
                         <i class="fab fa-twitter"></i> Twitter
                     </a>
-                </div>
-                <div class="form-group" style="margin-top: 1rem;">
-                    <label class="form-label">Link chia sẻ:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="shareLink" 
-                               value="https://giaohotrungdong.com/tet2026" readonly>
-                        <button class="btn btn-primary" onclick="copyShareLink()">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tin nhắn chia sẻ:</label>
-                    <textarea class="form-control" id="shareMessage" rows="3">🎉 Chúc Mừng Năm Mới 2026 - Bính Ngọ! Cùng đếm ngược Tết và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng 🐉🎆</textarea>
+                    <button class="share-btn copy-btn" onclick="copyShareLink()">
+                        <i class="fas fa-copy"></i> Sao Chép Link
+                    </button>
                 </div>
             </div>
         </div>
@@ -1582,16 +2058,41 @@
                 <button class="close-modal" onclick="hideUserManagementModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="user-list" id="userList">
-                    <!-- User list will be displayed here -->
-                </div>
-                <div class="button-grid">
+                <div class="user-management">
+                    <h4>Thêm người dùng mới</h4>
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên:</label>
+                        <input type="text" class="form-control" id="newUserName" 
+                               placeholder="Nhập họ và tên" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="newUserEmail" 
+                               placeholder="Nhập email" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vai trò:</label>
+                        <select class="form-control" id="newUserRole">
+                            <option value="user">Người dùng</option>
+                            <option value="moderator">Điều hành viên</option>
+                            <option value="admin">Quản trị viên</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mật khẩu:</label>
+                        <input type="password" class="form-control" id="newUserPassword" 
+                               placeholder="Nhập mật khẩu" maxlength="50">
+                    </div>
                     <button class="btn btn-primary" onclick="addNewUser()">
                         <i class="fas fa-user-plus"></i> Thêm Người Dùng
                     </button>
-                    <button class="btn btn-secondary" onclick="hideUserManagementModal()">
-                        <i class="fas fa-times"></i> Đóng
-                    </button>
+                </div>
+                
+                <hr>
+                
+                <h4>Danh sách người dùng</h4>
+                <div class="user-list" id="userList">
+                    <!-- User list will be displayed here -->
                 </div>
             </div>
         </div>
@@ -1649,6 +2150,7 @@
         
         // Panel state management
         const panelStates = {
+            iconPanel: false,
             controlPanel: false,
             fireworkTypesPanel: false,
             statsPanel: false,
@@ -1656,7 +2158,81 @@
             adminPanel: false
         };
         
-        // ==================== QUẢN LÝ PANEL ====================
+        // User management
+        let users = [];
+        
+        // ==================== HÀM MỚI: ICON GRID FUNCTIONS ====================
+        function toggleClickFireworksFromIcon() {
+            clickFireworksToggle.checked = !clickFireworksToggle.checked;
+            toggleClickFireworks();
+            
+            // Update icon state
+            const clickIcon = document.querySelector('.icon-click');
+            if (clickFireworksToggle.checked) {
+                clickIcon.classList.add('active');
+                clickIcon.querySelector('.icon-wrapper').innerHTML = `
+                    <i class="fas fa-hand-point-up"></i>
+                    <div class="icon-arrow">
+                        <i class="fas fa-check"></i>
+                    </div>
+                `;
+                clickIcon.querySelector('.icon-label').textContent = 'Click Bật';
+            } else {
+                clickIcon.classList.remove('active');
+                clickIcon.querySelector('.icon-wrapper').innerHTML = `
+                    <i class="fas fa-hand-point-up"></i>
+                    <div class="icon-arrow">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                `;
+                clickIcon.querySelector('.icon-label').textContent = 'Click Bắn';
+            }
+        }
+        
+        function activateIcon(iconClass) {
+            // Remove active class from all icons
+            document.querySelectorAll('.icon-item').forEach(icon => {
+                icon.classList.remove('active');
+            });
+            
+            // Add active class to clicked icon
+            const icon = document.querySelector(`.${iconClass}`);
+            if (icon) {
+                icon.classList.add('active');
+            }
+        }
+        
+        // ==================== HÀM MỚI: VỀ TRANG CHỦ ====================
+        function switchToHome() {
+            switchPage('countdown');
+        }
+        
+        // ==================== HÀM MỚI: CẬP NHẬT PREVIEW CHIA SẺ ====================
+        function updatePreview() {
+            const title = document.getElementById('shareTitle').value;
+            const description = document.getElementById('shareDescription').value;
+            
+            document.getElementById('previewTitle').textContent = title;
+            document.getElementById('previewDescription').textContent = description;
+            
+            // Cập nhật cả thẻ meta cho chia sẻ
+            updateMetaTags(title, description);
+        }
+        
+        function updateMetaTags(title, description) {
+            // Cập nhật thẻ meta cho Open Graph
+            document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+            
+            // Cập nhật thẻ meta cho Twitter
+            document.querySelector('meta[name="twitter:title"]').setAttribute('content', title);
+            document.querySelector('meta[name="twitter:description"]').setAttribute('content', description);
+            
+            // Cập nhật title của trang
+            document.title = title + ' - Giáo Họ Trung Đồng';
+        }
+        
+        // ==================== QUẢN LÝ PANEL MỚI ====================
         function togglePanel(panelId, event) {
             if (event) event.stopPropagation();
             
@@ -1664,23 +2240,39 @@
             panelStates[panelId] = !panelStates[panelId];
             
             if (panelStates[panelId]) {
-                panel.classList.add('minimized');
+                // Thu nhỏ panel
+                panel.classList.add('collapsed');
                 updatePanelButton(panelId, true);
             } else {
-                panel.classList.remove('minimized');
+                // Mở rộng panel
+                panel.classList.remove('collapsed');
                 updatePanelButton(panelId, false);
             }
             
             // Save to localStorage
             savePanelStates();
+            
+            // Sắp xếp lại các panel khi thu nhỏ
+            arrangeCollapsedPanels();
         }
         
-        function updatePanelButton(panelId, isMinimized) {
+        function updatePanelButton(panelId, isCollapsed) {
             const panel = document.getElementById(panelId);
             const btn = panel.querySelector('.panel-btn i');
             if (btn) {
-                btn.className = isMinimized ? 'fas fa-plus' : 'fas fa-minus';
+                btn.className = isCollapsed ? 'fas fa-window-maximize' : 'fas fa-window-minimize';
             }
+        }
+        
+        function arrangeCollapsedPanels() {
+            // Lấy tất cả các panel đã thu nhỏ
+            const collapsedPanels = document.querySelectorAll('.collapsible-panel.collapsed');
+            
+            // Sắp xếp vị trí từ dưới lên trên
+            collapsedPanels.forEach((panel, index) => {
+                panel.style.bottom = `${10 + index * 70}px`;
+                panel.style.zIndex = 1000 + index;
+            });
         }
         
         function minimizeAllPanels() {
@@ -1688,11 +2280,12 @@
                 panelStates[panelId] = true;
                 const panel = document.getElementById(panelId);
                 if (panel) {
-                    panel.classList.add('minimized');
+                    panel.classList.add('collapsed');
                     updatePanelButton(panelId, true);
                 }
             });
             savePanelStates();
+            arrangeCollapsedPanels();
         }
         
         function expandAllPanels() {
@@ -1700,7 +2293,7 @@
                 panelStates[panelId] = false;
                 const panel = document.getElementById(panelId);
                 if (panel) {
-                    panel.classList.remove('minimized');
+                    panel.classList.remove('collapsed');
                     updatePanelButton(panelId, false);
                 }
             });
@@ -1720,15 +2313,189 @@
                     const panel = document.getElementById(panelId);
                     if (panel) {
                         if (states[panelId]) {
-                            panel.classList.add('minimized');
+                            panel.classList.add('collapsed');
                             updatePanelButton(panelId, true);
                         } else {
-                            panel.classList.remove('minimized');
+                            panel.classList.remove('collapsed');
                             updatePanelButton(panelId, false);
                         }
                     }
                 });
+                arrangeCollapsedPanels();
             }
+        }
+        
+        // ==================== QUẢN LÝ NGƯỜI DÙNG ====================
+        function loadUsers() {
+            const savedUsers = localStorage.getItem('tet2026_users');
+            if (savedUsers) {
+                users = JSON.parse(savedUsers);
+            } else {
+                // Tạo dữ liệu mẫu
+                users = [
+                    {
+                        id: 1,
+                        name: 'Nguyễn Văn A',
+                        email: 'nguyenvana@example.com',
+                        role: 'admin',
+                        password: 'admin123',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        name: 'Trần Thị B',
+                        email: 'tranthib@example.com',
+                        role: 'moderator',
+                        password: 'moderator123',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 3,
+                        name: 'Lê Văn C',
+                        email: 'levanc@example.com',
+                        role: 'user',
+                        password: 'user123',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                saveUsers();
+            }
+        }
+        
+        function saveUsers() {
+            localStorage.setItem('tet2026_users', JSON.stringify(users));
+        }
+        
+        function showUserManagementModal() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                showAdminModal();
+                return;
+            }
+            loadUserList();
+            document.getElementById('userManagementModal').classList.add('show');
+        }
+        
+        function hideUserManagementModal() {
+            document.getElementById('userManagementModal').classList.remove('show');
+        }
+        
+        function loadUserList() {
+            const userListDiv = document.getElementById('userList');
+            loadUsers();
+            
+            let html = '';
+            users.forEach(user => {
+                const roleText = {
+                    'admin': 'Quản trị viên',
+                    'moderator': 'Điều hành viên',
+                    'user': 'Người dùng'
+                }[user.role] || user.role;
+                
+                html += `
+                    <div class="user-item" data-id="${user.id}">
+                        <div class="user-info">
+                            <div class="user-name">${user.name}</div>
+                            <div class="user-role">${roleText} • ${user.email}</div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-sm btn-warning" onclick="editUser(${user.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            userListDiv.innerHTML = html || '<p class="text-center">Chưa có người dùng nào.</p>';
+        }
+        
+        function addNewUser() {
+            const name = document.getElementById('newUserName').value.trim();
+            const email = document.getElementById('newUserEmail').value.trim();
+            const role = document.getElementById('newUserRole').value;
+            const password = document.getElementById('newUserPassword').value;
+            
+            // Kiểm tra dữ liệu
+            if (!name || !email || !password) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+            
+            // Kiểm tra email đã tồn tại
+            if (users.some(user => user.email === email)) {
+                alert('Email đã được sử dụng!');
+                return;
+            }
+            
+            // Tạo ID mới
+            const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+            
+            // Thêm người dùng mới
+            const newUser = {
+                id: newId,
+                name: name,
+                email: email,
+                role: role,
+                password: password, // Trong thực tế nên mã hóa mật khẩu
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            saveUsers();
+            loadUserList();
+            
+            // Reset form
+            document.getElementById('newUserName').value = '';
+            document.getElementById('newUserEmail').value = '';
+            document.getElementById('newUserPassword').value = '';
+            document.getElementById('newUserRole').value = 'user';
+            
+            alert('Thêm người dùng thành công!');
+        }
+        
+        function editUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            
+            // Tạo form chỉnh sửa
+            const newName = prompt('Nhập tên mới:', user.name);
+            if (newName === null) return;
+            
+            const newEmail = prompt('Nhập email mới:', user.email);
+            if (newEmail === null) return;
+            
+            const newRole = prompt('Nhập vai trò mới (admin/moderator/user):', user.role);
+            if (newRole === null) return;
+            
+            // Cập nhật thông tin
+            user.name = newName.trim();
+            user.email = newEmail.trim();
+            user.role = newRole.trim().toLowerCase();
+            
+            saveUsers();
+            loadUserList();
+            alert('Cập nhật thông tin thành công!');
+        }
+        
+        function deleteUser(userId) {
+            if (!confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+                return;
+            }
+            
+            // Không cho phép xóa chính mình
+            if (users.find(u => u.id === userId)?.email === ADMIN_CREDENTIALS.username) {
+                alert('Không thể xóa tài khoản admin chính!');
+                return;
+            }
+            
+            users = users.filter(user => user.id !== userId);
+            saveUsers();
+            loadUserList();
+            alert('Xóa người dùng thành công!');
         }
         
         // ==================== HỆ THỐNG CLICK BẮN PHÁO HOA ====================
@@ -2377,6 +3144,14 @@
                 document.getElementById('adminPanel').classList.add('show');
                 document.getElementById('adminBadge').style.display = 'inline-block';
                 
+                // Thay đổi nút đăng nhập
+                const adminNavItem = document.querySelector('.nav-item.admin-highlight');
+                adminNavItem.innerHTML = `
+                    <i class="fas fa-user-shield"></i>
+                    <span class="nav-text">Admin</span>
+                    <span class="admin-badge">${currentAdminName}</span>
+                `;
+                
                 // Lưu trạng thái đăng nhập
                 localStorage.setItem('adminLoggedIn', 'true');
                 localStorage.setItem('adminName', currentAdminName);
@@ -2386,8 +3161,9 @@
                 
                 // Hiển thị panel admin
                 panelStates.adminPanel = false;
-                document.getElementById('adminPanel').classList.remove('minimized');
+                document.getElementById('adminPanel').classList.remove('collapsed');
                 updatePanelButton('adminPanel', false);
+                arrangeCollapsedPanels();
             } else {
                 alert('Thông tin đăng nhập không chính xác!');
             }
@@ -2400,6 +3176,14 @@
             // Ẩn panel admin
             document.getElementById('adminPanel').classList.remove('show');
             document.getElementById('adminBadge').style.display = 'none';
+            
+            // Khôi phục nút đăng nhập
+            const adminNavItem = document.querySelector('.nav-item.admin-highlight');
+            adminNavItem.innerHTML = `
+                <i class="fas fa-user-shield"></i>
+                <span class="nav-text">Đăng Nhập Admin</span>
+                <span class="admin-badge" id="adminBadge" style="display: none;">Đã Đăng Nhập</span>
+            `;
             
             // Xóa trạng thái đăng nhập
             localStorage.removeItem('adminLoggedIn');
@@ -2420,6 +3204,14 @@
                 document.getElementById('adminName').textContent = currentAdminName;
                 document.getElementById('adminPanel').classList.add('show');
                 document.getElementById('adminBadge').style.display = 'inline-block';
+                
+                // Thay đổi nút đăng nhập
+                const adminNavItem = document.querySelector('.nav-item.admin-highlight');
+                adminNavItem.innerHTML = `
+                    <i class="fas fa-user-shield"></i>
+                    <span class="nav-text">Admin</span>
+                    <span class="admin-badge">${currentAdminName}</span>
+                `;
             }
         }
         
@@ -2448,9 +3240,11 @@
             nav.classList.toggle('show');
         }
         
-        // ==================== CHIA SẺ MXH ====================
+        // ==================== CHIA SẺ MXH VỚI LINK MỚI VÀ PREVIEW ====================
         function showShareModal() {
             document.getElementById('shareModal').classList.add('show');
+            // Cập nhật preview khi mở modal
+            updatePreview();
         }
         
         function hideShareModal() {
@@ -2458,20 +3252,23 @@
         }
         
         function shareToFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.getElementById('shareMessage').value);
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+            const url = encodeURIComponent('https://www.giaohotrungdong.io.vn/2026');
+            const title = encodeURIComponent(document.getElementById('shareTitle').value);
+            const description = encodeURIComponent(document.getElementById('shareDescription').value);
+            
+            // Facebook share với cả title và description
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title} - ${description}`, '_blank');
         }
         
         function shareToZalo() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.getElementById('shareMessage').value);
+            const url = encodeURIComponent('https://www.giaohotrungdong.io.vn/2026');
+            const text = encodeURIComponent(document.getElementById('shareDescription').value);
             window.open(`https://zalo.me/share?url=${url}&text=${text}`, '_blank');
         }
         
         function shareToTwitter() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(document.getElementById('shareMessage').value);
+            const url = encodeURIComponent('https://www.giaohotrungdong.io.vn/2026');
+            const text = encodeURIComponent(document.getElementById('shareTitle').value + ' - ' + document.getElementById('shareDescription').value);
             window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         }
         
@@ -2597,6 +3394,7 @@
                     adminName: currentAdminName
                 },
                 panelStates: panelStates,
+                users: users,
                 timestamp: new Date().toISOString()
             };
             
@@ -2608,46 +3406,6 @@
             linkElement.setAttribute('href', dataUri);
             linkElement.setAttribute('download', exportFileDefaultName);
             linkElement.click();
-        }
-        
-        function showUserManagement() {
-            if (!isAdmin) {
-                alert('Vui lòng đăng nhập admin trước!');
-                showAdminModal();
-                return;
-            }
-            document.getElementById('userManagementModal').classList.add('show');
-            loadUserList();
-        }
-        
-        function hideUserManagementModal() {
-            document.getElementById('userManagementModal').classList.remove('show');
-        }
-        
-        function loadUserList() {
-            const userListDiv = document.getElementById('userList');
-            // Giả lập danh sách người dùng
-            const users = [
-                { id: 1, name: 'Nguyễn Văn A', email: 'a@example.com', role: 'User' },
-                { id: 2, name: 'Trần Thị B', email: 'b@example.com', role: 'User' },
-                { id: 3, name: 'Lê Văn C', email: 'c@example.com', role: 'Moderator' }
-            ];
-            
-            let html = '<h4>Danh sách người dùng:</h4>';
-            users.forEach(user => {
-                html += `
-                    <div class="user-item" style="padding: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <strong>${user.name}</strong> (${user.role})<br>
-                        <small>${user.email}</small>
-                    </div>
-                `;
-            });
-            
-            userListDiv.innerHTML = html;
-        }
-        
-        function addNewUser() {
-            alert('Chức năng thêm người dùng mới đang được phát triển!');
         }
         
         // ==================== VÒNG LẶP CHÍNH ====================
@@ -2722,6 +3480,9 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             
+            // Khởi tạo quản lý người dùng
+            loadUsers();
+            
             // Khôi phục trạng thái click fireworks từ localStorage
             const savedClickState = localStorage.getItem('clickFireworksEnabled');
             if (savedClickState === 'true') {
@@ -2765,11 +3526,16 @@
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
+                arrangeCollapsedPanels();
             });
             
             // Phím tắt
             document.addEventListener('keydown', (e) => {
                 switch(e.key.toLowerCase()) {
+                    case 'h':
+                    case 'home':
+                        switchToHome();
+                        break;
                     case '1':
                         switchPage('countdown');
                         break;
