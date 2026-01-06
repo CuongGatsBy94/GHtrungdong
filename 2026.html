@@ -1,43 +1,55 @@
-<!-- 
-  @Author: DeepSeek Assistant
-  @Date: 2026-01-05
-  @Description: Nâng cấp hiệu ứng pháo hoa - Phiên bản nâng cao
--->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pháo Hoa Nâng Cao - Năm Mới 2026</title>
+    <title>Đếm Ngược Tết 2026 - Pháo Hoa Chúc Mừng</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
     <style>
         :root {
-            --gold-1: #FFD700;
-            --gold-2: #FFC400;
-            --gold-3: #FFAB00;
-            --red-1: #FF5252;
-            --red-2: #FF1744;
-            --blue-1: #2979FF;
-            --blue-2: #2962FF;
-            --green-1: #00E676;
-            --green-2: #00C853;
-            --purple-1: #D500F9;
-            --purple-2: #AA00FF;
-            --orange-1: #FF9100;
-            --orange-2: #FF6D00;
-            --pink-1: #FF4081;
-            --pink-2: #F50057;
+            /* Tet Colors */
+            --tet-red: #D32F2F;
+            --tet-gold: #FFD700;
+            --tet-yellow: #FFC107;
+            --tet-green: #388E3C;
+            --tet-pink: #E91E63;
+            --tet-orange: #FF9800;
+            --tet-blue: #2196F3;
+            --tet-purple: #9C27B0;
+            
+            /* Theme Colors */
+            --bg-primary: #0A0A2A;
+            --bg-secondary: #1A1A3A;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0C0;
+            
+            /* Font Sizes */
+            --font-xs: 0.75rem;
+            --font-sm: 0.875rem;
+            --font-base: 1rem;
+            --font-lg: 1.125rem;
+            --font-xl: 1.25rem;
+            --font-2xl: 1.5rem;
+            --font-3xl: 1.875rem;
+            --font-4xl: 2.25rem;
+            --font-5xl: 3rem;
+            --font-6xl: 4rem;
         }
         
+        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -45,328 +57,28 @@
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
-            color: white;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0A2A 0%, #1A1A3A 100%);
+            color: var(--text-primary);
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .container {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .control-panel {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            width: 300px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .control-panel h3 {
-            color: var(--gold-1);
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 10px;
-        }
-        
-        .control-group {
-            margin-bottom: 15px;
-        }
-        
-        .control-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #ddd;
-        }
-        
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .slider-container input[type="range"] {
-            flex: 1;
-            height: 6px;
-            -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            outline: none;
-        }
-        
-        .slider-container input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--gold-1);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        
-        .slider-value {
-            min-width: 40px;
-            text-align: right;
-            font-size: 14px;
-            color: var(--gold-1);
-        }
-        
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(45deg, var(--gold-2), var(--orange-1));
-            color: #000;
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .info-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            width: 300px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .info-panel h3 {
-            color: var(--gold-1);
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 10px;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .stat-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--gold-1);
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #aaa;
-        }
-        
-        .fireworks-list {
-            margin-top: 15px;
-        }
-        
-        .firework-type {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .firework-type:last-child {
-            border-bottom: none;
-        }
-        
-        .firework-name {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .firework-color {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-        }
-        
-        .title-section {
-            text-align: center;
-            margin-bottom: 40px;
-            max-width: 800px;
-        }
-        
-        .title-section h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--gold-1), var(--orange-1), var(--red-1));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            font-family: 'Playfair Display', serif;
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-            100% { text-shadow: 0 0 40px rgba(255, 87, 34, 0.5); }
-        }
-        
-        .title-section p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            overflow-x: hidden;
             line-height: 1.6;
+            cursor: default;
         }
         
-        .action-buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
         
-        .action-btn {
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            min-width: 200px;
+        /* Layout Container */
+        .container-fluid {
+            padding: 0 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
-        .firework-preview {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .preview-title {
-            color: var(--gold-1);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        
-        .preview-item {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            font-size: 24px;
-        }
-        
-        .preview-item:hover {
-            transform: scale(1.1);
-            border-color: var(--gold-1);
-        }
-        
-        .preview-item.active {
-            border-color: var(--gold-1);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-        
-        /* Fullscreen button */
-        .fullscreen-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            color: var(--gold-1);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .fullscreen-btn:hover {
-            background: rgba(255, 215, 0, 0.1);
-            transform: scale(1.1);
-        }
-        
-        /* Canvas styles */
+        /* Canvas */
         #fireworksCanvas {
             position: fixed;
             top: 0;
@@ -377,47 +89,976 @@
             pointer-events: none;
         }
         
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .control-panel, .info-panel {
-                position: relative;
-                top: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                margin-bottom: 20px;
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 0;
+            background: rgba(10, 10, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--tet-gold);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--tet-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .nav-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--tet-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .admin-badge {
+            background: linear-gradient(45deg, var(--tet-purple), var(--tet-pink));
+            color: white;
+            font-size: var(--font-xs);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--tet-gold);
+            font-size: var(--font-2xl);
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 2;
+            padding: 5rem 0 2rem;
+            min-height: 100vh;
+        }
+        
+        /* Page Container */
+        .page-container {
+            display: none;
+        }
+        
+        .page-container.active {
+            display: block;
+        }
+        
+        /* Countdown Page */
+        .countdown-page {
+            text-align: center;
+        }
+        
+        .countdown-title {
+            font-size: var(--font-4xl);
+            color: var(--tet-gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .countdown-title {
+                font-size: var(--font-3xl);
+            }
+        }
+        
+        .tet-year {
+            font-size: var(--font-6xl);
+            background: linear-gradient(45deg, var(--tet-red), var(--tet-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+        
+        @media (max-width: 768px) {
+            .tet-year {
+                font-size: var(--font-4xl);
+            }
+        }
+        
+        /* Countdown Timer */
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem auto;
+            max-width: 800px;
+        }
+        
+        .countdown-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-width: 100px;
+            border: 2px solid var(--tet-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--tet-red), var(--tet-gold), var(--tet-green));
+        }
+        
+        .countdown-number {
+            font-size: var(--font-5xl);
+            font-weight: 700;
+            color: var(--tet-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .countdown-label {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .countdown-timer {
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
             
-            .container {
-                flex-direction: column;
+            .countdown-item {
+                min-width: calc(50% - 0.5rem);
+                padding: 1rem;
             }
             
-            .title-section h1 {
-                font-size: 2.5rem;
+            .countdown-number {
+                font-size: var(--font-3xl);
+            }
+        }
+        
+        /* Celebration Message */
+        .celebration-section {
+            background: rgba(211, 47, 47, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            border: 2px solid var(--tet-red);
+            display: none;
+        }
+        
+        .celebration-section.show {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+        
+        .celebration-title {
+            font-size: var(--font-3xl);
+            color: var(--tet-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .greeting-message {
+            font-size: var(--font-xl);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .wishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .wish-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .wish-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .wish-icon {
+            font-size: 2rem;
+            color: var(--tet-gold);
+            margin-bottom: 1rem;
+        }
+        
+        /* Fireworks Page */
+        .fireworks-page {
+            padding: 1rem;
+        }
+        
+        /* Control Panel - Responsive */
+        .control-panel {
+            background: rgba(26, 26, 58, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--tet-gold);
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .control-panel.minimized {
+            height: 60px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .control-panel.minimized .panel-content {
+            display: none;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        
+        .control-panel.minimized .panel-header {
+            margin-bottom: 0;
+        }
+        
+        .panel-title {
+            color: var(--tet-gold);
+            font-size: var(--font-xl);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+        }
+        
+        .panel-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .panel-btn {
+            background: none;
+            border: none;
+            color: var(--tet-gold);
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .panel-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .panel-content {
+            transition: all 0.3s ease;
+        }
+        
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .slider-container input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+        
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--tet-gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            color: var(--tet-gold);
+            font-weight: 600;
+        }
+        
+        /* Button Grid */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: var(--font-sm);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--tet-red), var(--tet-orange));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Firework Types Grid */
+        .firework-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .firework-type-btn {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .firework-type-btn.active {
+            border: 2px solid var(--tet-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Stats Panel */
+        .stats-panel {
+            background: rgba(26, 26, 58, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px solid var(--tet-blue);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .stats-panel.minimized {
+            height: 60px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .stats-panel.minimized .panel-content {
+            display: none;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: var(--font-3xl);
+            font-weight: 700;
+            color: var(--tet-gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Share Section */
+        .share-section {
+            background: rgba(56, 142, 60, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px solid var(--tet-green);
+            text-align: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .share-section.minimized {
+            height: 60px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .share-section.minimized .panel-content {
+            display: none;
+        }
+        
+        .share-title {
+            color: var(--tet-gold);
+            margin-bottom: 1rem;
+            font-size: var(--font-xl);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .facebook-btn {
+            background: #1877F2;
+            color: white;
+        }
+        
+        .zalo-btn {
+            background: #0068FF;
+            color: white;
+        }
+        
+        .twitter-btn {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .copy-btn {
+            background: var(--tet-gold);
+            color: #000;
+        }
+        
+        /* Admin Panel (ẩn mặc định) */
+        .admin-panel {
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px solid var(--tet-purple);
+            display: none; /* Ẩn mặc định */
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .admin-panel.minimized {
+            height: 60px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .admin-panel.minimized .panel-content {
+            display: none;
+        }
+        
+        .admin-panel.show {
+            display: block; /* Chỉ hiển thị khi admin đăng nhập */
+        }
+        
+        .admin-title {
+            color: var(--tet-gold);
+            margin-bottom: 1rem;
+            font-size: var(--font-xl);
+        }
+        
+        .admin-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        /* NÚT ẨN BẮN PHÁO HOA KHI CLICK */
+        .click-fireworks-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border: 2px solid var(--tet-gold);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .click-fireworks-toggle:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+        
+        .toggle-label {
+            color: var(--tet-gold);
+            font-weight: 600;
+            font-size: var(--font-sm);
+            white-space: nowrap;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--tet-gold);
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        .toggle-checkbox:checked + .toggle-slider {
+            background-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .toggle-checkbox:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Click Indicator */
+        .click-indicator {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            pointer-events: none;
+            z-index: 999;
+            animation: clickRipple 0.6s ease-out;
+            border: 2px solid var(--tet-gold);
+            display: none;
+        }
+        
+        @keyframes clickRipple {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Click Mode Info */
+        .click-mode-info {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(211, 47, 47, 0.9);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            z-index: 999;
+            display: none;
+            animation: slideUp 0.3s ease;
+            border: 2px solid var(--tet-gold);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-backdrop.show {
+            display: block;
+        }
+        
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 1001;
+            border: 3px solid var(--tet-gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-title {
+            color: var(--tet-gold);
+            font-size: var(--font-2xl);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: var(--font-2xl);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--tet-gold);
+        }
+        
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--tet-gold);
+        }
+        
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            :root {
+                --font-6xl: 3rem;
+                --font-5xl: 2.5rem;
+                --font-4xl: 2rem;
+                --font-3xl: 1.75rem;
+            }
+            
+            .click-fireworks-toggle {
+                bottom: 70px;
             }
         }
         
         @media (max-width: 768px) {
-            .title-section h1 {
-                font-size: 2rem;
+            .main-nav {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 2px solid var(--tet-gold);
             }
             
-            .preview-grid {
+            .main-nav.show {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .action-btn {
-                min-width: 150px;
-                padding: 12px 20px;
-                font-size: 1rem;
+            .firework-types {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .click-fireworks-toggle {
+                bottom: 80px;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .toggle-label {
+                font-size: var(--font-xs);
             }
         }
         
-        /* Particle trail effect */
-        .trail {
-            position: absolute;
+        @media (max-width: 480px) {
+            :root {
+                --font-6xl: 2.5rem;
+                --font-5xl: 2rem;
+                --font-4xl: 1.75rem;
+                --font-3xl: 1.5rem;
+            }
+            
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+            
+            .countdown-item {
+                min-width: calc(50% - 0.5rem);
+                padding: 1rem;
+            }
+            
+            .countdown-number {
+                font-size: var(--font-2xl);
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+            
+            .click-fireworks-toggle {
+                bottom: 90px;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        /* Fullscreen Click Mode */
+        .fullscreen-click-mode .main-content,
+        .fullscreen-click-mode .main-footer,
+        .fullscreen-click-mode .click-fireworks-toggle {
             pointer-events: none;
-            z-index: 2;
+        }
+        
+        .fullscreen-click-mode canvas {
+            pointer-events: auto;
+        }
+        
+        /* Quick Minimize Buttons */
+        .quick-minimize {
+            position: fixed;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .minimize-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--tet-gold);
+            color: var(--tet-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .minimize-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .minimize-btn.active {
+            background: var(--tet-gold);
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .quick-minimize {
+                right: 10px;
+                bottom: 150px;
+            }
+            
+            .minimize-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -425,193 +1066,548 @@
     <!-- Fireworks Canvas -->
     <canvas id="fireworksCanvas"></canvas>
     
-    <!-- Control Panel -->
-    <div class="control-panel">
-        <h3><i class="fas fa-sliders-h"></i> Điều Khiển Pháo Hoa</h3>
-        
-        <div class="control-group">
-            <label>Số lượng pháo hoa:</label>
-            <div class="slider-container">
-                <input type="range" id="fireworkCount" min="1" max="20" value="5">
-                <span class="slider-value" id="countValue">5</span>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label>Kích thước pháo hoa:</label>
-            <div class="slider-container">
-                <input type="range" id="fireworkSize" min="50" max="300" value="150">
-                <span class="slider-value" id="sizeValue">150</span>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label>Tốc độ bung:</label>
-            <div class="slider-container">
-                <input type="range" id="explosionSpeed" min="1" max="10" value="5">
-                <span class="slider-value" id="speedValue">5</span>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label>Thời gian tồn tại:</label>
-            <div class="slider-container">
-                <input type="range" id="particleLife" min="50" max="300" value="150">
-                <span class="slider-value" id="lifeValue">150</span>
-            </div>
-        </div>
-        
-        <div class="btn-group">
-            <button class="btn btn-primary" onclick="launchCustomFireworks()">
-                <i class="fas fa-rocket"></i> Bắn Pháo Hoa
-            </button>
-            <button class="btn btn-secondary" onclick="clearAllFireworks()">
-                <i class="fas fa-trash"></i> Xóa Tất Cả
-            </button>
-        </div>
-        
-        <div class="btn-group" style="margin-top: 10px;">
-            <button class="btn btn-secondary" onclick="toggleAutoMode()" id="autoBtn">
-                <i class="fas fa-play"></i> Tự Động
-            </button>
-            <button class="btn btn-secondary" onclick="startFireworksShow()">
-                <i class="fas fa-fire"></i> Trình Diễn
-            </button>
+    <!-- Click Indicator (for visual feedback) -->
+    <div id="clickIndicator" class="click-indicator"></div>
+    
+    <!-- Click Mode Info -->
+    <div id="clickModeInfo" class="click-mode-info">
+        <i class="fas fa-mouse-pointer"></i> Click vào màn hình để bắn pháo hoa!
+    </div>
+    
+    <!-- Quick Minimize Buttons -->
+    <div class="quick-minimize" id="quickMinimize">
+        <button class="minimize-btn" title="Thu nhỏ tất cả" onclick="minimizeAllPanels()">
+            <i class="fas fa-window-minimize"></i>
+        </button>
+        <button class="minimize-btn" title="Mở rộng tất cả" onclick="expandAllPanels()">
+            <i class="fas fa-window-maximize"></i>
+        </button>
+    </div>
+    
+    <!-- Click Fireworks Toggle Button -->
+    <div class="click-fireworks-toggle">
+        <span class="toggle-label">
+            <i class="fas fa-mouse-pointer"></i> Click Bắn Pháo Hoa
+        </span>
+        <div class="toggle-switch">
+            <input type="checkbox" id="clickFireworksToggle" class="toggle-checkbox">
+            <label for="clickFireworksToggle" class="toggle-slider"></label>
         </div>
     </div>
     
-    <!-- Info Panel -->
-    <div class="info-panel">
-        <h3><i class="fas fa-chart-bar"></i> Thông Số Hệ Thống</h3>
-        
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-value" id="particleCount">0</div>
-                <div class="stat-label">SỐ HẠT</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="fireworkCountDisplay">0</div>
-                <div class="stat-label">PHÁO HOA</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="fpsCounter">60</div>
-                <div class="stat-label">FPS</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="autoCount">0</div>
-                <div class="stat-label">TỰ ĐỘNG</div>
-            </div>
-        </div>
-        
-        <div class="fireworks-list">
-            <h4 style="margin-top: 15px; margin-bottom: 10px; color: #ddd; font-size: 14px;">LOẠI PHÁO HOA:</h4>
-            <div class="firework-type">
-                <div class="firework-name">
-                    <div class="firework-color" style="background: var(--gold-1);"></div>
-                    <span>Pháo Hoa Vàng</span>
-                </div>
-                <span id="type1Count">0</span>
-            </div>
-            <div class="firework-type">
-                <div class="firework-name">
-                    <div class="firework-color" style="background: var(--red-1);"></div>
-                    <span>Pháo Hoa Đỏ</span>
-                </div>
-                <span id="type2Count">0</span>
-            </div>
-            <div class="firework-type">
-                <div class="firework-name">
-                    <div class="firework-color" style="background: var(--blue-1);"></div>
-                    <span>Pháo Hoa Xanh</span>
-                </div>
-                <span id="type3Count">0</span>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="switchPage('countdown')">
+                    <i class="fas fa-fire"></i>
+                    <span>Tết 2026</span>
+                </a>
+                
+                <nav class="main-nav" id="mainNav">
+                    <a href="#" class="nav-item active" onclick="switchPage('countdown')">
+                        <i class="fas fa-clock"></i>
+                        <span class="nav-text">Đếm Ngược</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="switchPage('fireworks')">
+                        <i class="fas fa-fireworks"></i>
+                        <span class="nav-text">Pháo Hoa</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showShareModal()">
+                        <i class="fas fa-share-alt"></i>
+                        <span class="nav-text">Chia Sẻ</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showAdminModal()">
+                        <i class="fas fa-user-shield"></i>
+                        <span class="nav-text">Admin</span>
+                        <span class="admin-badge" id="adminBadge" style="display: none;">Đã Đăng Nhập</span>
+                    </a>
+                </nav>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </header>
     
     <!-- Main Content -->
-    <div class="container">
-        <div class="title-section">
-            <h1>PHÁO HOA NĂM MỚI 2026</h1>
-            <p>Phiên bản nâng cao với hiệu ứng 3D, chuyển màu và âm thanh sống động</p>
-            <p>Chúc mừng năm mới Bính Ngọ - An khang thịnh vượng</p>
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Countdown Page -->
+            <div id="countdownPage" class="page-container active">
+                <div class="countdown-page">
+                    <h1 class="countdown-title animate__animated animate__fadeInDown">
+                        <i class="fas fa-dragon"></i> Đếm Ngược Tết Bính Ngọ 2026
+                    </h1>
+                    
+                    <div class="tet-year animate__animated animate__pulse animate__infinite">
+                        BÍNH NGỌ
+                    </div>
+                    
+                    <div class="countdown-timer">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="days">00</div>
+                            <div class="countdown-label">Ngày</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">00</div>
+                            <div class="countdown-label">Giờ</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">00</div>
+                            <div class="countdown-label">Phút</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">00</div>
+                            <div class="countdown-label">Giây</div>
+                        </div>
+                    </div>
+                    
+                    <div class="celebration-section" id="celebrationSection">
+                        <h2 class="celebration-title">
+                            <i class="fas fa-glass-cheers"></i> Chúc Mừng Năm Mới 2026!
+                        </h2>
+                        
+                        <div class="greeting-message" id="greetingMessage">
+                            <!-- Dynamic greeting will be inserted here -->
+                        </div>
+                        
+                        <div class="wishes-grid">
+                            <div class="wish-card">
+                                <div class="wish-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h4>Sức Khỏe</h4>
+                                <p>Dồi dào, tràn đầy năng lượng</p>
+                            </div>
+                            <div class="wish-card">
+                                <div class="wish-icon">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <h4>Tài Lộc</h4>
+                                <p>Thịnh vượng, tiền vào như nước</p>
+                            </div>
+                            <div class="wish-card">
+                                <div class="wish-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h4>Gia Đình</h4>
+                                <p>Ấm no, hạnh phúc sum vầy</p>
+                            </div>
+                            <div class="wish-card">
+                                <div class="wish-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h4>Công Danh</h4>
+                                <p>Thăng tiến, thành công rực rỡ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fireworks Page -->
+            <div id="fireworksPage" class="page-container">
+                <div class="fireworks-page">
+                    <!-- Control Panel -->
+                    <div class="control-panel" id="controlPanel">
+                        <div class="panel-header" onclick="togglePanel('controlPanel')">
+                            <h3 class="panel-title">
+                                <i class="fas fa-sliders-h"></i> Điều Khiển Pháo Hoa
+                            </h3>
+                            <div class="panel-controls">
+                                <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('controlPanel', event)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="control-grid">
+                                <div class="control-group">
+                                    <label class="control-label">Số lượng:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="fireworkCount" min="1" max="20" value="5">
+                                        <span class="slider-value" id="countValue">5</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Kích thước:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="fireworkSize" min="50" max="200" value="120">
+                                        <span class="slider-value" id="sizeValue">120</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Tốc độ:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="explosionSpeed" min="1" max="10" value="5">
+                                        <span class="slider-value" id="speedValue">5</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Thời gian:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="particleLife" min="50" max="200" value="120">
+                                        <span class="slider-value" id="lifeValue">120</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="button-grid">
+                                <button class="btn btn-primary" onclick="launchCustomFireworks()">
+                                    <i class="fas fa-rocket"></i> Bắn Pháo Hoa
+                                </button>
+                                <button class="btn btn-secondary" onclick="toggleAutoMode()" id="autoBtn">
+                                    <i class="fas fa-play"></i> Tự Động
+                                </button>
+                                <button class="btn btn-secondary" onclick="clearAllFireworks()">
+                                    <i class="fas fa-trash"></i> Xóa Hết
+                                </button>
+                                <button class="btn btn-primary" onclick="startFireworksShow()">
+                                    <i class="fas fa-theater-masks"></i> Trình Diễn
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Firework Types -->
+                    <div class="control-panel" id="fireworkTypesPanel">
+                        <div class="panel-header" onclick="togglePanel('fireworkTypesPanel')">
+                            <h3 class="panel-title">
+                                <i class="fas fa-fire"></i> Loại Pháo Hoa
+                            </h3>
+                            <div class="panel-controls">
+                                <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('fireworkTypesPanel', event)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="firework-types">
+                                <div class="firework-type-btn active" style="background: linear-gradient(45deg, var(--tet-gold), var(--tet-orange));" 
+                                     onclick="selectFireworkType('gold')">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="firework-type-btn" style="background: linear-gradient(45deg, var(--tet-red), var(--tet-pink));" 
+                                     onclick="selectFireworkType('red')">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="firework-type-btn" style="background: linear-gradient(45deg, var(--tet-blue), var(--tet-purple));" 
+                                     onclick="selectFireworkType('blue')">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="firework-type-btn" style="background: linear-gradient(45deg, var(--tet-green), var(--tet-blue));" 
+                                     onclick="selectFireworkType('green')">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="firework-type-btn" style="background: linear-gradient(45deg, #fff, #aaa);" 
+                                     onclick="selectFireworkType('white')">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="firework-type-btn" style="background: linear-gradient(45deg, var(--tet-red), var(--tet-gold), var(--tet-green));" 
+                                     onclick="selectFireworkType('rainbow')">
+                                    <i class="fas fa-rainbow"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="button-grid" style="margin-top: 1rem;">
+                                <button class="btn btn-primary" onclick="launchSpecialFirework('heart')">
+                                    <i class="fas fa-heart"></i> Trái Tim
+                                </button>
+                                <button class="btn btn-primary" onclick="launchSpecialFirework('star')">
+                                    <i class="fas fa-star"></i> Ngôi Sao
+                                </button>
+                                <button class="btn btn-primary" onclick="launchSpecialFirework('dragon')">
+                                    <i class="fas fa-dragon"></i> Rồng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Panel -->
+                    <div class="stats-panel" id="statsPanel">
+                        <div class="panel-header" onclick="togglePanel('statsPanel')">
+                            <h3 class="panel-title">
+                                <i class="fas fa-chart-bar"></i> Thống Kê
+                            </h3>
+                            <div class="panel-controls">
+                                <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('statsPanel', event)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="particleCount">0</div>
+                                    <div class="stat-label">HẠT PHÁO</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="fireworkCountDisplay">0</div>
+                                    <div class="stat-label">PHÁO HOA</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="fpsCounter">60</div>
+                                    <div class="stat-label">FPS</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="autoCount">0</div>
+                                    <div class="stat-label">TỰ ĐỘNG</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Share Section -->
+            <div class="share-section" id="sharePanel">
+                <div class="panel-header" onclick="togglePanel('sharePanel')">
+                    <h3 class="panel-title">
+                        <i class="fas fa-share-alt"></i> Chia Sẻ Niềm Vui
+                    </h3>
+                    <div class="panel-controls">
+                        <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('sharePanel', event)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <p>Chia sẻ trang web này với bạn bè và người thân để cùng đón năm mới!</p>
+                    
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn facebook-btn" onclick="shareToFacebook()">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
+                        <a href="#" class="share-btn zalo-btn" onclick="shareToZalo()">
+                            <i class="fab fa-facebook-messenger"></i> Zalo
+                        </a>
+                        <a href="#" class="share-btn twitter-btn" onclick="shareToTwitter()">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                        <button class="share-btn copy-btn" onclick="copyShareLink()">
+                            <i class="fas fa-copy"></i> Sao Chép Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin Panel (Chỉ hiển thị khi admin đăng nhập) -->
+            <div class="admin-panel" id="adminPanel">
+                <div class="panel-header" onclick="togglePanel('adminPanel')">
+                    <h3 class="panel-title">
+                        <i class="fas fa-user-shield"></i> Chức Năng Admin
+                    </h3>
+                    <div class="panel-controls">
+                        <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('adminPanel', event)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <p class="text-center mb-3">Chỉ dành cho quản trị viên - Xin chào <span id="adminName">Admin</span>!</p>
+                    
+                    <div class="admin-controls">
+                        <button class="btn btn-primary" onclick="showTestModal()">
+                            <i class="fas fa-vial"></i> Kiểm Tra Hệ Thống
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetCountdown()">
+                            <i class="fas fa-redo"></i> Reset Đếm Ngược
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportData()">
+                            <i class="fas fa-download"></i> Xuất Dữ Liệu
+                        </button>
+                        <button class="btn btn-primary" onclick="showMessageModal()">
+                            <i class="fas fa-edit"></i> Sửa Lời Chúc
+                        </button>
+                        <button class="btn btn-secondary" onclick="showUserManagement()">
+                            <i class="fas fa-users"></i> Quản Lý Người Dùng
+                        </button>
+                        <button class="btn btn-primary" onclick="adminLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="action-buttons">
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('heart')">
-                <i class="fas fa-heart"></i> Trái Tim
-            </button>
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('star')">
-                <i class="fas fa-star"></i> Ngôi Sao
-            </button>
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('smiley')">
-                <i class="fas fa-smile"></i> Mặt Cười
-            </button>
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('spiral')">
-                <i class="fas fa-circle-notch"></i> Xoáy Ốc
-            </button>
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('ring')">
-                <i class="fas fa-ring"></i> Vòng Tròn
-            </button>
-            <button class="action-btn btn-primary" onclick="launchSpecialFirework('flower')">
-                <i class="fas fa-seedling"></i> Hoa Nở
-            </button>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <p>&copy; 2025-2026 Giáo Họ Trung Đồng - Chúc Mừng Năm Mới Bính Ngọ</p>
+            <p>Địa chỉ: Xóm 4 - Xuân Phú - Xuân Trường - Nam Định</p>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div class="modal-backdrop" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-share-alt"></i> Chia Sẻ
+                </h3>
+                <button class="close-modal" onclick="hideShareModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook-btn" onclick="shareToFacebook()">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" class="share-btn zalo-btn" onclick="shareToZalo()">
+                        <i class="fab fa-facebook-messenger"></i> Zalo
+                    </a>
+                    <a href="#" class="share-btn twitter-btn" onclick="shareToTwitter()">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label">Link chia sẻ:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="shareLink" 
+                               value="https://giaohotrungdong.com/tet2026" readonly>
+                        <button class="btn btn-primary" onclick="copyShareLink()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tin nhắn chia sẻ:</label>
+                    <textarea class="form-control" id="shareMessage" rows="3">🎉 Chúc Mừng Năm Mới 2026 - Bính Ngọ! Cùng đếm ngược Tết và thưởng thức pháo hoa rực rỡ tại Giáo Họ Trung Đồng 🐉🎆</textarea>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- Firework Preview -->
-    <div class="firework-preview">
-        <div class="preview-title">Chọn Loại Pháo Hoa:</div>
-        <div class="preview-grid">
-            <div class="preview-item active" style="background: linear-gradient(45deg, var(--gold-1), var(--orange-1));" 
-                 onclick="selectFireworkType('gold')">
-                <i class="fas fa-fire"></i>
+    <div class="modal-backdrop" id="adminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-user-shield"></i> Đăng Nhập Admin
+                </h3>
+                <button class="close-modal" onclick="hideAdminModal()">&times;</button>
             </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--red-1), var(--pink-1));" 
-                 onclick="selectFireworkType('red')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--blue-1), var(--purple-1));" 
-                 onclick="selectFireworkType('blue')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--green-1), var(--blue-2));" 
-                 onclick="selectFireworkType('green')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--purple-1), var(--pink-2));" 
-                 onclick="selectFireworkType('purple')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--orange-1), var(--red-2));" 
-                 onclick="selectFireworkType('orange')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, #fff, #aaa);" 
-                 onclick="selectFireworkType('white')">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="preview-item" style="background: linear-gradient(45deg, var(--gold-1), var(--red-1), var(--blue-1));" 
-                 onclick="selectFireworkType('rainbow')">
-                <i class="fas fa-rainbow"></i>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Tên đăng nhập:</label>
+                    <input type="text" class="form-control" id="adminUsername" 
+                           placeholder="Nhập tên đăng nhập" value="cuonggatsby7">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu:</label>
+                    <input type="password" class="form-control" id="adminPassword" 
+                           placeholder="Nhập mật khẩu" value="Yeubega@1994#">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mã xác thực (nếu có):</label>
+                    <input type="text" class="form-control" id="adminCode" 
+                           placeholder="Nhập mã xác thực">
+                </div>
+                <div class="button-grid">
+                    <button class="btn btn-primary" onclick="adminLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Đăng Nhập
+                    </button>
+                    <button class="btn btn-secondary" onclick="hideAdminModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- Fullscreen Button -->
-    <div class="fullscreen-btn" onclick="toggleFullscreen()">
-        <i class="fas fa-expand"></i>
+    <div class="modal-backdrop" id="testModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-vial"></i> Kiểm Tra Hệ Thống
+                </h3>
+                <button class="close-modal" onclick="hideTestModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="test-results" id="testResults">
+                    <!-- Test results will be displayed here -->
+                </div>
+                <div class="button-grid">
+                    <button class="btn btn-primary" onclick="runSystemTests()">
+                        <i class="fas fa-play"></i> Chạy Kiểm Tra
+                    </button>
+                    <button class="btn btn-secondary" onclick="hideTestModal()">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-backdrop" id="messageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-edit"></i> Chỉnh Sửa Lời Chúc
+                </h3>
+                <button class="close-modal" onclick="hideMessageModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Tiêu đề lời chúc:</label>
+                    <input type="text" class="form-control" id="greetingTitle" 
+                           value="Chúc Mừng Năm Mới 2026!" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nội dung lời chúc:</label>
+                    <textarea class="form-control" id="greetingContent" rows="6">Giáo Họ Trung Đồng kính chúc quý vị và gia đình một năm mới Bính Ngọ tràn đầy hồng ân Chúa, sức khỏe dồi dào, an khang thịnh vượng, và bình an trong tâm hồn. Chúc mọi điều tốt đẹp nhất sẽ đến với tất cả mọi người!</textarea>
+                </div>
+                <div class="button-grid">
+                    <button class="btn btn-primary" onclick="saveGreeting()">
+                        <i class="fas fa-save"></i> Lưu Lời Chúc
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetGreeting()">
+                        <i class="fas fa-redo"></i> Mặc Định
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-backdrop" id="userManagementModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-users"></i> Quản Lý Người Dùng
+                </h3>
+                <button class="close-modal" onclick="hideUserManagementModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="user-list" id="userList">
+                    <!-- User list will be displayed here -->
+                </div>
+                <div class="button-grid">
+                    <button class="btn btn-primary" onclick="addNewUser()">
+                        <i class="fas fa-user-plus"></i> Thêm Người Dùng
+                    </button>
+                    <button class="btn btn-secondary" onclick="hideUserManagementModal()">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // ==================== CẤU HÌNH HỆ THỐNG ====================
+        // ==================== BIẾN TOÀN CỤC ====================
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
+        const clickFireworksToggle = document.getElementById('clickFireworksToggle');
+        const clickIndicator = document.getElementById('clickIndicator');
+        const clickModeInfo = document.getElementById('clickModeInfo');
         
         // Thiết lập canvas
         canvas.width = window.innerWidth;
@@ -628,82 +1624,397 @@
         let lastTime = 0;
         let fps = 60;
         let selectedType = 'gold';
-        let specialShapes = ['heart', 'star', 'smiley', 'spiral', 'ring', 'flower'];
+        let isAdmin = false;
+        let countdownEnded = false;
+        let clickFireworksEnabled = false;
+        let currentAdminName = '';
         
         // Thống kê
         let stats = {
             totalParticles: 0,
             activeFireworks: 0,
-            goldCount: 0,
-            redCount: 0,
-            blueCount: 0,
-            autoLaunched: 0
+            autoLaunched: 0,
+            clickLaunched: 0
         };
         
-        // ==================== LỚP PHÁO HOA ====================
+        // Target date: Tết Bính Ngọ 2026 (17/02/2026 00:00 GMT+7)
+        const tetDate = new Date('2026-02-17T00:00:00+07:00');
+        
+        // Admin credentials (pre-defined)
+        const ADMIN_CREDENTIALS = {
+            username: 'cuonggatsby7',
+            password: 'Yeubega@1994#',
+            displayName: 'Cường GatsBy'
+        };
+        
+        // Panel state management
+        const panelStates = {
+            controlPanel: false,
+            fireworkTypesPanel: false,
+            statsPanel: false,
+            sharePanel: false,
+            adminPanel: false
+        };
+        
+        // ==================== QUẢN LÝ PANEL ====================
+        function togglePanel(panelId, event) {
+            if (event) event.stopPropagation();
+            
+            const panel = document.getElementById(panelId);
+            panelStates[panelId] = !panelStates[panelId];
+            
+            if (panelStates[panelId]) {
+                panel.classList.add('minimized');
+                updatePanelButton(panelId, true);
+            } else {
+                panel.classList.remove('minimized');
+                updatePanelButton(panelId, false);
+            }
+            
+            // Save to localStorage
+            savePanelStates();
+        }
+        
+        function updatePanelButton(panelId, isMinimized) {
+            const panel = document.getElementById(panelId);
+            const btn = panel.querySelector('.panel-btn i');
+            if (btn) {
+                btn.className = isMinimized ? 'fas fa-plus' : 'fas fa-minus';
+            }
+        }
+        
+        function minimizeAllPanels() {
+            Object.keys(panelStates).forEach(panelId => {
+                panelStates[panelId] = true;
+                const panel = document.getElementById(panelId);
+                if (panel) {
+                    panel.classList.add('minimized');
+                    updatePanelButton(panelId, true);
+                }
+            });
+            savePanelStates();
+        }
+        
+        function expandAllPanels() {
+            Object.keys(panelStates).forEach(panelId => {
+                panelStates[panelId] = false;
+                const panel = document.getElementById(panelId);
+                if (panel) {
+                    panel.classList.remove('minimized');
+                    updatePanelButton(panelId, false);
+                }
+            });
+            savePanelStates();
+        }
+        
+        function savePanelStates() {
+            localStorage.setItem('panelStates', JSON.stringify(panelStates));
+        }
+        
+        function loadPanelStates() {
+            const savedStates = localStorage.getItem('panelStates');
+            if (savedStates) {
+                const states = JSON.parse(savedStates);
+                Object.keys(states).forEach(panelId => {
+                    panelStates[panelId] = states[panelId];
+                    const panel = document.getElementById(panelId);
+                    if (panel) {
+                        if (states[panelId]) {
+                            panel.classList.add('minimized');
+                            updatePanelButton(panelId, true);
+                        } else {
+                            panel.classList.remove('minimized');
+                            updatePanelButton(panelId, false);
+                        }
+                    }
+                });
+            }
+        }
+        
+        // ==================== HỆ THỐNG CLICK BẮN PHÁO HOA ====================
+        function toggleClickFireworks() {
+            clickFireworksEnabled = clickFireworksToggle.checked;
+            
+            if (clickFireworksEnabled) {
+                // Kích hoạt chế độ click
+                enableClickFireworks();
+                showClickModeInfo();
+                localStorage.setItem('clickFireworksEnabled', 'true');
+            } else {
+                // Tắt chế độ click
+                disableClickFireworks();
+                localStorage.setItem('clickFireworksEnabled', 'false');
+            }
+        }
+        
+        function enableClickFireworks() {
+            // Thêm class để xử lý pointer events
+            document.body.classList.add('fullscreen-click-mode');
+            
+            // Cho phép click trên canvas
+            canvas.style.pointerEvents = 'auto';
+            canvas.style.cursor = 'crosshair';
+            
+            // Thêm sự kiện click
+            canvas.addEventListener('click', handleCanvasClick);
+            canvas.addEventListener('touchstart', handleCanvasTouch);
+        }
+        
+        function disableClickFireworks() {
+            // Xóa class
+            document.body.classList.remove('fullscreen-click-mode');
+            
+            // Khôi phục canvas
+            canvas.style.pointerEvents = 'none';
+            canvas.style.cursor = 'default';
+            
+            // Xóa sự kiện
+            canvas.removeEventListener('click', handleCanvasClick);
+            canvas.removeEventListener('touchstart', handleCanvasTouch);
+        }
+        
+        function handleCanvasClick(event) {
+            if (!clickFireworksEnabled) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Tạo pháo hoa tại vị trí click
+            createFireworkAtPosition(x, y);
+            
+            // Hiệu ứng visual feedback
+            showClickIndicator(x, y);
+            
+            // Thống kê
+            stats.clickLaunched++;
+            
+            // Play sound
+            createClickSound();
+        }
+        
+        function handleCanvasTouch(event) {
+            if (!clickFireworksEnabled) return;
+            
+            event.preventDefault();
+            
+            const touch = event.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            
+            // Tạo pháo hoa tại vị trí touch
+            createFireworkAtPosition(x, y);
+            
+            // Hiệu ứng visual feedback
+            showClickIndicator(x, y);
+            
+            // Thống kê
+            stats.clickLaunched++;
+            
+            // Play sound
+            createClickSound();
+        }
+        
+        function createFireworkAtPosition(x, y) {
+            // Tạo ngẫu nhiên loại pháo hoa đặc biệt
+            const specialTypes = ['heart', 'star', 'dragon', 'normal'];
+            const randomType = specialTypes[Math.floor(Math.random() * specialTypes.length)];
+            
+            // Chọn màu ngẫu nhiên
+            const colors = ['gold', 'red', 'blue', 'green', 'rainbow'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Tạo pháo hoa
+            const firework = new Firework(x, y, randomType, randomColor);
+            fireworks.push(firework);
+        }
+        
+        function showClickIndicator(x, y) {
+            // Hiển thị hiệu ứng tại vị trí click
+            clickIndicator.style.left = (x - 20) + 'px';
+            clickIndicator.style.top = (y - 20) + 'px';
+            clickIndicator.style.display = 'block';
+            
+            // Ẩn sau animation
+            setTimeout(() => {
+                clickIndicator.style.display = 'none';
+            }, 600);
+        }
+        
+        function showClickModeInfo() {
+            // Hiển thị thông báo
+            clickModeInfo.style.display = 'block';
+            
+            // Ẩn sau 3 giây
+            setTimeout(() => {
+                clickModeInfo.style.display = 'none';
+            }, 3000);
+        }
+        
+        function createClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 300 + Math.random() * 200;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } catch (e) {
+                console.log("Audio không khả dụng");
+            }
+        }
+        
+        // ==================== HỆ THỐNG ĐẾM NGƯỢC ====================
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = tetDate - now;
+            
+            // Nếu đã đến Tết
+            if (timeLeft <= 0 && !countdownEnded) {
+                countdownEnded = true;
+                showCelebration();
+                startTetFireworks();
+                return;
+            }
+            
+            // Tính toán thời gian
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // Cập nhật hiển thị
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            // Hiệu ứng nhấp nháy cho 10 giây cuối
+            if (timeLeft < 10000) {
+                document.querySelectorAll('.countdown-item').forEach(item => {
+                    item.classList.add('pulse');
+                });
+            }
+        }
+        
+        function showCelebration() {
+            const section = document.getElementById('celebrationSection');
+            const message = document.getElementById('greetingMessage');
+            
+            // Load greeting from localStorage or use default
+            const savedGreeting = localStorage.getItem('tetGreeting');
+            if (savedGreeting) {
+                message.innerHTML = savedGreeting;
+            } else {
+                message.innerHTML = `
+                    <p>Giáo Họ Trung Đồng kính chúc quý vị và gia đình một năm mới Bính Ngọ tràn đầy hồng ân Chúa!</p>
+                    <p>Chúc mọi điều tốt đẹp nhất sẽ đến với tất cả mọi người!</p>
+                `;
+            }
+            
+            section.classList.add('show');
+            
+            // Tự động chuyển sang trang pháo hoa
+            setTimeout(() => {
+                switchPage('fireworks');
+            }, 5000);
+        }
+        
+        function startTetFireworks() {
+            // Bắn pháo hoa chào mừng Tết
+            clearAllFireworks();
+            
+            // Tự động bật chế độ click
+            clickFireworksToggle.checked = true;
+            toggleClickFireworks();
+            
+            // Tạo pháo hoa theo trình tự
+            setTimeout(() => createTetFirework('gold', 'normal'), 500);
+            setTimeout(() => createTetFirework('red', 'heart'), 1000);
+            setTimeout(() => createTetFirework('green', 'star'), 1500);
+            setTimeout(() => createTetFirework('blue', 'dragon'), 2000);
+            setTimeout(() => createTetFirework('rainbow', 'normal'), 2500);
+            
+            // Bật chế độ tự động
+            setTimeout(() => {
+                toggleAutoMode();
+            }, 3000);
+        }
+        
+        function createTetFirework(color, type) {
+            const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
+            const y = canvas.height * 0.3;
+            
+            const firework = new Firework(x, y, type, color);
+            fireworks.push(firework);
+        }
+        
+        // ==================== HỆ THỐNG PHÁO HOA ====================
         class Firework {
             constructor(x, y, type = 'normal', colorType = selectedType) {
                 this.x = x || Math.random() * canvas.width;
                 this.y = canvas.height;
                 this.targetX = x || this.x;
-                this.targetY = y || Math.random() * canvas.height * 0.5;
+                this.targetY = y || Math.random() * canvas.height * 0.3;
                 this.type = type;
                 this.colorType = colorType;
-                this.speed = 5 + Math.random() * 5;
+                this.speed = 4 + Math.random() * 4;
                 this.size = parseInt(document.getElementById('fireworkSize').value) / 100;
                 this.exploded = false;
                 this.trail = [];
-                this.maxTrail = 10;
+                this.maxTrail = 8;
                 this.color = this.getColor();
                 this.sparkles = [];
                 
-                // Thêm vào thống kê
                 stats.activeFireworks++;
-                this.updateTypeCount();
             }
             
             getColor() {
                 const colors = {
-                    'gold': [varColors.gold1, varColors.gold2, varColors.gold3],
-                    'red': [varColors.red1, varColors.red2],
-                    'blue': [varColors.blue1, varColors.blue2],
-                    'green': [varColors.green1, varColors.green2],
-                    'purple': [varColors.purple1, varColors.purple2],
-                    'orange': [varColors.orange1, varColors.orange2],
-                    'pink': [varColors.pink1, varColors.pink2],
-                    'white': ['#FFFFFF', '#CCCCCC'],
-                    'rainbow': [varColors.gold1, varColors.red1, varColors.blue1, varColors.green1, varColors.purple1]
+                    'gold': ['#FFD700', '#FFC400', '#FFAB00'],
+                    'red': ['#D32F2F', '#C62828', '#B71C1C'],
+                    'blue': ['#2196F3', '#1976D2', '#0D47A1'],
+                    'green': ['#388E3C', '#2E7D32', '#1B5E20'],
+                    'white': ['#FFFFFF', '#F5F5F5', '#E0E0E0'],
+                    'rainbow': ['#FFD700', '#D32F2F', '#2196F3', '#388E3C']
                 };
                 
                 const colorSet = colors[this.colorType] || colors.gold;
                 return colorSet[Math.floor(Math.random() * colorSet.length)];
             }
             
-            updateTypeCount() {
-                switch(this.colorType) {
-                    case 'gold': stats.goldCount++; break;
-                    case 'red': stats.redCount++; break;
-                    case 'blue': stats.blueCount++; break;
-                }
-            }
-            
             update() {
-                // Lưu vị trí vào trail
+                // Thêm vệt đuôi
                 this.trail.push({x: this.x, y: this.y});
                 if (this.trail.length > this.maxTrail) {
                     this.trail.shift();
                 }
                 
-                // Di chuyển lên trên
+                // Di chuyển
                 this.y -= this.speed;
-                
-                // Di chuyển ngang nếu có mục tiêu
                 const dx = this.targetX - this.x;
                 this.x += dx * 0.05;
                 
-                // Kiểm tra nổ
-                if (this.y <= this.targetY && !this.exploded) {
-                    this.explode();
+                // Tạo sparkles
+                if (Math.random() < 0.3) {
+                    this.sparkles.push({
+                        x: this.x,
+                        y: this.y,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        life: 15,
+                        size: Math.random() * 2 + 1
+                    });
                 }
                 
                 // Cập nhật sparkles
@@ -717,56 +2028,49 @@
                     }
                 });
                 
-                // Thêm sparkle mới
-                if (Math.random() < 0.3) {
-                    this.sparkles.push({
-                        x: this.x,
-                        y: this.y,
-                        vx: (Math.random() - 0.5) * 2,
-                        vy: (Math.random() - 0.5) * 2,
-                        life: 20,
-                        size: Math.random() * 2 + 1
-                    });
+                // Kiểm tra nổ
+                if (this.y <= this.targetY && !this.exploded) {
+                    this.explode();
+                    return false;
                 }
+                
+                return true;
             }
             
             explode() {
                 this.exploded = true;
-                const particleCount = parseInt(document.getElementById('fireworkCount').value) * 10;
-                const explosionSpeed = parseInt(document.getElementById('explosionSpeed').value) / 5;
-                const particleLife = parseInt(document.getElementById('particleLife').value);
+                const count = parseInt(document.getElementById('fireworkCount').value) * 8;
+                const speed = parseInt(document.getElementById('explosionSpeed').value) / 3;
+                const life = parseInt(document.getElementById('particleLife').value);
                 
-                // Tạo hiệu ứng nổ đặc biệt
                 switch(this.type) {
                     case 'heart':
-                        this.createHeartExplosion(particleCount, explosionSpeed, particleLife);
+                        this.createHeartExplosion(count, speed, life);
                         break;
                     case 'star':
-                        this.createStarExplosion(particleCount, explosionSpeed, particleLife);
+                        this.createStarExplosion(count, speed, life);
                         break;
-                    case 'smiley':
-                        this.createSmileyExplosion(particleCount, explosionSpeed, particleLife);
-                        break;
-                    case 'spiral':
-                        this.createSpiralExplosion(particleCount, explosionSpeed, particleLife);
-                        break;
-                    case 'ring':
-                        this.createRingExplosion(particleCount, explosionSpeed, particleLife);
-                        break;
-                    case 'flower':
-                        this.createFlowerExplosion(particleCount, explosionSpeed, particleLife);
+                    case 'dragon':
+                        this.createDragonExplosion(count, speed, life);
                         break;
                     default:
-                        this.createNormalExplosion(particleCount, explosionSpeed, particleLife);
+                        this.createNormalExplosion(count, speed, life);
                 }
                 
-                // Tạo âm thanh nổ
-                this.createExplosionSound();
+                // Tạo shockwave
+                trails.push({
+                    x: this.x,
+                    y: this.y,
+                    radius: 0,
+                    maxRadius: 80,
+                    color: this.color,
+                    life: 80
+                });
                 
-                // Tạo hiệu ứng shockwave
-                this.createShockwave();
+                // Tạo âm thanh
+                createExplosionSound();
                 
-                // Xóa pháo hoa khỏi mảng
+                // Xóa khỏi mảng
                 const index = fireworks.indexOf(this);
                 if (index > -1) {
                     fireworks.splice(index, 1);
@@ -778,15 +2082,13 @@
                 for (let i = 0; i < count; i++) {
                     const angle = Math.random() * Math.PI * 2;
                     const velocity = {
-                        x: Math.cos(angle) * speed * (Math.random() * 3 + 1),
-                        y: Math.sin(angle) * speed * (Math.random() * 3 + 1)
+                        x: Math.cos(angle) * speed * (Math.random() + 0.5),
+                        y: Math.sin(angle) * speed * (Math.random() + 0.5)
                     };
                     
                     particles.push(new Particle(
-                        this.x, this.y, 
-                        velocity, 
-                        this.color, 
-                        life * (Math.random() * 0.5 + 0.5),
+                        this.x, this.y, velocity, this.color,
+                        life * (0.5 + Math.random() * 0.5),
                         Math.random() * 3 + 2
                     ));
                 }
@@ -795,7 +2097,7 @@
             createHeartExplosion(count, speed, life) {
                 for (let i = 0; i < count; i++) {
                     const t = Math.random() * Math.PI * 2;
-                    const scale = 15 * (Math.random() * 0.5 + 0.5);
+                    const scale = 12;
                     const x = 16 * Math.pow(Math.sin(t), 3);
                     const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
                     
@@ -805,11 +2107,8 @@
                     };
                     
                     particles.push(new Particle(
-                        this.x, this.y, 
-                        velocity, 
-                        this.color, 
-                        life * 1.2,
-                        Math.random() * 4 + 3
+                        this.x, this.y, velocity, this.color,
+                        life * 1.2, Math.random() * 3 + 2
                     ));
                 }
             }
@@ -817,214 +2116,52 @@
             createStarExplosion(count, speed, life) {
                 const points = 5;
                 for (let i = 0; i < count; i++) {
-                    const angle = (i / count) * Math.PI * 2;
-                    const radius = 10 * (Math.random() * 0.5 + 0.5);
-                    
+                    const angle = (i % points) * (Math.PI * 2 / points) + Math.random() * 0.5;
                     const velocity = {
-                        x: Math.cos(angle) * speed * radius * 0.1,
-                        y: Math.sin(angle) * speed * radius * 0.1
+                        x: Math.cos(angle) * speed * (i / points),
+                        y: Math.sin(angle) * speed * (i / points)
                     };
                     
                     particles.push(new Particle(
-                        this.x, this.y, 
-                        velocity, 
-                        this.color, 
-                        life,
+                        this.x, this.y, velocity, this.color,
+                        life * (0.3 + (i % points) * 0.1),
+                        Math.random() * 2 + 2
+                    ));
+                }
+            }
+            
+            createDragonExplosion(count, speed, life) {
+                // Tạo hình rồng với các hạt
+                for (let i = 0; i < count; i++) {
+                    const t = (i / count) * Math.PI * 4;
+                    const x = Math.sin(t) * 20;
+                    const y = Math.cos(t * 0.5) * 15 - Math.abs(Math.sin(t * 2)) * 10;
+                    
+                    const velocity = {
+                        x: (x / 20) * speed * 2,
+                        y: (y / 20) * speed * 2
+                    };
+                    
+                    particles.push(new Particle(
+                        this.x, this.y, velocity, this.color,
+                        life * (0.3 + (i / count) * 0.7),
                         Math.random() * 3 + 2
                     ));
                 }
             }
             
-            createSmileyExplosion(count, speed, life) {
-                // Tạo mặt cười với các hạt ở vị trí đặc biệt
-                const smileyPoints = [];
-                
-                // Vòng tròn mặt
-                for (let i = 0; i < count * 0.7; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const radius = 20;
-                    
-                    const velocity = {
-                        x: Math.cos(angle) * speed * radius * 0.05,
-                        y: Math.sin(angle) * speed * radius * 0.05
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, 
-                        velocity, 
-                        this.color, 
-                        life,
-                        Math.random() * 2 + 1
-                    ));
-                }
-                
-                // Mắt
-                for (let i = 0; i < count * 0.1; i++) {
-                    const offsetX = -8 + Math.random() * 4;
-                    const offsetY = -8 + Math.random() * 4;
-                    
-                    particles.push(new Particle(
-                        this.x + offsetX, this.y + offsetY,
-                        {x: 0, y: 0},
-                        '#000000',
-                        life * 0.8,
-                        3
-                    ));
-                }
-                
-                for (let i = 0; i < count * 0.1; i++) {
-                    const offsetX = 8 + Math.random() * 4;
-                    const offsetY = -8 + Math.random() * 4;
-                    
-                    particles.push(new Particle(
-                        this.x + offsetX, this.y + offsetY,
-                        {x: 0, y: 0},
-                        '#000000',
-                        life * 0.8,
-                        3
-                    ));
-                }
-                
-                // Miệng cười
-                for (let i = 0; i < count * 0.1; i++) {
-                    const angle = Math.PI * 0.7 + Math.random() * Math.PI * 0.6;
-                    const radius = 15;
-                    
-                    const velocity = {
-                        x: Math.cos(angle) * speed * radius * 0.03,
-                        y: Math.sin(angle) * speed * radius * 0.03
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, 
-                        velocity, 
-                        '#000000',
-                        life * 0.8,
-                        2
-                    ));
-                }
-            }
-            
-            createSpiralExplosion(count, speed, life) {
-                const spirals = 3;
-                for (let s = 0; s < spirals; s++) {
-                    for (let i = 0; i < count / spirals; i++) {
-                        const angle = (i / (count / spirals)) * Math.PI * 4 + (s * Math.PI * 2 / spirals);
-                        const radius = 0.5 + (i / (count / spirals)) * 15;
-                        
-                        const velocity = {
-                            x: Math.cos(angle) * speed * radius * 0.1,
-                            y: Math.sin(angle) * speed * radius * 0.1
-                        };
-                        
-                        particles.push(new Particle(
-                            this.x, this.y, 
-                            velocity, 
-                            this.color, 
-                            life * (0.5 + (i / (count / spirals)) * 0.5),
-                            Math.random() * 2 + 1
-                        ));
-                    }
-                }
-            }
-            
-            createRingExplosion(count, speed, life) {
-                const rings = 3;
-                for (let r = 0; r < rings; r++) {
-                    const ringRadius = 10 * (r + 1);
-                    for (let i = 0; i < count / rings; i++) {
-                        const angle = (i / (count / rings)) * Math.PI * 2;
-                        
-                        const velocity = {
-                            x: Math.cos(angle) * speed * (r + 1) * 0.5,
-                            y: Math.sin(angle) * speed * (r + 1) * 0.5
-                        };
-                        
-                        particles.push(new Particle(
-                            this.x, this.y, 
-                            velocity, 
-                            this.color, 
-                            life * (0.3 + r * 0.3),
-                            Math.random() * 2 + 1
-                        ));
-                    }
-                }
-            }
-            
-            createFlowerExplosion(count, speed, life) {
-                const petals = 8;
-                for (let p = 0; p < petals; p++) {
-                    const petalAngle = (p / petals) * Math.PI * 2;
-                    for (let i = 0; i < count / petals; i++) {
-                        const t = (i / (count / petals)) * Math.PI;
-                        const radius = Math.sin(t * 2) * 20;
-                        
-                        const velocity = {
-                            x: Math.cos(petalAngle) * speed * radius * 0.05,
-                            y: Math.sin(petalAngle) * speed * radius * 0.05
-                        };
-                        
-                        particles.push(new Particle(
-                            this.x, this.y, 
-                            velocity, 
-                            this.color, 
-                            life * (0.3 + (i / (count / petals)) * 0.7),
-                            Math.random() * 2 + 1
-                        ));
-                    }
-                }
-            }
-            
-            createExplosionSound() {
-                // Tạo âm thanh nổ sử dụng Web Audio API
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = 100 + Math.random() * 200;
-                    oscillator.type = 'sine';
-                    
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                    
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.5);
-                } catch (e) {
-                    console.log("Audio không khả dụng");
-                }
-            }
-            
-            createShockwave() {
-                // Tạo hiệu ứng sóng xung kích
-                trails.push({
-                    x: this.x,
-                    y: this.y,
-                    radius: 0,
-                    maxRadius: 100,
-                    color: this.color,
-                    life: 100
-                });
-            }
-            
             draw() {
                 // Vẽ trail
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                
                 if (this.trail.length > 1) {
+                    ctx.strokeStyle = this.color + '80';
+                    ctx.lineWidth = 2;
+                    ctx.lineCap = 'round';
+                    
                     ctx.beginPath();
                     ctx.moveTo(this.trail[0].x, this.trail[0].y);
-                    
                     for (let i = 1; i < this.trail.length; i++) {
                         ctx.lineTo(this.trail[i].x, this.trail[i].y);
                     }
-                    
                     ctx.stroke();
                 }
                 
@@ -1036,24 +2173,22 @@
                     ctx.fill();
                 });
                 
-                // Vẽ thân pháo hoa
+                // Vẽ thân
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
                 ctx.fill();
                 
                 // Vẽ đuôi
-                const tailLength = 20;
                 ctx.strokeStyle = this.color;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y + 4);
-                ctx.lineTo(this.x, this.y + tailLength);
+                ctx.lineTo(this.x, this.y + 20);
                 ctx.stroke();
             }
         }
         
-        // ==================== LỚP HẠT PHÁO HOA ====================
         class Particle {
             constructor(x, y, velocity, color, life, size) {
                 this.x = x;
@@ -1063,26 +2198,22 @@
                 this.life = life;
                 this.maxLife = life;
                 this.size = size;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
                 this.gravity = 0.05;
-                this.friction = 0.97;
-                this.sparkle = Math.random() > 0.7;
-                this.sparkleTimer = 0;
+                this.friction = 0.98;
                 this.trail = [];
-                this.maxTrail = 5;
+                this.maxTrail = 3;
                 
                 stats.totalParticles++;
             }
             
             update() {
-                // Lưu vị trí vào trail
+                // Thêm trail
                 this.trail.push({x: this.x, y: this.y});
                 if (this.trail.length > this.maxTrail) {
                     this.trail.shift();
                 }
                 
-                // Áp dụng vận tốc và lực
+                // Áp dụng vật lý
                 this.velocity.x *= this.friction;
                 this.velocity.y *= this.friction;
                 this.velocity.y += this.gravity;
@@ -1090,16 +2221,7 @@
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
                 
-                // Xoay
-                this.rotation += this.rotationSpeed;
-                
-                // Giảm tuổi thọ
                 this.life--;
-                
-                // Cập nhật sparkle
-                if (this.sparkle) {
-                    this.sparkleTimer++;
-                }
                 
                 return this.life > 0;
             }
@@ -1110,93 +2232,60 @@
                     ctx.strokeStyle = this.color + '40';
                     ctx.lineWidth = this.size * 0.5;
                     ctx.lineCap = 'round';
-                    ctx.lineJoin = 'round';
                     
                     ctx.beginPath();
                     ctx.moveTo(this.trail[0].x, this.trail[0].y);
-                    
                     for (let i = 1; i < this.trail.length; i++) {
                         ctx.lineTo(this.trail[i].x, this.trail[i].y);
                     }
-                    
                     ctx.stroke();
                 }
                 
-                // Tính độ trong suốt dựa trên tuổi thọ
+                // Vẽ hạt
                 const opacity = this.life / this.maxLife;
-                
-                // Vẽ hạt với hiệu ứng sparkle
-                if (this.sparkle && this.sparkleTimer % 10 < 5) {
-                    // Hiệu ứng lấp lánh
-                    ctx.fillStyle = '#FFFFFF';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size * 1.5, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                
-                // Vẽ hạt chính
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-                
-                // Tạo gradient màu
-                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-                gradient.addColorStop(0, this.color + 'FF');
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size
+                );
+                gradient.addColorStop(0, this.color + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
                 gradient.addColorStop(1, this.color + '00');
                 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
-                
-                // Tạo hình dạng ngẫu nhiên
-                if (Math.random() > 0.5) {
-                    // Hình tròn
-                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                } else {
-                    // Hình sao
-                    this.drawStar(0, 0, this.size, this.size * 0.5, 5);
-                }
-                
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.restore();
-            }
-            
-            drawStar(x, y, radius1, radius2, points) {
-                ctx.beginPath();
-                for (let i = 0; i < points * 2; i++) {
-                    const angle = (i * Math.PI) / points;
-                    const radius = i % 2 === 0 ? radius1 : radius2;
-                    const px = x + Math.cos(angle) * radius;
-                    const py = y + Math.sin(angle) * radius;
-                    
-                    if (i === 0) {
-                        ctx.moveTo(px, py);
-                    } else {
-                        ctx.lineTo(px, py);
-                    }
-                }
-                ctx.closePath();
             }
         }
         
         // ==================== HÀM TIỆN ÍCH ====================
-        const varColors = {
-            gold1: '#FFD700', gold2: '#FFC400', gold3: '#FFAB00',
-            red1: '#FF5252', red2: '#FF1744',
-            blue1: '#2979FF', blue2: '#2962FF',
-            green1: '#00E676', green2: '#00C853',
-            purple1: '#D500F9', purple2: '#AA00FF',
-            orange1: '#FF9100', orange2: '#FF6D00',
-            pink1: '#FF4081', pink2: '#F50057'
-        };
+        function createExplosionSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 150 + Math.random() * 100;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                console.log("Audio không khả dụng");
+            }
+        }
         
         function selectFireworkType(type) {
             selectedType = type;
-            
-            // Cập nhật giao diện
-            document.querySelectorAll('.preview-item').forEach(item => {
-                item.classList.remove('active');
+            document.querySelectorAll('.firework-type-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
-            event.target.closest('.preview-item').classList.add('active');
+            event.target.classList.add('active');
         }
         
         function launchCustomFireworks() {
@@ -1206,7 +2295,7 @@
                 setTimeout(() => {
                     fireworks.push(new Firework(
                         Math.random() * canvas.width * 0.8 + canvas.width * 0.1,
-                        Math.random() * canvas.height * 0.3 + canvas.height * 0.1,
+                        Math.random() * canvas.height * 0.3,
                         'normal',
                         selectedType
                     ));
@@ -1215,69 +2304,35 @@
         }
         
         function launchSpecialFirework(type) {
-            if (!specialShapes.includes(type)) return;
-            
-            fireworks.push(new Firework(
-                canvas.width * 0.5,
-                canvas.height * 0.3,
-                type,
-                selectedType
-            ));
-        }
-        
-        function startFireworksShow() {
-            // Trình diễn pháo hoa tự động
-            clearInterval(autoTimer);
-            autoMode = true;
-            
-            const showInterval = setInterval(() => {
-                if (!autoMode) {
-                    clearInterval(showInterval);
-                    return;
-                }
-                
-                // Bắn nhiều loại pháo hoa khác nhau
-                const types = ['normal', 'heart', 'star', 'spiral', 'ring', 'flower'];
-                const type = types[Math.floor(Math.random() * types.length)];
-                const colorTypes = ['gold', 'red', 'blue', 'green', 'purple', 'orange', 'rainbow'];
-                const colorType = colorTypes[Math.floor(Math.random() * colorTypes.length)];
-                
-                fireworks.push(new Firework(
-                    Math.random() * canvas.width,
-                    Math.random() * canvas.height * 0.4,
-                    type,
-                    colorType
-                ));
-                
-                stats.autoLaunched++;
-                
-                // Dừng sau 30 lần bắn
-                if (stats.autoLaunched >= 30) {
-                    clearInterval(showInterval);
-                    autoMode = false;
-                    document.getElementById('autoBtn').innerHTML = '<i class="fas fa-play"></i> Tự Động';
-                }
-            }, 500);
+            const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
+            const y = canvas.height * 0.3;
+            fireworks.push(new Firework(x, y, type, selectedType));
         }
         
         function toggleAutoMode() {
             autoMode = !autoMode;
+            const btn = document.getElementById('autoBtn');
             
             if (autoMode) {
-                document.getElementById('autoBtn').innerHTML = '<i class="fas fa-pause"></i> Dừng';
+                btn.innerHTML = '<i class="fas fa-pause"></i> Dừng';
                 autoTimer = setInterval(() => {
-                    if (fireworks.length < 5) {
+                    if (fireworks.length < 3) {
+                        const types = ['normal', 'heart', 'star', 'dragon'];
+                        const type = types[Math.floor(Math.random() * types.length)];
+                        const colors = ['gold', 'red', 'blue', 'green', 'rainbow'];
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        
                         fireworks.push(new Firework(
                             Math.random() * canvas.width,
-                            Math.random() * canvas.height * 0.4,
-                            'normal',
-                            ['gold', 'red', 'blue', 'green'][Math.floor(Math.random() * 4)]
+                            Math.random() * canvas.height * 0.3,
+                            type,
+                            color
                         ));
                         stats.autoLaunched++;
                     }
-                }, 1000);
+                }, 800);
             } else {
-                document.getElementById('autoBtn').innerHTML = '<i class="fas fa-play"></i> Tự Động';
+                btn.innerHTML = '<i class="fas fa-play"></i> Tự Động';
                 clearInterval(autoTimer);
             }
         }
@@ -1288,21 +2343,311 @@
             trails = [];
             stats.totalParticles = 0;
             stats.activeFireworks = 0;
-            stats.goldCount = 0;
-            stats.redCount = 0;
-            stats.blueCount = 0;
+            stats.autoLaunched = 0;
+            stats.clickLaunched = 0;
         }
         
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Lỗi fullscreen: ${err.message}`);
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
+        function startFireworksShow() {
+            clearAllFireworks();
+            toggleAutoMode();
+            
+            // Trình diễn đặc biệt
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        launchSpecialFirework(['heart', 'star', 'dragon'][i % 3]);
+                    }, i * 300);
                 }
+            }, 1000);
+        }
+        
+        // ==================== QUẢN LÝ ADMIN ====================
+        function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            const code = document.getElementById('adminCode').value;
+            
+            // Kiểm tra thông tin đăng nhập
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isAdmin = true;
+                currentAdminName = ADMIN_CREDENTIALS.displayName;
+                
+                // Cập nhật giao diện admin
+                document.getElementById('adminName').textContent = currentAdminName;
+                document.getElementById('adminPanel').classList.add('show');
+                document.getElementById('adminBadge').style.display = 'inline-block';
+                
+                // Lưu trạng thái đăng nhập
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminName', currentAdminName);
+                
+                alert(`Đăng nhập thành công! Xin chào ${currentAdminName}`);
+                hideAdminModal();
+                
+                // Hiển thị panel admin
+                panelStates.adminPanel = false;
+                document.getElementById('adminPanel').classList.remove('minimized');
+                updatePanelButton('adminPanel', false);
+            } else {
+                alert('Thông tin đăng nhập không chính xác!');
             }
+        }
+        
+        function adminLogout() {
+            isAdmin = false;
+            currentAdminName = '';
+            
+            // Ẩn panel admin
+            document.getElementById('adminPanel').classList.remove('show');
+            document.getElementById('adminBadge').style.display = 'none';
+            
+            // Xóa trạng thái đăng nhập
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminName');
+            
+            alert('Đã đăng xuất thành công!');
+        }
+        
+        function checkAdminLogin() {
+            const loggedIn = localStorage.getItem('adminLoggedIn');
+            const adminName = localStorage.getItem('adminName');
+            
+            if (loggedIn === 'true' && adminName) {
+                isAdmin = true;
+                currentAdminName = adminName;
+                
+                // Cập nhật giao diện admin
+                document.getElementById('adminName').textContent = currentAdminName;
+                document.getElementById('adminPanel').classList.add('show');
+                document.getElementById('adminBadge').style.display = 'inline-block';
+            }
+        }
+        
+        // ==================== GIAO DIỆN & ĐIỀU KHIỂN ====================
+        function switchPage(page) {
+            // Ẩn tất cả các trang
+            document.querySelectorAll('.page-container').forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // Hiện trang được chọn
+            document.getElementById(page + 'Page').classList.add('active');
+            
+            // Cập nhật navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.nav-item[onclick*="${page}"]`).classList.add('active');
+            
+            // Đóng menu mobile nếu đang mở
+            document.getElementById('mainNav').classList.remove('show');
+        }
+        
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('show');
+        }
+        
+        // ==================== CHIA SẺ MXH ====================
+        function showShareModal() {
+            document.getElementById('shareModal').classList.add('show');
+        }
+        
+        function hideShareModal() {
+            document.getElementById('shareModal').classList.remove('show');
+        }
+        
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.getElementById('shareMessage').value);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+        }
+        
+        function shareToZalo() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.getElementById('shareMessage').value);
+            window.open(`https://zalo.me/share?url=${url}&text=${text}`, '_blank');
+        }
+        
+        function shareToTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.getElementById('shareMessage').value);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+        
+        function copyShareLink() {
+            const linkInput = document.getElementById('shareLink');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            alert('Đã sao chép link vào clipboard!');
+        }
+        
+        // ==================== CHỨC NĂNG ADMIN ====================
+        function showAdminModal() {
+            document.getElementById('adminModal').classList.add('show');
+        }
+        
+        function hideAdminModal() {
+            document.getElementById('adminModal').classList.remove('show');
+        }
+        
+        function showTestModal() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                showAdminModal();
+                return;
+            }
+            document.getElementById('testModal').classList.add('show');
+        }
+        
+        function hideTestModal() {
+            document.getElementById('testModal').classList.remove('show');
+        }
+        
+        function runSystemTests() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = `
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Canvas hoạt động bình thường
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Hệ thống pháo hoa: ${fireworks.length} active
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Số hạt: ${stats.totalParticles}
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> FPS: ${fps}
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Thời gian đến Tết: ${Math.floor((tetDate - new Date()) / (1000 * 60 * 60 * 24))} ngày
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Trạng thái admin: ${isAdmin ? 'Đã đăng nhập' : 'Chưa đăng nhập'}
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Click pháo hoa: ${stats.clickLaunched} lần
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Admin hiện tại: ${currentAdminName}
+                </div>
+            `;
+        }
+        
+        function showMessageModal() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                showAdminModal();
+                return;
+            }
+            document.getElementById('messageModal').classList.add('show');
+        }
+        
+        function hideMessageModal() {
+            document.getElementById('messageModal').classList.remove('show');
+        }
+        
+        function saveGreeting() {
+            const title = document.getElementById('greetingTitle').value;
+            const content = document.getElementById('greetingContent').value;
+            
+            const greetingHTML = `
+                <h3>${title}</h3>
+                <p>${content.replace(/\n/g, '</p><p>')}</p>
+            `;
+            
+            localStorage.setItem('tetGreeting', greetingHTML);
+            alert('Đã lưu lời chúc thành công!');
+            hideMessageModal();
+        }
+        
+        function resetGreeting() {
+            document.getElementById('greetingTitle').value = 'Chúc Mừng Năm Mới 2026!';
+            document.getElementById('greetingContent').value = 'Giáo Họ Trung Đồng kính chúc quý vị và gia đình một năm mới Bính Ngọ tràn đầy hồng ân Chúa, sức khỏe dồi dào, an khang thịnh vượng, và bình an trong tâm hồn. Chúc mọi điều tốt đẹp nhất sẽ đến với tất cả mọi người!';
+        }
+        
+        function resetCountdown() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                return;
+            }
+            
+            countdownEnded = false;
+            document.getElementById('celebrationSection').classList.remove('show');
+            clearAllFireworks();
+            alert('Đã reset hệ thống đếm ngược!');
+        }
+        
+        function exportData() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                return;
+            }
+            
+            const data = {
+                stats: stats,
+                settings: {
+                    selectedType: selectedType,
+                    autoMode: autoMode,
+                    isAdmin: isAdmin,
+                    countdownEnded: countdownEnded,
+                    clickFireworksEnabled: clickFireworksEnabled,
+                    adminName: currentAdminName
+                },
+                panelStates: panelStates,
+                timestamp: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'tet2026_data.json';
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+        
+        function showUserManagement() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                showAdminModal();
+                return;
+            }
+            document.getElementById('userManagementModal').classList.add('show');
+            loadUserList();
+        }
+        
+        function hideUserManagementModal() {
+            document.getElementById('userManagementModal').classList.remove('show');
+        }
+        
+        function loadUserList() {
+            const userListDiv = document.getElementById('userList');
+            // Giả lập danh sách người dùng
+            const users = [
+                { id: 1, name: 'Nguyễn Văn A', email: 'a@example.com', role: 'User' },
+                { id: 2, name: 'Trần Thị B', email: 'b@example.com', role: 'User' },
+                { id: 3, name: 'Lê Văn C', email: 'c@example.com', role: 'Moderator' }
+            ];
+            
+            let html = '<h4>Danh sách người dùng:</h4>';
+            users.forEach(user => {
+                html += `
+                    <div class="user-item" style="padding: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <strong>${user.name}</strong> (${user.role})<br>
+                        <small>${user.email}</small>
+                    </div>
+                `;
+            });
+            
+            userListDiv.innerHTML = html;
+        }
+        
+        function addNewUser() {
+            alert('Chức năng thêm người dùng mới đang được phát triển!');
         }
         
         // ==================== VÒNG LẶP CHÍNH ====================
@@ -1313,21 +2658,33 @@
                 fps = frameCount;
                 frameCount = 0;
                 lastTime = currentTime;
+                
+                // Cập nhật thống kê
+                document.getElementById('particleCount').textContent = stats.totalParticles;
+                document.getElementById('fireworkCountDisplay').textContent = stats.activeFireworks;
+                document.getElementById('fpsCounter').textContent = fps;
+                document.getElementById('autoCount').textContent = stats.autoLaunched;
+                
+                // Cập nhật giá trị slider
+                document.getElementById('countValue').textContent = document.getElementById('fireworkCount').value;
+                document.getElementById('sizeValue').textContent = document.getElementById('fireworkSize').value;
+                document.getElementById('speedValue').textContent = document.getElementById('explosionSpeed').value;
+                document.getElementById('lifeValue').textContent = document.getElementById('particleLife').value;
             }
             
-            // Xóa canvas với hiệu ứng mờ dần
-            ctx.fillStyle = 'rgba(0, 4, 40, 0.1)';
+            // Xóa canvas với hiệu ứng mờ
+            ctx.fillStyle = 'rgba(10, 10, 42, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Cập nhật và vẽ trails (shockwaves)
+            // Cập nhật và vẽ trails
             trails.forEach((trail, index) => {
-                trail.radius += 2;
+                trail.radius += 1.5;
                 trail.life -= 2;
                 
                 if (trail.life <= 0) {
                     trails.splice(index, 1);
                 } else {
-                    const opacity = trail.life / 100;
+                    const opacity = trail.life / 80;
                     ctx.strokeStyle = trail.color.replace(')', `, ${opacity})`).replace('rgb', 'rgba');
                     ctx.lineWidth = 2;
                     ctx.beginPath();
@@ -1337,9 +2694,12 @@
             });
             
             // Cập nhật và vẽ pháo hoa
-            fireworks.forEach(firework => {
-                firework.update();
-                firework.draw();
+            fireworks.forEach((firework, index) => {
+                if (!firework.update()) {
+                    fireworks.splice(index, 1);
+                } else {
+                    firework.draw();
+                }
             });
             
             // Cập nhật và vẽ hạt
@@ -1352,93 +2712,107 @@
                 }
             });
             
-            // Cập nhật thông số
-            updateStats();
-            
-            // Tiếp tục vòng lặp
+            // Tiếp tục animation
             animationId = requestAnimationFrame(animate);
         }
         
-        function updateStats() {
-            document.getElementById('particleCount').textContent = stats.totalParticles;
-            document.getElementById('fireworkCountDisplay').textContent = stats.activeFireworks;
-            document.getElementById('fpsCounter').textContent = fps;
-            document.getElementById('autoCount').textContent = stats.autoLaunched;
-            document.getElementById('type1Count').textContent = stats.goldCount;
-            document.getElementById('type2Count').textContent = stats.redCount;
-            document.getElementById('type3Count').textContent = stats.blueCount;
-            
-            // Cập nhật giá trị slider
-            document.getElementById('countValue').textContent = document.getElementById('fireworkCount').value;
-            document.getElementById('sizeValue').textContent = document.getElementById('fireworkSize').value;
-            document.getElementById('speedValue').textContent = document.getElementById('explosionSpeed').value;
-            document.getElementById('lifeValue').textContent = document.getElementById('particleLife').value;
-        }
-        
-        // ==================== SỰ KIỆN ====================
-        window.addEventListener('resize', () => {
+        // ==================== KHỞI TẠO ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Khởi tạo canvas
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        });
-        
-        canvas.addEventListener('click', (e) => {
-            fireworks.push(new Firework(
-                e.clientX,
-                e.clientY,
-                'normal',
-                selectedType
-            ));
-        });
-        
-        canvas.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            launchSpecialFirework(specialShapes[Math.floor(Math.random() * specialShapes.length)]);
-        });
-        
-        // Khởi động
-        document.addEventListener('DOMContentLoaded', () => {
-            // Bắt đầu vòng lặp animation
+            
+            // Khôi phục trạng thái click fireworks từ localStorage
+            const savedClickState = localStorage.getItem('clickFireworksEnabled');
+            if (savedClickState === 'true') {
+                clickFireworksToggle.checked = true;
+                toggleClickFireworks();
+            }
+            
+            // Khôi phục trạng thái panel
+            loadPanelStates();
+            
+            // Kiểm tra đăng nhập admin
+            checkAdminLogin();
+            
+            // Thêm event listener cho toggle switch
+            clickFireworksToggle.addEventListener('change', toggleClickFireworks);
+            
+            // Bắt đầu animation
             animate(0);
+            
+            // Bắt đầu đếm ngược
+            setInterval(updateCountdown, 1000);
+            updateCountdown(); // Chạy ngay lần đầu
             
             // Bắn pháo hoa chào mừng
             setTimeout(() => {
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        fireworks.push(new Firework(
-                            canvas.width * 0.3 + i * canvas.width * 0.2,
-                            canvas.height * 0.4,
-                            'normal',
-                            ['gold', 'red', 'blue'][i]
-                        ));
-                    }, i * 500);
-                }
-            }, 1000);
-        });
-        
-        // Thêm phím tắt
-        document.addEventListener('keydown', (e) => {
-            switch(e.key.toLowerCase()) {
-                case ' ':
-                    launchCustomFireworks();
-                    break;
-                case 'c':
-                    clearAllFireworks();
-                    break;
-                case 'a':
-                    toggleAutoMode();
-                    break;
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                    const index = parseInt(e.key) - 1;
-                    if (index < specialShapes.length) {
-                        launchSpecialFirework(specialShapes[index]);
+                if (!countdownEnded) {
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            fireworks.push(new Firework(
+                                canvas.width * 0.3 + i * canvas.width * 0.2,
+                                canvas.height * 0.4,
+                                'normal',
+                                ['gold', 'red', 'green'][i]
+                            ));
+                        }, i * 500);
                     }
-                    break;
-            }
+                }
+            }, 2000);
+            
+            // Xử lý resize
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            
+            // Phím tắt
+            document.addEventListener('keydown', (e) => {
+                switch(e.key.toLowerCase()) {
+                    case '1':
+                        switchPage('countdown');
+                        break;
+                    case '2':
+                        switchPage('fireworks');
+                        break;
+                    case 'c':
+                        // Toggle click mode with C key
+                        clickFireworksToggle.checked = !clickFireworksToggle.checked;
+                        toggleClickFireworks();
+                        break;
+                    case ' ':
+                        if (document.getElementById('fireworksPage').classList.contains('active')) {
+                            launchCustomFireworks();
+                        }
+                        break;
+                    case 'escape':
+                        // Tắt click mode khi nhấn ESC
+                        if (clickFireworksEnabled) {
+                            clickFireworksToggle.checked = false;
+                            toggleClickFireworks();
+                        }
+                        hideShareModal();
+                        hideAdminModal();
+                        hideTestModal();
+                        hideMessageModal();
+                        hideUserManagementModal();
+                        break;
+                }
+            });
+            
+            // Prevent default touch behavior
+            document.addEventListener('touchstart', function(e) {
+                if (e.target === canvas) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Prevent context menu on canvas
+            canvas.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
         });
     </script>
 </body>
