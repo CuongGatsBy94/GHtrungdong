@@ -9,4 +9,4 @@ User-agent: *
 Allow: /
 
 # Đường dẫn tới sitemap
-Sitemap: https://giaohotrungdong.icu/sitemap.xml
+Sitemap: https://giaohotrungdong.io.vn/sitemap.xml
