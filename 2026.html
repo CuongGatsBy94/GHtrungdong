@@ -1,9 +1,3 @@
-<!-- 
-  @Author: Your name
-  @Date:   2026-01-05 20:02:07
-  @Last Modified by:   Your name
-  @Last Modified time: 2026-01-06 19:51:08
--->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -107,6 +101,7 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            filter: brightness(1.1) contrast(1.1);
         }
         
         /* Header */
@@ -588,6 +583,11 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
+        .btn-warning {
+            background: linear-gradient(45deg, var(--tet-orange), var(--tet-yellow));
+            color: white;
+        }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -882,6 +882,26 @@
         
         .icon-click .icon-wrapper {
             background: linear-gradient(135deg, #3F51B5, #2196F3);
+            color: white;
+        }
+        
+        .icon-physics .icon-wrapper {
+            background: linear-gradient(135deg, #FF9800, #FF5722);
+            color: white;
+        }
+        
+        .icon-audio .icon-wrapper {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+        
+        .icon-show .icon-wrapper {
+            background: linear-gradient(135deg, #9C27B0, #673AB7);
+            color: white;
+        }
+        
+        .icon-wind .icon-wrapper {
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
             color: white;
         }
         
@@ -1252,6 +1272,47 @@
         }
         
         /* Quick Minimize Buttons - Removed as we have new collapse system */
+        
+        /* Hiệu ứng loading cho pháo hoa */
+        .firework-loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            flex-direction: column;
+        }
+        
+        .firework-loading.hidden {
+            display: none;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--tet-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Animation cho gió */
+        @keyframes windEffect {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .wind-active .particle {
+            animation: windEffect 2s infinite ease-in-out;
+        }
         
         /* Responsive Breakpoints */
         @media (max-width: 1024px) {
@@ -1652,6 +1713,50 @@
                                     </div>
                                     <div class="icon-label">Click Bắn</div>
                                 </div>
+                                
+                                <!-- Vật Lý -->
+                                <div class="icon-item icon-physics" onclick="togglePhysicsQuality()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-atom"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-cog"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Vật Lý</div>
+                                </div>
+                                
+                                <!-- Âm Thanh -->
+                                <div class="icon-item icon-audio" onclick="toggleAudio()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-volume-up"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-music"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Âm Thanh</div>
+                                </div>
+                                
+                                <!-- Trình Diễn -->
+                                <div class="icon-item icon-show" onclick="launchFireworkShow()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-theater-masks"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Trình Diễn</div>
+                                </div>
+                                
+                                <!-- Gió -->
+                                <div class="icon-item icon-wind" onclick="toggleWindEffect()">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-wind"></i>
+                                        <div class="icon-arrow">
+                                            <i class="fas fa-cloud"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-label">Gió</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1715,6 +1820,68 @@
                                 </button>
                                 <button class="btn btn-primary" onclick="startFireworksShow()">
                                     <i class="fas fa-theater-masks"></i> Trình Diễn
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Controls Panel -->
+                    <div class="collapsible-panel" id="enhancedControlsPanel">
+                        <div class="panel-header" onclick="togglePanel('enhancedControlsPanel')">
+                            <h3 class="panel-title">
+                                <i class="fas fa-magic"></i> Điều Khiển Nâng Cao
+                            </h3>
+                            <div class="panel-controls">
+                                <button class="panel-btn" title="Thu nhỏ" onclick="togglePanel('enhancedControlsPanel', event)">
+                                    <i class="fas fa-window-minimize"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div class="control-grid">
+                                <div class="control-group">
+                                    <label class="control-label">Chất lượng vật lý:</label>
+                                    <select class="form-control" id="physicsQuality" onchange="changePhysicsQuality(this.value)">
+                                        <option value="low">Thấp</option>
+                                        <option value="medium" selected>Trung bình</option>
+                                        <option value="high">Cao</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Hiệu ứng bloom:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="bloomEffect" min="0" max="1" value="1" step="1">
+                                        <span class="slider-value" id="bloomValue">Bật</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Motion blur:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="motionBlur" min="0" max="1" value="1" step="1">
+                                        <span class="slider-value" id="blurValue">Bật</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">Lực gió:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="windControl" min="-3" max="3" value="0" step="0.1">
+                                        <span class="slider-value" id="windValue">0.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="button-grid" style="margin-top: 1rem;">
+                                <button class="btn btn-primary" onclick="toggleAudio()">
+                                    <i class="fas fa-volume-up"></i> Bật/Tắt Âm Thanh
+                                </button>
+                                <button class="btn btn-secondary" onclick="toggleSmokeEffect()">
+                                    <i class="fas fa-smog"></i> Hiệu ứng Khói
+                                </button>
+                                <button class="btn btn-primary" onclick="launchFireworkShow()">
+                                    <i class="fas fa-play-circle"></i> Trình Diễn
                                 </button>
                             </div>
                         </div>
@@ -1860,6 +2027,9 @@
                     <div class="admin-controls">
                         <button class="btn btn-primary" onclick="showTestModal()">
                             <i class="fas fa-vial"></i> Kiểm Tra Hệ Thống
+                        </button>
+                        <button class="btn btn-warning" onclick="testCountdownEnd()">
+                            <i class="fas fa-fast-forward"></i> Test Kết Thúc Đếm Ngược
                         </button>
                         <button class="btn btn-secondary" onclick="resetCountdown()">
                             <i class="fas fa-redo"></i> Reset Đếm Ngược
@@ -2103,7 +2273,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // ==================== BIẾN TOÀN CỤC ====================
+        // ==================== BIẾN TOÀN CỤC NÂNG CẤP ====================
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
         const clickFireworksToggle = document.getElementById('clickFireworksToggle');
@@ -2114,9 +2284,10 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        // Biến hệ thống
+        // Biến hệ thống nâng cấp
         let fireworks = [];
         let particles = [];
+        let smokeParticles = [];
         let trails = [];
         let animationId = null;
         let autoMode = false;
@@ -2130,6 +2301,41 @@
         let clickFireworksEnabled = false;
         let currentAdminName = '';
         
+        // Biến nâng cao cho pháo hoa thực tế
+        let audioEnabled = true;
+        let gravity = 0.08;
+        let wind = 0;
+        let lastWindChange = 0;
+        let bloomEffect = true;
+        let motionBlur = true;
+        let physicsQuality = 'high';
+        let smokeEnabled = true;
+        
+        // Khởi tạo hệ thống âm thanh
+        let audioContext;
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log("Audio context không khả dụng");
+            audioEnabled = false;
+        }
+        
+        // Các loại pháo hoa mới
+        const FIREWORK_TYPES = {
+            PEONY: {name: 'peony', particles: 120, colors: ['gold', 'red', 'blue'], shape: 'circle', layers: 1},
+            CHRYSANTHEMUM: {name: 'chrysanthemum', particles: 180, colors: ['rainbow'], shape: 'circle', layers: 1},
+            WILLOW: {name: 'willow', particles: 80, colors: ['gold', 'silver'], shape: 'willow', layers: 1},
+            CROSSETTE: {name: 'crossette', particles: 60, colors: ['multi'], shape: 'cross', layers: 2},
+            RING: {name: 'ring', particles: 100, colors: ['blue', 'green'], shape: 'ring', layers: 1},
+            HEART: {name: 'heart', particles: 80, colors: ['pink', 'red'], shape: 'heart', layers: 1},
+            STAR: {name: 'star', particles: 50, colors: ['gold', 'yellow'], shape: 'star', layers: 1},
+            DRAGON_EGG: {name: 'dragon', particles: 90, colors: ['red', 'gold'], shape: 'egg', layers: 3},
+            SPIDER: {name: 'spider', particles: 110, colors: ['white'], shape: 'spider', layers: 1},
+            COMET: {name: 'comet', particles: 30, colors: ['silver', 'blue'], shape: 'comet', layers: 1},
+            SPIRAL: {name: 'spiral', particles: 150, colors: ['rainbow'], shape: 'spiral', layers: 2},
+            WATERFALL: {name: 'waterfall', particles: 200, colors: ['blue', 'purple'], shape: 'waterfall', layers: 1}
+        };
+        
         // Thống kê
         let stats = {
             totalParticles: 0,
@@ -2139,7 +2345,7 @@
         };
         
         // Target date: Tết Bính Ngọ 2026 (17/02/2026 00:00 GMT+7)
-        const tetDate = new Date('2026-02-17T00:00:00+07:00');
+        let tetDate = new Date('2026-02-17T00:00:00+07:00');
         
         // Admin credentials (pre-defined)
         const ADMIN_CREDENTIALS = {
@@ -2152,6 +2358,7 @@
         const panelStates = {
             iconPanel: false,
             controlPanel: false,
+            enhancedControlsPanel: false,
             fireworkTypesPanel: false,
             statsPanel: false,
             sharePanel: false,
@@ -2160,6 +2367,816 @@
         
         // User management
         let users = [];
+        
+        // ==================== LỚP KHÓI MỚI ====================
+        class SmokeParticle {
+            constructor(x, y, color = 'rgba(100, 100, 100, 0.3)', size = 15, life = 100) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = -Math.random() * 0.3;
+                this.color = color;
+                this.size = size;
+                this.life = life;
+                this.maxLife = life;
+                this.growth = 0.1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.size += this.growth;
+                this.life--;
+                
+                // Thay đổi màu theo thời gian
+                const alpha = (this.life / this.maxLife) * 0.3;
+                this.color = this.color.replace(/[\d\.]+\)$/g, `${alpha})`);
+                
+                return this.life > 0;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life / this.maxLife * 0.3;
+                
+                // Tạo gradient cho khói
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size
+                );
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(1, 'rgba(50, 50, 50, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+        
+        // ==================== LỚP PHÁO HOA NÂNG CẤP ====================
+        class EnhancedFirework {
+            constructor(x, y, type = 'PEONY', colorType = selectedType) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = canvas.height;
+                this.targetX = x || this.x;
+                this.targetY = y || Math.random() * canvas.height * 0.3;
+                this.type = FIREWORK_TYPES[type] || FIREWORK_TYPES.PEONY;
+                this.colorType = colorType;
+                
+                // Vật lý thực tế
+                this.speed = 6 + Math.random() * 3;
+                this.velocity = {
+                    x: (this.targetX - this.x) * 0.01,
+                    y: -this.speed
+                };
+                this.acceleration = { x: 0, y: 0 };
+                this.trail = [];
+                this.maxTrail = 10;
+                this.sparkles = [];
+                this.exploded = false;
+                this.explosionTime = 0;
+                this.layers = [];
+                this.currentLayer = 0;
+                this.hasSecondary = Math.random() > 0.7;
+                
+                // Hiệu ứng hình ảnh
+                this.glowSize = 8;
+                this.glowColor = this.getGlowColor();
+                this.mainColor = this.getMainColor();
+                
+                // Khói
+                this.smokeInterval = 3;
+                this.smokeCounter = 0;
+                
+                stats.activeFireworks++;
+            }
+            
+            getMainColor() {
+                const colorSets = {
+                    'gold': ['#FFD700', '#FFC400', '#FFAB00'],
+                    'red': ['#FF5252', '#FF1744', '#D50000'],
+                    'blue': ['#448AFF', '#2979FF', '#2962FF'],
+                    'green': ['#69F0AE', '#00E676', '#00C853'],
+                    'purple': ['#E040FB', '#D500F9', '#AA00FF'],
+                    'rainbow': ['#FF5252', '#FF9800', '#FFEB3B', '#4CAF50', '#2196F3', '#9C27B0'],
+                    'multi': ['#FF5252', '#FF9800', '#FFEB3B', '#4CAF50', '#2196F3'],
+                    'silver': ['#E0E0E0', '#BDBDBD', '#9E9E9E'],
+                    'pink': ['#FF4081', '#F50057', '#C51162'],
+                    'white': ['#FFFFFF', '#F5F5F5', '#E0E0E0']
+                };
+                
+                const set = colorSets[this.colorType] || colorSets.gold;
+                return set[Math.floor(Math.random() * set.length)];
+            }
+            
+            getGlowColor() {
+                const mainColor = this.mainColor;
+                // Làm sáng màu cho hiệu ứng glow
+                return mainColor.replace('rgb', 'rgba').replace(')', ', 0.5)');
+            }
+            
+            update() {
+                // Thêm khói định kỳ
+                if (smokeEnabled) {
+                    this.smokeCounter++;
+                    if (this.smokeCounter >= this.smokeInterval && !this.exploded) {
+                        smokeParticles.push(new SmokeParticle(
+                            this.x, this.y,
+                            'rgba(150, 150, 150, 0.4)',
+                            10 + Math.random() * 5,
+                            80 + Math.random() * 40
+                        ));
+                        this.smokeCounter = 0;
+                    }
+                }
+                
+                // Thêm vào trail
+                this.trail.push({x: this.x, y: this.y, size: 3});
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+                
+                // Cập nhật trail
+                this.trail.forEach(point => {
+                    point.size *= 0.95;
+                });
+                
+                // Vật lý
+                if (!this.exploded) {
+                    // Trọng lực
+                    this.acceleration.y = gravity;
+                    
+                    // Gió
+                    this.acceleration.x = wind * 0.01;
+                    
+                    // Cập nhật vận tốc
+                    this.velocity.x += this.acceleration.x;
+                    this.velocity.y += this.acceleration.y;
+                    
+                    // Cập nhật vị trí
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                    
+                    // Tạo sparkles
+                    if (Math.random() < 0.4) {
+                        this.sparkles.push({
+                            x: this.x,
+                            y: this.y,
+                            vx: (Math.random() - 0.5) * 1.5,
+                            vy: (Math.random() - 0.5) * 1.5,
+                            life: 20,
+                            size: Math.random() * 2 + 1,
+                            color: this.mainColor
+                        });
+                    }
+                    
+                    // Kiểm tra nổ
+                    const distanceToTarget = Math.sqrt(
+                        Math.pow(this.targetX - this.x, 2) + 
+                        Math.pow(this.targetY - this.y, 2)
+                    );
+                    
+                    if (this.y <= this.targetY || distanceToTarget < 5) {
+                        this.explode();
+                        return false;
+                    }
+                } else {
+                    // Xử lý các lớp nổ
+                    if (this.layers.length > 0) {
+                        this.layers.forEach((layer, layerIndex) => {
+                            layer.particles = layer.particles.filter(p => p.update());
+                            
+                            // Kiểm tra nổ lớp tiếp theo
+                            if (layer.hasSecondary && layer.secondaryTimer > 0) {
+                                layer.secondaryTimer--;
+                                if (layer.secondaryTimer <= 0) {
+                                    this.createSecondaryExplosion(layer);
+                                }
+                            }
+                        });
+                        
+                        // Loại bỏ các layer đã hoàn thành
+                        this.layers = this.layers.filter(layer => layer.particles.length > 0);
+                    }
+                    
+                    return this.layers.length > 0;
+                }
+                
+                // Cập nhật sparkles
+                this.sparkles.forEach((sparkle, index) => {
+                    sparkle.x += sparkle.vx;
+                    sparkle.y += sparkle.vy;
+                    sparkle.life--;
+                    
+                    if (sparkle.life <= 0) {
+                        this.sparkles.splice(index, 1);
+                    }
+                });
+                
+                return true;
+            }
+            
+            explode() {
+                this.exploded = true;
+                this.explosionTime = Date.now();
+                
+                // Tạo âm thanh nổ
+                this.playExplosionSound();
+                
+                // Tạo khói lớn khi nổ
+                if (smokeEnabled) {
+                    for (let i = 0; i < 8; i++) {
+                        smokeParticles.push(new SmokeParticle(
+                            this.x, this.y,
+                            'rgba(200, 200, 200, 0.5)',
+                            20 + Math.random() * 15,
+                            120 + Math.random() * 60
+                        ));
+                    }
+                }
+                
+                // Tạo lớp nổ chính
+                const mainLayer = this.createExplosionLayer(this.type);
+                this.layers.push(mainLayer);
+                
+                // Xóa khỏi mảng fireworks
+                const index = fireworks.indexOf(this);
+                if (index > -1) {
+                    fireworks.splice(index, 1);
+                    stats.activeFireworks--;
+                }
+            }
+            
+            createExplosionLayer(fireworkType) {
+                const count = fireworkType.particles;
+                const particles = [];
+                const colors = this.getExplosionColors();
+                const life = 80 + Math.random() * 40;
+                
+                switch(fireworkType.shape) {
+                    case 'circle':
+                        this.createCircleExplosion(particles, count, colors, life);
+                        break;
+                    case 'willow':
+                        this.createWillowExplosion(particles, count, colors, life);
+                        break;
+                    case 'cross':
+                        this.createCrossetteExplosion(particles, count, colors, life);
+                        break;
+                    case 'ring':
+                        this.createRingExplosion(particles, count, colors, life);
+                        break;
+                    case 'heart':
+                        this.createHeartExplosion(particles, count, colors, life);
+                        break;
+                    case 'star':
+                        this.createStarExplosion(particles, count, colors, life);
+                        break;
+                    case 'egg':
+                        this.createDragonEggExplosion(particles, count, colors, life);
+                        break;
+                    case 'spider':
+                        this.createSpiderExplosion(particles, count, colors, life);
+                        break;
+                    case 'comet':
+                        this.createCometExplosion(particles, count, colors, life);
+                        break;
+                    case 'spiral':
+                        this.createSpiralExplosion(particles, count, colors, life);
+                        break;
+                    case 'waterfall':
+                        this.createWaterfallExplosion(particles, count, colors, life);
+                        break;
+                    default:
+                        this.createCircleExplosion(particles, count, colors, life);
+                }
+                
+                return {
+                    particles: particles,
+                    hasSecondary: this.hasSecondary && fireworkType.layers > 1,
+                    secondaryTimer: 30 + Math.random() * 30
+                };
+            }
+            
+            createSecondaryExplosion(layer) {
+                layer.hasSecondary = false;
+                
+                // Tạo nổ thứ cấp từ các hạt hiện có
+                layer.particles.forEach(particle => {
+                    if (Math.random() > 0.7) {
+                        const secondaryCount = 3 + Math.floor(Math.random() * 4);
+                        const colors = this.getExplosionColors();
+                        
+                        for (let i = 0; i < secondaryCount; i++) {
+                            const angle = Math.random() * Math.PI * 2;
+                            const speed = 1 + Math.random() * 2;
+                            const velocity = {
+                                x: Math.cos(angle) * speed,
+                                y: Math.sin(angle) * speed
+                            };
+                            
+                            const secondaryParticle = new EnhancedParticle(
+                                particle.x, particle.y,
+                                velocity,
+                                colors[Math.floor(Math.random() * colors.length)],
+                                40 + Math.random() * 20,
+                                particle.size * 0.5
+                            );
+                            
+                            layer.particles.push(secondaryParticle);
+                        }
+                    }
+                });
+            }
+            
+            getExplosionColors() {
+                const colorMap = {
+                    'gold': ['#FFD700', '#FFC400', '#FFAB00', '#FF8F00'],
+                    'red': ['#FF5252', '#FF1744', '#D50000', '#B71C1C'],
+                    'blue': ['#448AFF', '#2979FF', '#2962FF', '#304FFE'],
+                    'green': ['#69F0AE', '#00E676', '#00C853', '#00B248'],
+                    'rainbow': ['#FF5252', '#FF9800', '#FFEB3B', '#4CAF50', '#2196F3', '#9C27B0'],
+                    'multi': ['#FF5252', '#FF9800', '#FFEB3B', '#4CAF50', '#2196F3'],
+                    'silver': ['#FFFFFF', '#E0E0E0', '#BDBDBD', '#9E9E9E'],
+                    'pink': ['#FF80AB', '#FF4081', '#F50057', '#C51162'],
+                    'white': ['#FFFFFF', '#F5F5F5', '#E0E0E0', '#BDBDBD']
+                };
+                
+                return colorMap[this.colorType] || colorMap.gold;
+            }
+            
+            // Các phương thức tạo hiệu ứng nổ cụ thể
+            createCircleExplosion(particles, count, colors, life) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 2 + Math.random() * 4;
+                    const velocity = {
+                        x: Math.cos(angle) * speed,
+                        y: Math.sin(angle) * speed
+                    };
+                    
+                    particles.push(new EnhancedParticle(
+                        this.x, this.y, velocity,
+                        colors[Math.floor(Math.random() * colors.length)],
+                        life * (0.7 + Math.random() * 0.6),
+                        3 + Math.random() * 3
+                    ));
+                }
+            }
+            
+            createWillowExplosion(particles, count, colors, life) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 1.5 + Math.random() * 1.5;
+                    const velocity = {
+                        x: Math.cos(angle) * speed,
+                        y: Math.sin(angle) * speed
+                    };
+                    
+                    const particle = new EnhancedParticle(
+                        this.x, this.y, velocity,
+                        colors[Math.floor(Math.random() * colors.length)],
+                        life * 1.5,
+                        2 + Math.random() * 2
+                    );
+                    particle.gravity = 0.02;
+                    particle.friction = 0.99;
+                    particle.sparkTrail = true;
+                    particles.push(particle);
+                }
+            }
+            
+            createCrossetteExplosion(particles, count, colors, life) {
+                const arms = 4;
+                for (let arm = 0; arm < arms; arm++) {
+                    const baseAngle = (arm / arms) * Math.PI * 2;
+                    for (let i = 0; i < count / arms; i++) {
+                        const angle = baseAngle + (Math.random() - 0.5) * 0.5;
+                        const speed = 3 + Math.random() * 2;
+                        const velocity = {
+                            x: Math.cos(angle) * speed,
+                            y: Math.sin(angle) * speed
+                        };
+                        
+                        particles.push(new EnhancedParticle(
+                            this.x, this.y, velocity,
+                            colors[Math.floor(Math.random() * colors.length)],
+                            life * (0.8 + Math.random() * 0.4),
+                            2.5 + Math.random() * 2
+                        ));
+                    }
+                }
+            }
+            
+            createRingExplosion(particles, count, colors, life) {
+                const rings = 3;
+                for (let ring = 0; ring < rings; ring++) {
+                    const radius = (ring + 1) * 1.5;
+                    for (let i = 0; i < count / rings; i++) {
+                        const angle = (i / (count / rings)) * Math.PI * 2;
+                        const speed = radius;
+                        const velocity = {
+                            x: Math.cos(angle) * speed,
+                            y: Math.sin(angle) * speed
+                        };
+                        
+                        particles.push(new EnhancedParticle(
+                            this.x, this.y, velocity,
+                            colors[Math.floor(Math.random() * colors.length)],
+                            life * (0.9 - ring * 0.1),
+                            2 + Math.random() * 2
+                        ));
+                    }
+                }
+            }
+            
+            createHeartExplosion(particles, count, colors, life) {
+                for (let i = 0; i < count; i++) {
+                    const t = Math.random() * Math.PI * 2;
+                    const scale = 10;
+                    const x = 16 * Math.pow(Math.sin(t), 3);
+                    const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                    
+                    const velocity = {
+                        x: (x / scale) * (2 + Math.random()),
+                        y: (y / scale) * (2 + Math.random())
+                    };
+                    
+                    particles.push(new EnhancedParticle(
+                        this.x, this.y, velocity,
+                        colors[Math.floor(Math.random() * colors.length)],
+                        life * 1.2,
+                        Math.random() * 3 + 2
+                    ));
+                }
+            }
+            
+            createStarExplosion(particles, count, colors, life) {
+                const points = 5;
+                for (let i = 0; i < count; i++) {
+                    const angle = (i % points) * (Math.PI * 2 / points) + Math.random() * 0.5;
+                    const velocity = {
+                        x: Math.cos(angle) * 3 * (i / count),
+                        y: Math.sin(angle) * 3 * (i / count)
+                    };
+                    
+                    particles.push(new EnhancedParticle(
+                        this.x, this.y, velocity,
+                        colors[Math.floor(Math.random() * colors.length)],
+                        life * (0.3 + (i % points) * 0.1),
+                        Math.random() * 2 + 2
+                    ));
+                }
+            }
+            
+            createSpiralExplosion(particles, count, colors, life) {
+                const spirals = 3;
+                for (let s = 0; s < spirals; s++) {
+                    for (let i = 0; i < count / spirals; i++) {
+                        const t = (i / (count / spirals)) * Math.PI * 4 + s * (Math.PI * 2 / spirals);
+                        const radius = 0.5 + (i / (count / spirals)) * 4;
+                        const velocity = {
+                            x: Math.cos(t) * radius,
+                            y: Math.sin(t) * radius
+                        };
+                        
+                        particles.push(new EnhancedParticle(
+                            this.x, this.y, velocity,
+                            colors[Math.floor(Math.random() * colors.length)],
+                            life * (0.5 + (i / (count / spirals)) * 0.5),
+                            2 + Math.random() * 2
+                        ));
+                    }
+                }
+            }
+            
+            // Các phương thức nổ khác (giản lược)
+            createDragonEggExplosion(particles, count, colors, life) {
+                this.createCircleExplosion(particles, count, colors, life);
+            }
+            
+            createSpiderExplosion(particles, count, colors, life) {
+                this.createCircleExplosion(particles, count, colors, life * 0.9);
+            }
+            
+            createCometExplosion(particles, count, colors, life) {
+                this.createCircleExplosion(particles, count, colors, life * 1.1);
+            }
+            
+            createWaterfallExplosion(particles, count, colors, life) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.5;
+                    const speed = 1 + Math.random() * 3;
+                    const velocity = {
+                        x: Math.cos(angle) * speed,
+                        y: Math.sin(angle) * speed
+                    };
+                    
+                    const particle = new EnhancedParticle(
+                        this.x, this.y, velocity,
+                        colors[Math.floor(Math.random() * colors.length)],
+                        life * 2,
+                        2 + Math.random() * 2
+                    );
+                    particle.gravity = 0.15;
+                    particle.friction = 0.98;
+                    particles.push(particle);
+                }
+            }
+            
+            playExplosionSound() {
+                if (!audioEnabled || !audioContext) return;
+                
+                try {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    // Âm thanh khác nhau cho các loại pháo hoa
+                    let frequency, duration, type;
+                    
+                    switch(this.type.shape) {
+                        case 'circle':
+                            frequency = 200 + Math.random() * 100;
+                            duration = 0.3;
+                            type = 'sine';
+                            break;
+                        case 'willow':
+                            frequency = 150 + Math.random() * 50;
+                            duration = 0.5;
+                            type = 'triangle';
+                            break;
+                        case 'heart':
+                            frequency = 300 + Math.random() * 100;
+                            duration = 0.4;
+                            type = 'sine';
+                            break;
+                        case 'ring':
+                            frequency = 250 + Math.random() * 150;
+                            duration = 0.35;
+                            type = 'square';
+                            break;
+                        default:
+                            frequency = 180 + Math.random() * 120;
+                            duration = 0.25;
+                            type = 'sawtooth';
+                    }
+                    
+                    oscillator.frequency.value = frequency;
+                    oscillator.type = type;
+                    
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + duration);
+                    
+                    // Tự động disconnect sau khi kết thúc
+                    setTimeout(() => {
+                        try {
+                            oscillator.disconnect();
+                        } catch(e) {}
+                    }, duration * 1000);
+                } catch (e) {
+                    console.log("Audio không khả dụng");
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                
+                if (!this.exploded) {
+                    // Hiệu ứng glow cho pháo hoa đang bay
+                    if (bloomEffect) {
+                        const glowGradient = ctx.createRadialGradient(
+                            this.x, this.y, 0,
+                            this.x, this.y, this.glowSize * 3
+                        );
+                        glowGradient.addColorStop(0, this.glowColor);
+                        glowGradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+                        
+                        ctx.globalCompositeOperation = 'lighter';
+                        ctx.fillStyle = glowGradient;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.glowSize * 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // Vẽ trail
+                    if (this.trail.length > 1) {
+                        ctx.strokeStyle = this.mainColor + '80';
+                        ctx.lineWidth = 2;
+                        ctx.lineCap = 'round';
+                        ctx.globalCompositeOperation = 'lighter';
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                        for (let i = 1; i < this.trail.length; i++) {
+                            const point = this.trail[i];
+                            ctx.lineWidth = point.size;
+                            ctx.lineTo(point.x, point.y);
+                            ctx.stroke();
+                            ctx.beginPath();
+                            ctx.moveTo(point.x, point.y);
+                        }
+                    }
+                    
+                    // Vẽ sparkles
+                    ctx.fillStyle = this.mainColor;
+                    this.sparkles.forEach(sparkle => {
+                        ctx.globalAlpha = sparkle.life / 20;
+                        ctx.beginPath();
+                        ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    
+                    // Vẽ thân pháo hoa
+                    ctx.globalAlpha = 1;
+                    ctx.globalCompositeOperation = 'source-over';
+                    const bodyGradient = ctx.createLinearGradient(
+                        this.x, this.y,
+                        this.x, this.y + 20
+                    );
+                    bodyGradient.addColorStop(0, this.mainColor);
+                    bodyGradient.addColorStop(1, '#FFFFFF');
+                    
+                    ctx.fillStyle = bodyGradient;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Vẽ đuôi
+                    ctx.strokeStyle = bodyGradient;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y + 4);
+                    ctx.lineTo(this.x, this.y + 25);
+                    ctx.stroke();
+                } else {
+                    // Vẽ các lớp nổ
+                    this.layers.forEach(layer => {
+                        layer.particles.forEach(particle => {
+                            particle.draw();
+                        });
+                    });
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // ==================== LỚP HẠT NÂNG CẤP ====================
+        class EnhancedParticle {
+            constructor(x, y, velocity, color, life, size) {
+                this.x = x;
+                this.y = y;
+                this.velocity = velocity;
+                this.color = color;
+                this.life = life;
+                this.maxLife = life;
+                this.size = size;
+                this.gravity = 0.1;
+                this.friction = 0.97;
+                this.trail = [];
+                this.maxTrail = 5;
+                this.sparkTrail = false;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+                
+                stats.totalParticles++;
+            }
+            
+            update() {
+                // Thêm vào trail
+                this.trail.push({x: this.x, y: this.y});
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+                
+                // Vật lý
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.velocity.y += this.gravity;
+                
+                // Ảnh hưởng của gió
+                this.velocity.x += wind * 0.001;
+                
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                
+                this.life--;
+                this.rotation += this.rotationSpeed;
+                
+                // Giảm kích thước theo thời gian
+                this.size *= 0.99;
+                
+                // Tạo spark trail nếu cần
+                if (this.sparkTrail && Math.random() < 0.3 && this.life > 10 && smokeEnabled) {
+                    smokeParticles.push(new SmokeParticle(
+                        this.x, this.y,
+                        this.color.replace(')', ', 0.3)'),
+                        2 + Math.random() * 3,
+                        30 + Math.random() * 20
+                    ));
+                }
+                
+                return this.life > 0 && this.size > 0.1;
+            }
+            
+            draw() {
+                ctx.save();
+                
+                // Hiệu ứng bloom
+                if (bloomEffect) {
+                    ctx.globalCompositeOperation = 'lighter';
+                    const glowGradient = ctx.createRadialGradient(
+                        this.x, this.y, 0,
+                        this.x, this.y, this.size * 3
+                    );
+                    glowGradient.addColorStop(0, this.color.replace(')', ', 0.5)'));
+                    glowGradient.addColorStop(1, this.color.replace(')', ', 0)'));
+                    
+                    ctx.fillStyle = glowGradient;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Vẽ trail
+                if (this.trail.length > 1 && !this.sparkTrail) {
+                    ctx.strokeStyle = this.color + '40';
+                    ctx.lineWidth = this.size * 0.8;
+                    ctx.lineCap = 'round';
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                    for (let i = 1; i < this.trail.length; i++) {
+                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                    }
+                    ctx.stroke();
+                }
+                
+                // Vẽ hạt chính
+                ctx.globalCompositeOperation = 'source-over';
+                const opacity = this.life / this.maxLife;
+                
+                // Hạt hình sao cho một số loại
+                if (Math.random() > 0.7) {
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = opacity;
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    
+                    // Vẽ hình sao đơn giản
+                    ctx.beginPath();
+                    for (let i = 0; i < 5; i++) {
+                        const angle = (i * Math.PI * 2) / 5;
+                        const radius = this.size;
+                        const spikeRadius = radius * 1.5;
+                        
+                        if (i === 0) {
+                            ctx.moveTo(
+                                Math.cos(angle - Math.PI/2) * spikeRadius,
+                                Math.sin(angle - Math.PI/2) * spikeRadius
+                            );
+                        }
+                        
+                        ctx.lineTo(
+                            Math.cos(angle - Math.PI/2) * radius,
+                            Math.sin(angle - Math.PI/2) * radius
+                        );
+                        
+                        const nextAngle = angle + (Math.PI * 2) / 10;
+                        ctx.lineTo(
+                            Math.cos(nextAngle - Math.PI/2) * spikeRadius,
+                            Math.sin(nextAngle - Math.PI/2) * spikeRadius
+                        );
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    // Hạt hình tròn
+                    const gradient = ctx.createRadialGradient(
+                        this.x, this.y, 0,
+                        this.x, this.y, this.size
+                    );
+                    gradient.addColorStop(0, this.color + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
+                    gradient.addColorStop(1, this.color + '00');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            }
+        }
         
         // ==================== HÀM MỚI: ICON GRID FUNCTIONS ====================
         function toggleClickFireworksFromIcon() {
@@ -2440,7 +3457,7 @@
                 name: name,
                 email: email,
                 role: role,
-                password: password, // Trong thực tế nên mã hóa mật khẩu
+                password: password,
                 createdAt: new Date().toISOString()
             };
             
@@ -2585,15 +3602,15 @@
         
         function createFireworkAtPosition(x, y) {
             // Tạo ngẫu nhiên loại pháo hoa đặc biệt
-            const specialTypes = ['heart', 'star', 'dragon', 'normal'];
-            const randomType = specialTypes[Math.floor(Math.random() * specialTypes.length)];
+            const types = ['PEONY', 'CHRYSANTHEMUM', 'HEART', 'STAR', 'DRAGON_EGG', 'SPIRAL', 'RING'];
+            const randomType = types[Math.floor(Math.random() * types.length)];
             
             // Chọn màu ngẫu nhiên
-            const colors = ['gold', 'red', 'blue', 'green', 'rainbow'];
+            const colors = ['gold', 'red', 'blue', 'green', 'rainbow', 'multi', 'silver'];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             
             // Tạo pháo hoa
-            const firework = new Firework(x, y, randomType, randomColor);
+            const firework = new EnhancedFirework(x, y, randomType, randomColor);
             fireworks.push(firework);
         }
         
@@ -2620,8 +3637,9 @@
         }
         
         function createClickSound() {
+            if (!audioEnabled || !audioContext) return;
+            
             try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 
@@ -2636,6 +3654,13 @@
                 
                 oscillator.start(audioContext.currentTime);
                 oscillator.stop(audioContext.currentTime + 0.2);
+                
+                // Tự động disconnect sau khi kết thúc
+                setTimeout(() => {
+                    try {
+                        oscillator.disconnect();
+                    } catch(e) {}
+                }, 200);
             } catch (e) {
                 console.log("Audio không khả dụng");
             }
@@ -2706,11 +3731,16 @@
             toggleClickFireworks();
             
             // Tạo pháo hoa theo trình tự
-            setTimeout(() => createTetFirework('gold', 'normal'), 500);
-            setTimeout(() => createTetFirework('red', 'heart'), 1000);
-            setTimeout(() => createTetFirework('green', 'star'), 1500);
-            setTimeout(() => createTetFirework('blue', 'dragon'), 2000);
-            setTimeout(() => createTetFirework('rainbow', 'normal'), 2500);
+            const types = ['PEONY', 'CHRYSANTHEMUM', 'HEART', 'STAR', 'DRAGON_EGG', 'RING', 'SPIRAL'];
+            const colors = ['gold', 'red', 'green', 'blue', 'rainbow', 'multi', 'silver'];
+            
+            types.forEach((type, index) => {
+                setTimeout(() => {
+                    const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
+                    const y = canvas.height * 0.3;
+                    fireworks.push(new EnhancedFirework(x, y, type, colors[index % colors.length]));
+                }, index * 800);
+            });
             
             // Bật chế độ tự động
             setTimeout(() => {
@@ -2718,335 +3748,7 @@
             }, 3000);
         }
         
-        function createTetFirework(color, type) {
-            const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
-            const y = canvas.height * 0.3;
-            
-            const firework = new Firework(x, y, type, color);
-            fireworks.push(firework);
-        }
-        
-        // ==================== HỆ THỐNG PHÁO HOA ====================
-        class Firework {
-            constructor(x, y, type = 'normal', colorType = selectedType) {
-                this.x = x || Math.random() * canvas.width;
-                this.y = canvas.height;
-                this.targetX = x || this.x;
-                this.targetY = y || Math.random() * canvas.height * 0.3;
-                this.type = type;
-                this.colorType = colorType;
-                this.speed = 4 + Math.random() * 4;
-                this.size = parseInt(document.getElementById('fireworkSize').value) / 100;
-                this.exploded = false;
-                this.trail = [];
-                this.maxTrail = 8;
-                this.color = this.getColor();
-                this.sparkles = [];
-                
-                stats.activeFireworks++;
-            }
-            
-            getColor() {
-                const colors = {
-                    'gold': ['#FFD700', '#FFC400', '#FFAB00'],
-                    'red': ['#D32F2F', '#C62828', '#B71C1C'],
-                    'blue': ['#2196F3', '#1976D2', '#0D47A1'],
-                    'green': ['#388E3C', '#2E7D32', '#1B5E20'],
-                    'white': ['#FFFFFF', '#F5F5F5', '#E0E0E0'],
-                    'rainbow': ['#FFD700', '#D32F2F', '#2196F3', '#388E3C']
-                };
-                
-                const colorSet = colors[this.colorType] || colors.gold;
-                return colorSet[Math.floor(Math.random() * colorSet.length)];
-            }
-            
-            update() {
-                // Thêm vệt đuôi
-                this.trail.push({x: this.x, y: this.y});
-                if (this.trail.length > this.maxTrail) {
-                    this.trail.shift();
-                }
-                
-                // Di chuyển
-                this.y -= this.speed;
-                const dx = this.targetX - this.x;
-                this.x += dx * 0.05;
-                
-                // Tạo sparkles
-                if (Math.random() < 0.3) {
-                    this.sparkles.push({
-                        x: this.x,
-                        y: this.y,
-                        vx: (Math.random() - 0.5) * 2,
-                        vy: (Math.random() - 0.5) * 2,
-                        life: 15,
-                        size: Math.random() * 2 + 1
-                    });
-                }
-                
-                // Cập nhật sparkles
-                this.sparkles.forEach((sparkle, index) => {
-                    sparkle.x += sparkle.vx;
-                    sparkle.y += sparkle.vy;
-                    sparkle.life--;
-                    
-                    if (sparkle.life <= 0) {
-                        this.sparkles.splice(index, 1);
-                    }
-                });
-                
-                // Kiểm tra nổ
-                if (this.y <= this.targetY && !this.exploded) {
-                    this.explode();
-                    return false;
-                }
-                
-                return true;
-            }
-            
-            explode() {
-                this.exploded = true;
-                const count = parseInt(document.getElementById('fireworkCount').value) * 8;
-                const speed = parseInt(document.getElementById('explosionSpeed').value) / 3;
-                const life = parseInt(document.getElementById('particleLife').value);
-                
-                switch(this.type) {
-                    case 'heart':
-                        this.createHeartExplosion(count, speed, life);
-                        break;
-                    case 'star':
-                        this.createStarExplosion(count, speed, life);
-                        break;
-                    case 'dragon':
-                        this.createDragonExplosion(count, speed, life);
-                        break;
-                    default:
-                        this.createNormalExplosion(count, speed, life);
-                }
-                
-                // Tạo shockwave
-                trails.push({
-                    x: this.x,
-                    y: this.y,
-                    radius: 0,
-                    maxRadius: 80,
-                    color: this.color,
-                    life: 80
-                });
-                
-                // Tạo âm thanh
-                createExplosionSound();
-                
-                // Xóa khỏi mảng
-                const index = fireworks.indexOf(this);
-                if (index > -1) {
-                    fireworks.splice(index, 1);
-                    stats.activeFireworks--;
-                }
-            }
-            
-            createNormalExplosion(count, speed, life) {
-                for (let i = 0; i < count; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const velocity = {
-                        x: Math.cos(angle) * speed * (Math.random() + 0.5),
-                        y: Math.sin(angle) * speed * (Math.random() + 0.5)
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, velocity, this.color,
-                        life * (0.5 + Math.random() * 0.5),
-                        Math.random() * 3 + 2
-                    ));
-                }
-            }
-            
-            createHeartExplosion(count, speed, life) {
-                for (let i = 0; i < count; i++) {
-                    const t = Math.random() * Math.PI * 2;
-                    const scale = 12;
-                    const x = 16 * Math.pow(Math.sin(t), 3);
-                    const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-                    
-                    const velocity = {
-                        x: (x / scale) * speed,
-                        y: (y / scale) * speed
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, velocity, this.color,
-                        life * 1.2, Math.random() * 3 + 2
-                    ));
-                }
-            }
-            
-            createStarExplosion(count, speed, life) {
-                const points = 5;
-                for (let i = 0; i < count; i++) {
-                    const angle = (i % points) * (Math.PI * 2 / points) + Math.random() * 0.5;
-                    const velocity = {
-                        x: Math.cos(angle) * speed * (i / points),
-                        y: Math.sin(angle) * speed * (i / points)
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, velocity, this.color,
-                        life * (0.3 + (i % points) * 0.1),
-                        Math.random() * 2 + 2
-                    ));
-                }
-            }
-            
-            createDragonExplosion(count, speed, life) {
-                // Tạo hình rồng với các hạt
-                for (let i = 0; i < count; i++) {
-                    const t = (i / count) * Math.PI * 4;
-                    const x = Math.sin(t) * 20;
-                    const y = Math.cos(t * 0.5) * 15 - Math.abs(Math.sin(t * 2)) * 10;
-                    
-                    const velocity = {
-                        x: (x / 20) * speed * 2,
-                        y: (y / 20) * speed * 2
-                    };
-                    
-                    particles.push(new Particle(
-                        this.x, this.y, velocity, this.color,
-                        life * (0.3 + (i / count) * 0.7),
-                        Math.random() * 3 + 2
-                    ));
-                }
-            }
-            
-            draw() {
-                // Vẽ trail
-                if (this.trail.length > 1) {
-                    ctx.strokeStyle = this.color + '80';
-                    ctx.lineWidth = 2;
-                    ctx.lineCap = 'round';
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
-                    for (let i = 1; i < this.trail.length; i++) {
-                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
-                    }
-                    ctx.stroke();
-                }
-                
-                // Vẽ sparkles
-                ctx.fillStyle = this.color;
-                this.sparkles.forEach(sparkle => {
-                    ctx.beginPath();
-                    ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                
-                // Vẽ thân
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Vẽ đuôi
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y + 4);
-                ctx.lineTo(this.x, this.y + 20);
-                ctx.stroke();
-            }
-        }
-        
-        class Particle {
-            constructor(x, y, velocity, color, life, size) {
-                this.x = x;
-                this.y = y;
-                this.velocity = velocity;
-                this.color = color;
-                this.life = life;
-                this.maxLife = life;
-                this.size = size;
-                this.gravity = 0.05;
-                this.friction = 0.98;
-                this.trail = [];
-                this.maxTrail = 3;
-                
-                stats.totalParticles++;
-            }
-            
-            update() {
-                // Thêm trail
-                this.trail.push({x: this.x, y: this.y});
-                if (this.trail.length > this.maxTrail) {
-                    this.trail.shift();
-                }
-                
-                // Áp dụng vật lý
-                this.velocity.x *= this.friction;
-                this.velocity.y *= this.friction;
-                this.velocity.y += this.gravity;
-                
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                
-                this.life--;
-                
-                return this.life > 0;
-            }
-            
-            draw() {
-                // Vẽ trail
-                if (this.trail.length > 1) {
-                    ctx.strokeStyle = this.color + '40';
-                    ctx.lineWidth = this.size * 0.5;
-                    ctx.lineCap = 'round';
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
-                    for (let i = 1; i < this.trail.length; i++) {
-                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
-                    }
-                    ctx.stroke();
-                }
-                
-                // Vẽ hạt
-                const opacity = this.life / this.maxLife;
-                const gradient = ctx.createRadialGradient(
-                    this.x, this.y, 0,
-                    this.x, this.y, this.size
-                );
-                gradient.addColorStop(0, this.color + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
-                gradient.addColorStop(1, this.color + '00');
-                
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        // ==================== HÀM TIỆN ÍCH ====================
-        function createExplosionSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = 150 + Math.random() * 100;
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.3);
-            } catch (e) {
-                console.log("Audio không khả dụng");
-            }
-        }
-        
+        // ==================== HỆ THỐNG PHÁO HOA NÂNG CẤP ====================
         function selectFireworkType(type) {
             selectedType = type;
             document.querySelectorAll('.firework-type-btn').forEach(btn => {
@@ -3057,13 +3759,15 @@
         
         function launchCustomFireworks() {
             const count = parseInt(document.getElementById('fireworkCount').value);
+            const types = Object.keys(FIREWORK_TYPES);
             
             for (let i = 0; i < count; i++) {
                 setTimeout(() => {
-                    fireworks.push(new Firework(
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    fireworks.push(new EnhancedFirework(
                         Math.random() * canvas.width * 0.8 + canvas.width * 0.1,
                         Math.random() * canvas.height * 0.3,
-                        'normal',
+                        type,
                         selectedType
                     ));
                 }, i * 200);
@@ -3073,7 +3777,38 @@
         function launchSpecialFirework(type) {
             const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
             const y = canvas.height * 0.3;
-            fireworks.push(new Firework(x, y, type, selectedType));
+            
+            // Ánh xạ từ tên cũ sang tên mới
+            const typeMap = {
+                'heart': 'HEART',
+                'star': 'STAR',
+                'dragon': 'DRAGON_EGG'
+            };
+            
+            const fireworkType = typeMap[type] || 'PEONY';
+            fireworks.push(new EnhancedFirework(x, y, fireworkType, selectedType));
+        }
+        
+        function launchRealisticFirework(type = 'PEONY', colorType = selectedType) {
+            const x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6;
+            const y = canvas.height * 0.8;
+            fireworks.push(new EnhancedFirework(x, y, type, colorType));
+        }
+        
+        function launchFireworkShow() {
+            clearAllFireworks();
+            
+            // Trình diễn pháo hoa đa dạng
+            const types = Object.keys(FIREWORK_TYPES);
+            const colors = ['gold', 'red', 'blue', 'green', 'rainbow', 'multi', 'silver'];
+            
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    launchRealisticFirework(type, color);
+                }, i * 800);
+            }
         }
         
         function toggleAutoMode() {
@@ -3084,12 +3819,12 @@
                 btn.innerHTML = '<i class="fas fa-pause"></i> Dừng';
                 autoTimer = setInterval(() => {
                     if (fireworks.length < 3) {
-                        const types = ['normal', 'heart', 'star', 'dragon'];
+                        const types = Object.keys(FIREWORK_TYPES);
                         const type = types[Math.floor(Math.random() * types.length)];
-                        const colors = ['gold', 'red', 'blue', 'green', 'rainbow'];
+                        const colors = ['gold', 'red', 'blue', 'green', 'rainbow', 'multi', 'silver'];
                         const color = colors[Math.floor(Math.random() * colors.length)];
                         
-                        fireworks.push(new Firework(
+                        fireworks.push(new EnhancedFirework(
                             Math.random() * canvas.width,
                             Math.random() * canvas.height * 0.3,
                             type,
@@ -3107,6 +3842,7 @@
         function clearAllFireworks() {
             fireworks = [];
             particles = [];
+            smokeParticles = [];
             trails = [];
             stats.totalParticles = 0;
             stats.activeFireworks = 0;
@@ -3122,10 +3858,103 @@
             setTimeout(() => {
                 for (let i = 0; i < 5; i++) {
                     setTimeout(() => {
+                        const types = ['HEART', 'STAR', 'DRAGON_EGG'];
                         launchSpecialFirework(['heart', 'star', 'dragon'][i % 3]);
                     }, i * 300);
                 }
             }, 1000);
+        }
+        
+        // ==================== HÀM TIỆN ÍCH NÂNG CAO ====================
+        function togglePhysicsQuality() {
+            const qualities = ['low', 'medium', 'high'];
+            const currentIndex = qualities.indexOf(physicsQuality);
+            physicsQuality = qualities[(currentIndex + 1) % qualities.length];
+            
+            // Áp dụng cài đặt chất lượng
+            switch(physicsQuality) {
+                case 'low':
+                    gravity = 0.1;
+                    wind = 0;
+                    bloomEffect = false;
+                    break;
+                case 'medium':
+                    gravity = 0.08;
+                    wind = Math.random() * 2 - 1;
+                    bloomEffect = true;
+                    break;
+                case 'high':
+                    gravity = 0.06;
+                    wind = Math.random() * 4 - 2;
+                    bloomEffect = true;
+                    break;
+            }
+            
+            // Cập nhật select
+            document.getElementById('physicsQuality').value = physicsQuality;
+            
+            alert(`Chất lượng vật lý: ${physicsQuality.toUpperCase()}`);
+        }
+        
+        function changePhysicsQuality(value) {
+            physicsQuality = value;
+            
+            // Áp dụng cài đặt chất lượng
+            switch(physicsQuality) {
+                case 'low':
+                    gravity = 0.1;
+                    wind = 0;
+                    bloomEffect = false;
+                    break;
+                case 'medium':
+                    gravity = 0.08;
+                    wind = Math.random() * 2 - 1;
+                    bloomEffect = true;
+                    break;
+                case 'high':
+                    gravity = 0.06;
+                    wind = Math.random() * 4 - 2;
+                    bloomEffect = true;
+                    break;
+            }
+        }
+        
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const btn = document.querySelector('.icon-audio');
+            if (btn) {
+                if (audioEnabled) {
+                    btn.querySelector('.icon-wrapper').innerHTML = '<i class="fas fa-volume-up"></i>';
+                    btn.querySelector('.icon-label').textContent = 'Âm Thanh Bật';
+                } else {
+                    btn.querySelector('.icon-wrapper').innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    btn.querySelector('.icon-label').textContent = 'Âm Thanh Tắt';
+                }
+            }
+        }
+        
+        function toggleSmokeEffect() {
+            smokeEnabled = !smokeEnabled;
+            alert(`Hiệu ứng khói: ${smokeEnabled ? 'BẬT' : 'TẮT'}`);
+        }
+        
+        function toggleWindEffect() {
+            wind = wind === 0 ? (Math.random() * 4 - 2) : 0;
+            document.getElementById('windControl').value = wind;
+            document.getElementById('windValue').textContent = wind.toFixed(1);
+        }
+        
+        function updateWind() {
+            // Thay đổi gió ngẫu nhiên theo thời gian
+            if (Date.now() - lastWindChange > 5000) {
+                wind += (Math.random() - 0.5) * 0.5;
+                wind = Math.max(-3, Math.min(3, wind));
+                lastWindChange = Date.now();
+                
+                // Cập nhật slider
+                document.getElementById('windControl').value = wind;
+                document.getElementById('windValue').textContent = wind.toFixed(1);
+            }
         }
         
         // ==================== QUẢN LÝ ADMIN ====================
@@ -3213,6 +4042,28 @@
                     <span class="admin-badge">${currentAdminName}</span>
                 `;
             }
+        }
+        
+        // ==================== CHỨC NĂNG ADMIN MỚI: TEST KẾT THÚC ĐẾM NGƯỢC ====================
+        function testCountdownEnd() {
+            if (!isAdmin) {
+                alert('Vui lòng đăng nhập admin trước!');
+                showAdminModal();
+                return;
+            }
+            
+            // Đặt thời gian Tết về quá khứ (ngay lập tức kích hoạt)
+            tetDate = new Date();
+            countdownEnded = false;
+            
+            // Cập nhật ngay lập tức
+            updateCountdown();
+            
+            // Hiển thị thông báo
+            alert('Đã kích hoạt chế độ test kết thúc đếm ngược! Hiệu ứng Tết sẽ bắt đầu ngay lập tức.');
+            
+            // Ghi log cho admin
+            console.log(`[ADMIN] Test kết thúc đếm ngược được kích hoạt bởi ${currentAdminName} vào ${new Date().toLocaleString()}`);
         }
         
         // ==================== GIAO DIỆN & ĐIỀU KHIỂN ====================
@@ -3330,6 +4181,15 @@
                 <div class="test-item">
                     <i class="fas fa-check-circle text-success"></i> Admin hiện tại: ${currentAdminName}
                 </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Chất lượng vật lý: ${physicsQuality}
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Âm thanh: ${audioEnabled ? 'Bật' : 'Tắt'}
+                </div>
+                <div class="test-item">
+                    <i class="fas fa-check-circle text-success"></i> Hiệu ứng khói: ${smokeEnabled ? 'Bật' : 'Tắt'}
+                </div>
             `;
         }
         
@@ -3371,10 +4231,12 @@
                 return;
             }
             
+            // Reset về thời gian Tết 2026
+            tetDate = new Date('2026-02-17T00:00:00+07:00');
             countdownEnded = false;
             document.getElementById('celebrationSection').classList.remove('show');
             clearAllFireworks();
-            alert('Đã reset hệ thống đếm ngược!');
+            alert('Đã reset hệ thống đếm ngược về Tết Bính Ngọ 2026!');
         }
         
         function exportData() {
@@ -3391,7 +4253,14 @@
                     isAdmin: isAdmin,
                     countdownEnded: countdownEnded,
                     clickFireworksEnabled: clickFireworksEnabled,
-                    adminName: currentAdminName
+                    adminName: currentAdminName,
+                    physicsQuality: physicsQuality,
+                    audioEnabled: audioEnabled,
+                    smokeEnabled: smokeEnabled,
+                    bloomEffect: bloomEffect,
+                    motionBlur: motionBlur,
+                    wind: wind,
+                    gravity: gravity
                 },
                 panelStates: panelStates,
                 users: users,
@@ -3408,8 +4277,8 @@
             linkElement.click();
         }
         
-        // ==================== VÒNG LẶP CHÍNH ====================
-        function animate(currentTime) {
+        // ==================== VÒNG LẶP CHÍNH NÂNG CẤP ====================
+        function enhancedAnimate(currentTime) {
             // Tính FPS
             frameCount++;
             if (currentTime - lastTime >= 1000) {
@@ -3430,9 +4299,25 @@
                 document.getElementById('lifeValue').textContent = document.getElementById('particleLife').value;
             }
             
-            // Xóa canvas với hiệu ứng mờ
-            ctx.fillStyle = 'rgba(10, 10, 42, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Cập nhật gió
+            updateWind();
+            
+            // Hiệu ứng motion blur
+            if (motionBlur) {
+                ctx.fillStyle = 'rgba(10, 10, 42, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Cập nhật và vẽ khói
+            smokeParticles.forEach((smoke, index) => {
+                if (!smoke.update()) {
+                    smokeParticles.splice(index, 1);
+                } else {
+                    smoke.draw();
+                }
+            });
             
             // Cập nhật và vẽ trails
             trails.forEach((trail, index) => {
@@ -3460,7 +4345,7 @@
                 }
             });
             
-            // Cập nhật và vẽ hạt
+            // Cập nhật và vẽ hạt (particles từ lớp cũ - giữ để tương thích)
             particles.forEach((particle, index) => {
                 if (!particle.update()) {
                     particles.splice(index, 1);
@@ -3470,8 +4355,40 @@
                 }
             });
             
+            // Vẽ hiệu ứng gió (chỉ báo)
+            if (Math.abs(wind) > 0.5) {
+                ctx.save();
+                ctx.globalAlpha = 0.3;
+                ctx.fillStyle = wind > 0 ? '#2196F3' : '#FF9800';
+                ctx.font = '12px Arial';
+                ctx.fillText(`Gió: ${wind.toFixed(1)}`, 20, 30);
+                ctx.restore();
+            }
+            
             // Tiếp tục animation
-            animationId = requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(enhancedAnimate);
+        }
+        
+        // ==================== KHỞI TẠO HỆ THỐNG NÂNG CẤP ====================
+        function initializeEnhancedFireworks() {
+            // Thiết lập các điều khiển nâng cao
+            document.getElementById('bloomEffect').addEventListener('input', function() {
+                bloomEffect = this.value == 1;
+                document.getElementById('bloomValue').textContent = bloomEffect ? 'Bật' : 'Tắt';
+            });
+            
+            document.getElementById('motionBlur').addEventListener('input', function() {
+                motionBlur = this.value == 1;
+                document.getElementById('blurValue').textContent = motionBlur ? 'Bật' : 'Tắt';
+            });
+            
+            document.getElementById('windControl').addEventListener('input', function() {
+                wind = parseFloat(this.value);
+                document.getElementById('windValue').textContent = wind.toFixed(1);
+            });
+            
+            // Khởi động hệ thống
+            enhancedAnimate(0);
         }
         
         // ==================== KHỞI TẠO ====================
@@ -3499,8 +4416,8 @@
             // Thêm event listener cho toggle switch
             clickFireworksToggle.addEventListener('change', toggleClickFireworks);
             
-            // Bắt đầu animation
-            animate(0);
+            // Bắt đầu animation nâng cao
+            initializeEnhancedFireworks();
             
             // Bắt đầu đếm ngược
             setInterval(updateCountdown, 1000);
@@ -3511,10 +4428,10 @@
                 if (!countdownEnded) {
                     for (let i = 0; i < 3; i++) {
                         setTimeout(() => {
-                            fireworks.push(new Firework(
+                            fireworks.push(new EnhancedFirework(
                                 canvas.width * 0.3 + i * canvas.width * 0.2,
                                 canvas.height * 0.4,
-                                'normal',
+                                'PEONY',
                                 ['gold', 'red', 'green'][i]
                             ));
                         }, i * 500);
@@ -3563,6 +4480,12 @@
                         hideTestModal();
                         hideMessageModal();
                         hideUserManagementModal();
+                        break;
+                    case 't':
+                        // Test kết thúc đếm ngược (chỉ admin)
+                        if (isAdmin && e.ctrlKey) {
+                            testCountdownEnd();
+                        }
                         break;
                 }
             });
