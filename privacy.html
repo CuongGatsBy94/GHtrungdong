@@ -1,41 +1,403 @@
+<!-- 
+  @Author: Cường GatsBy
+  @Date:   2025-04-03 23:10:28
+  @Last Modified by:   Your name
+  @Last Modified time: 2026-04-07 22:27:58
+-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Chính sách bảo mật - Giáo Họ Trung Đồng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="w1NH3M5PiBfskkvCzulARP0eFddvgKkWJs3E1GHuB2c" />
+    <meta name="msvalidate.01" content="CACCA3CDB162ADDD475C6F85AEAFF2A6" />
+    
+    <title>Chính Sách Bảo Mật - Giáo Họ Trung Đồng</title>
+    <meta name="description" content="Chính sách bảo mật thông tin cá nhân trên trang web Giáo Họ Trung Đồng">
+    <meta name="keywords" content="chính sách bảo mật, giaohotrungdong">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chính Sách Bảo Mật - Giáo Họ Trung Đồng">
+    <meta property="og:description" content="Chính sách bảo mật thông tin cá nhân">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <!-- Preload & Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Vietnamese:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
     <style>
-        body { font-family: 'Noto Sans Vietnamese', sans-serif; line-height: 1.6; padding: 40px 0; background: #f9f9f9; }
-        .container { max-width: 900px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-        h1 { color: #c41e3a; margin-bottom: 30px; }
-        h2 { font-size: 1.5rem; margin-top: 25px; color: #1e5799; }
-        .footer { margin-top: 40px; text-align: center; font-size: 0.9rem; color: #666; }
+        /* ===== COPY TOÀN BỘ CSS TỪ INDEX.HTML ===== */
+        :root {
+            --primary-color: #c41e3a;
+            --secondary-color: #1e5799;
+            --accent-color: #daa520;
+            --gold-color: #ffd700;
+            --light-red: #ff6b6b;
+            --bg-color: #fffaf0;
+            --text-color: #2d3436;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #1a1a2e;
+            --nav-link-color: #333;
+            --section-bg: #ffffff;
+            --service-box-bg: rgba(255, 255, 255, 0.1);
+            --tet-red: #c41e3a;
+            --tet-gold: #ffd700;
+            --tet-orange: #ff8c00;
+            --tet-green: #228b22;
+            --tet-pink: #ff9999;
+            --tet-yellow: #ffde59;
+            --tet-blue: #1e5799;
+            --gradient-red: linear-gradient(135deg, #c41e3a, #ff6b6b);
+            --gradient-gold: linear-gradient(135deg, #ffd700, #ffed4e);
+            --gradient-holy: linear-gradient(135deg, #1e5799, #4cc9f0);
+            --gradient-church: linear-gradient(135deg, #8b4513, #daa520);
+        }
+        [data-theme="dark"] {
+            --bg-color: #0a0a0f;
+            --text-color: #f8f9fa;
+            --card-bg: #1a1a2e;
+            --header-bg: rgba(26, 26, 46, 0.95);
+            --footer-bg: #0a0a0f;
+            --secondary-color: #16213e;
+            --nav-link-color: #f8f9fa;
+            --section-bg: #1a1a2e;
+            --service-box-bg: rgba(26, 26, 46, 0.5);
+            --tet-red: #ff6b6b;
+            --tet-gold: #ffd700;
+        }
+        body {
+            font-family: 'Noto Sans Vietnamese', 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.4s ease;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--tet-red);
+        }
+        .navbar {
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--header-bg) !important;
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        .navbar.scrolled {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            box-shadow: 0 8px 30px rgba(196, 30, 58, 0.2);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+            color: var(--tet-red) !important;
+            font-family: 'Merriweather', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            position: relative;
+            margin: 0 20px;
+            font-weight: 600;
+            color: var(--nav-link-color) !important;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+            padding: 10px 0 !important;
+            font-family: 'Noto Sans Vietnamese', sans-serif;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--tet-red), var(--tet-gold));
+            transition: width 0.4s;
+            border-radius: 2px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: var(--tet-red) !important;
+        }
+        .btn {
+            background: var(--gradient-red);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        footer {
+            background: linear-gradient(135deg, var(--tet-red), var(--footer-bg));
+            color: white;
+            padding: 60px 0 30px;
+            transition: background-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--tet-gold), var(--tet-red), var(--tet-gold));
+        }
+        footer a {
+            color: #ddd;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: var(--tet-gold);
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1.3rem;
+            margin: 0 8px;
+            transition: all 0.4s;
+        }
+        .social-icons a:hover {
+            background: var(--tet-gold);
+            color: var(--tet-red);
+            transform: translateY(-5px);
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: none;
+            z-index: 99;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            padding: 0;
+            font-size: 1.5rem;
+            background: var(--gradient-red);
+            color: white;
+            border: 2px solid var(--tet-gold);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
+            transition: all 0.4s;
+        }
+        #backToTop:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        .privacy-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 120px auto 80px;
+            max-width: 1000px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(196,30,58,0.2);
+        }
+        .privacy-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--tet-red);
+            display: inline-block;
+            width: auto;
+            padding-bottom: 10px;
+        }
+        .privacy-container h2 {
+            margin-top: 35px;
+            font-size: 1.5rem;
+            color: var(--tet-red);
+        }
+        .highlight-box {
+            background: rgba(196,30,58,0.1);
+            padding: 20px;
+            border-left: 4px solid var(--tet-red);
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        @media (max-width: 768px) {
+            .privacy-container { margin: 100px 20px 60px; padding: 25px; }
+            .navbar-brand { font-size: 1.5rem; }
+        }
+        /* Tet effects nhẹ (không bắt buộc) */
+        .tet-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .tet-overlay.active { opacity: 1; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Chính sách bảo mật</h1>
-    <p><strong>Cập nhật lần cuối:</strong> 06/01/2026</p>
-    
-    <h2>1. Thông tin chúng tôi thu thập</h2>
-    <p>Trang web Giáo Họ Trung Đồng có thể thu thập thông tin cá nhân như tên, email, số điện thoại khi bạn gửi qua form liên hệ. Chúng tôi cũng sử dụng Google Analytics để thu thập dữ liệu truy cập ẩn danh (IP, trình duyệt, hành vi duyệt web).</p>
-    
-    <h2>2. Cách chúng tôi sử dụng thông tin</h2>
-    <p>Thông tin được dùng để trả lời liên hệ, cải thiện nội dung website, và phân tích lưu lượng truy cập. Chúng tôi không bán hoặc chia sẻ thông tin cho bên thứ ba trừ khi có yêu cầu pháp lý.</p>
-    
-    <h2>3. Cookie</h2>
-    <p>Chúng tôi sử dụng cookie để ghi nhớ tùy chọn của bạn (ví dụ: chấp nhận cookie, chế độ sáng/tối). Google Analytics cũng đặt cookie để thu thập dữ liệu. Bạn có thể từ chối cookie qua cài đặt trình duyệt.</p>
-    
-    <h2>4. Bảo mật dữ liệu</h2>
-    <p>Chúng tôi áp dụng các biện pháp bảo vệ hợp lý để ngăn chặn truy cập trái phép. Tuy nhiên, không có phương thức truyền dữ liệu nào qua internet là an toàn tuyệt đối.</p>
-    
-    <h2>5. Liên hệ</h2>
-    <p>Nếu có thắc mắc về chính sách bảo mật, vui lòng liên hệ: <strong>nhathogiaohotrungdong@gmail.com</strong>.</p>
-    
-    <div class="footer">
-        <a href="/">← Về trang chủ</a>
+    <!-- Tet overlay nhẹ (đồng bộ với index) -->
+    <div class="tet-overlay"></div>
+
+    <!-- Navigation giống index -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-church mr-2"></i>Giáo Họ Trung Đồng</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-label="Mở menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">Giới Thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#services">Hoạt Động</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Hình Ảnh</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Liên Hệ</a></li>
+                    <li class="nav-item">
+                        <button id="themeToggle" class="btn btn-link nav-link" title="Chế độ sáng/tối">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <ul class="navbar-nav social-icons ml-3">
+                    <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/GHtrungdong" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://www.youtube.com/@nhothogiaohotrungong7117" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nội dung chính sách -->
+    <div class="privacy-container" data-aos="fade-up">
+        <h1><i class="fas fa-shield-alt mr-2"></i>CHÍNH SÁCH BẢO MẬT</h1>
+        <p class="text-right font-italic">Cập nhật lần cuối: 07/04/2026</p>
+        
+        <div class="highlight-box">
+            <p><i class="fas fa-info-circle mr-2"></i>Giáo Họ Trung Đồng cam kết bảo vệ thông tin cá nhân của giáo dân và khách truy cập.</p>
+        </div>
+        
+        <h2><i class="fas fa-database mr-2"></i>1. Thông tin thu thập</h2>
+        <p>Chúng tôi có thể thu thập:</p>
+        <ul>
+            <li>Thông tin công khai khi tham gia hoạt động</li>
+            <li>Dữ liệu truy cập (địa chỉ IP, trình duyệt) qua Google Analytics (chỉ khi bạn đồng ý cookie)</li>
+            <li>Thông tin bạn tự nguyện cung cấp qua form liên hệ</li>
+        </ul>
+        
+        <h2><i class="fas fa-user-shield mr-2"></i>2. Bảo mật dữ liệu</h2>
+        <p>Áp dụng các biện pháp:</p>
+        <ul>
+            <li>Mã hóa SSL cho dữ liệu truyền tải</li>
+            <li>Giới hạn quyền truy cập thông tin nhạy cảm</li>
+            <li>Không lưu trữ thông tin tài chính</li>
+        </ul>
+        
+        <h2><i class="fas fa-cookie-bite mr-2"></i>3. Cookie</h2>
+        <p>Website sử dụng cookie để:</p>
+        <ul>
+            <li>Ghi nhớ tùy chọn người dùng (dark mode, hiệu ứng Tết)</li>
+            <li>Phân tích truy cập (Google Analytics) – chỉ khi bạn chấp nhận</li>
+            <li>Bạn có thể tắt cookie trong trình duyệt</li>
+        </ul>
+        
+        <h2><i class="fas fa-question-circle mr-2"></i>4. Liên hệ</h2>
+        <p>Mọi thắc mắc về bảo mật:</p>
+        <p><i class="fas fa-envelope mr-2"></i> <strong>nhathogiaohotrungdong@gmail.com</strong></p>
+        
+        <div class="text-center mt-5">
+            <a href="index.html" class="btn btn-primary"><i class="fas fa-arrow-left mr-2"></i>Về Trang Chủ</a>
+        </div>
     </div>
-</div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-left mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2024-2026 Giáo Họ Trung Đồng. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <a href="privacy.html" class="mr-3">Chính Sách Bảo Mật</a>
+                    <a href="terms.html">Điều Khoản Sử Dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="btn btn-primary" title="Lên đầu trang"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        
+        // Dark mode
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        function updateIcon(theme) {
+            if (theme === 'dark') { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+            else { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+        }
+        updateIcon(savedTheme);
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+        
+        // Navbar scroll effect
+        $(window).scroll(function() { $(this).scrollTop() > 100 ? $('.navbar').addClass('scrolled') : $('.navbar').removeClass('scrolled'); });
+        
+        // Back to top
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { backBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none'; });
+        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
+        // Kích hoạt hiệu ứng Tết nhẹ (nếu đang trong mùa Tết)
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const isTetSeason = (month === 12 && day >= 15) || month === 1 || (month === 2 && day <= 20);
+        if (isTetSeason) document.querySelector('.tet-overlay')?.classList.add('active');
+    </script>
 </body>
 </html>
